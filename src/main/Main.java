@@ -13,13 +13,13 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Server server = new Server();
-        Client client = new Client();
+        //Client client = new Client();
 
         ServerSocket serverSocket = server.getConnection();
-        Socket clientSocket = client.getConnection();
+        //Socket clientSocket = serverSocket.accept();
 
-        client.stringFromClient(clientSocket);
-        server.socketInit(serverSocket);
+        //client.stringFromClient(clientSocket);
+        server.performUserInfo(serverSocket.accept());
 
 
       /*  ArrayList<String> arrayList = client.stringFromServer(clientSocket);

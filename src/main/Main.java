@@ -19,11 +19,10 @@ public class Main {
         Socket clientSocket = client.getConnection();
 
         client.stringFromClient(clientSocket);
-        server.performUserInfo(serverSocket.accept());
-        
-        ArrayList<String> arrayList = client.stringFromServer(clientSocket);
-        arrayList.forEach(System.out::println);
+        server.socketInit(serverSocket);
 
 
+      /*  ArrayList<String> arrayList = client.stringFromServer(clientSocket);
+        arrayList.forEach(System.out::println);*/
     }
 }

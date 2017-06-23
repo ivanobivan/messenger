@@ -18,6 +18,7 @@ public class Client {
 
     public void stringFromClient(Socket socket) {
         //TODO use try-with-resources
+        //TODO realise throw Thread
         try {
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             Scanner scanner = new Scanner(System.in);

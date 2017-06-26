@@ -1,33 +1,58 @@
 package server;
 
 
+import log.Logger;
 import main.Parameters;
 
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 
 
 public class Server {
 
-    public ServerSocket getConnection() throws IOException {
-        return new ServerSocket(Parameters.PORT);
+    public Server() {
+        try{
+            ServerSocket serverSocket = new ServerSocket(Parameters.PORT);
+
+            while(true){
+                Socket socket = serverSocket.accept();
+                new ServerConnector(socket);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
-    public void performUserInfo(Socket socketClient) throws IOException {
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));
 
-        while (in.ready()){
-            System.out.println(in.readLine());
+
+    private class ServerConnector implements Runnable {
+
+        private Socket socket;
+        private DataInputStream dataInputStream;
+        private DataOutputStream dataOutputStream;
+        private String userName;
+
+        ServerConnector(Socket socket) throws IOException {
+           this.socket = socket;
+           this.dataInputStream = new DataInputStream(socket.getInputStream());
+           this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
         }
 
-        out.write(Parameters.HTML_STRING);
+        @Override
+        public void run() {
+            try {
+                this.userName = dataInputStream.readUTF();
+                System.out.println(this.userName + "Come now");
 
-        out.close();
-        in.close();
-        socketClient.close();
+                while (dataInputStream.available() > 0){
+                    dataOutputStream.writeUTF(dataInputStream.readUTF().toUpperCase());
+                }
 
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
 }

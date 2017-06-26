@@ -7,22 +7,25 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Server server = new Server();
-        //Client client = new Client();
 
-        ServerSocket serverSocket = server.getConnection();
-        //Socket clientSocket = serverSocket.accept();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Select the operating mode: Server(1) or Client(2)");
+        while (true) {
+            if (scanner.nextInt() == 1) {
+                new Server();
+            } else if (scanner.nextInt() == 2) {
+                new Client();
+            } else {
+                System.out.println("Unknown command");
+            }
+        }
 
-        //client.stringFromClient(clientSocket);
-        server.performUserInfo(serverSocket.accept());
 
-
-      /*  ArrayList<String> arrayList = client.stringFromServer(clientSocket);
-        arrayList.forEach(System.out::println);*/
     }
 }

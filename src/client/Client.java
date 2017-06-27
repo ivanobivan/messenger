@@ -3,63 +3,81 @@ package client;
 import log.Logger;
 import main.Parameters;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Client {
+    private InputStream inputStream;
+    private OutputStream outputStream;
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
     private Socket socket;
 
     public Client() {
         Scanner scanner = new Scanner(System.in);
-        try{
+        try {
             System.out.println("Connecting...");
-            socket = new Socket(Parameters.LOCAL_IP,Parameters.PORT);
-            dataInputStream = new DataInputStream(socket.getInputStream());
-            dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            socket = new Socket(Parameters.LOCAL_IP, Parameters.PORT);
+            inputStream = socket.getInputStream();
+            outputStream = socket.getOutputStream();
+            dataInputStream = new DataInputStream(inputStream);
+            dataOutputStream = new DataOutputStream(outputStream);
 
             System.out.println("Enter your name");
+            dataOutputStream.writeUTF(scanner.next());
 
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
+            ClientMessenger clientMessenger = new ClientMessenger();
+            clientMessenger.run();
 
-    public Socket getConnection() throws IOException {
-        Logger.log("Start session for new Client");
-        return new Socket(Parameters.LOCAL_IP, Parameters.PORT);
-    }
-
-    public void stringFromClient(Socket socket) {
-        try {
-            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            Scanner scanner = new Scanner(System.in);
-            while (scanner.hasNext()) {
-                String line = scanner.nextLine();
-                if (line.matches(".*exit.*")) {
-                    dataOutputStream.writeUTF(line);
-                    break;
-                }
+            String line = "";
+            while (!line.matches(".*exit.*")) {
+                line = scanner.nextLine();
                 dataOutputStream.writeUTF(line);
             }
+            clientMessenger.setStop();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+    }
+
+    private void close() {
+        try{
+            dataInputStream.close();
+            dataOutputStream.close();
+            socket.close();
         }catch (IOException e){
+            System.out.println("!Threads not be aborted");
             e.printStackTrace();
         }
     }
 
-    public ArrayList<String> stringFromServer(Socket socket) throws IOException {
-        ArrayList <String> arrayList = new ArrayList<>();
-        DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+    private class ClientMessenger implements Runnable {
 
-        while (dataInputStream.available() >0 ){
-           arrayList.add(dataInputStream.readUTF());
+        private boolean stop;
+
+
+        public void setStop() {
+            this.stop = true;
         }
-        return arrayList;
+
+        @Override
+        public void run() {
+            try {
+                while (!stop) {
+                    String line = dataInputStream.readUTF();
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Error with messenger service");
+                e.printStackTrace();
+            }
+        }
     }
+
 }

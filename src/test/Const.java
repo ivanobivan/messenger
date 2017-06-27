@@ -1,5 +1,5 @@
 package test;
 
 public abstract class Const {
-    public static final int Port = 5050;
+    public static final int Port = 9090;
 }

@@ -1,15 +1,16 @@
 package server;
 
 
-import log.Logger;
 import main.Parameters;
 
 import java.io.*;
-import java.net.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+//TODO Реализвать доступ к закрытию сервера в настройках
 
 public class Server {
 
@@ -22,13 +23,15 @@ public class Server {
             serverSocket = new ServerSocket(Parameters.PORT);
 
             while (true) {
+                System.out.println("Server start successful");
                 Socket socket = serverSocket.accept();
-                serverConnectorList.add(new ServerConnector(socket));
+                ServerConnector serverConnector = new ServerConnector(socket);
+                serverConnectorList.add(serverConnector);
+                serverConnector.run();
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            //TODO Реализвать доступ к закрытию сервера в настройках
+        } finally {
             closeServer();
         }
     }
@@ -36,7 +39,7 @@ public class Server {
     private void closeServer() {
         try {
             serverSocket.close();
-            synchronized (serverConnectorList){
+            synchronized (serverConnectorList) {
                 serverConnectorList.forEach(ServerConnector::closeClientCanal);
             }
         } catch (IOException e) {
@@ -49,78 +52,58 @@ public class Server {
     private class ServerConnector implements Runnable {
 
         private Socket socket;
-        private DataInputStream dataInputStream;
-        private DataOutputStream dataOutputStream;
+        private BufferedReader bufferedReader;
+        private PrintWriter printWriter;
         private String userName;
 
         ServerConnector(Socket socket) throws IOException {
             this.socket = socket;
-            this.dataInputStream = new DataInputStream(socket.getInputStream());
-            this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            this.printWriter = new PrintWriter(socket.getOutputStream(), true);
         }
 
         @Override
         public void run() {
             try {
-                this.userName = dataInputStream.readUTF();
+                this.userName = bufferedReader.readLine();
                 System.out.println(this.userName + " come now");
 
                 synchronized (serverConnectorList) {
                     serverConnectorList.forEach(serverConnector -> {
-                        try {
-                            dataOutputStream
-                                    .writeUTF(userName + "connect");
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        printWriter.write(userName + " : connect");
                     });
                 }
                 String line = "";
                 while (true) {
-                    line = dataInputStream.readUTF();
+                    line = bufferedReader.readLine();
                     if (line.matches(".*exit.*")) {
                         break;
                     }
-
                     synchronized (serverConnectorList) {
                         String finalLine = line;
                         serverConnectorList.forEach(serverConnector -> {
-                            try {
-                                dataOutputStream
-                                        .writeUTF(userName + " : " + finalLine);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            printWriter.write(userName + " : " + finalLine);
                         });
                     }
                 }
-
-
                 synchronized (serverConnectorList) {
                     serverConnectorList.forEach(serverConnector -> {
-                        try {
-                            dataOutputStream.writeUTF(
-                                    userName + " : has left us"
-                            );
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        printWriter.write(userName + " : has left us");
                     });
                 }
-
 
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-
+                closeClientCanal();
             }
 
         }
 
-        public void closeClientCanal() {
+        void closeClientCanal() {
             try {
-                dataInputStream.close();
-                dataOutputStream.close();
+                bufferedReader.close();
+                printWriter.close();
                 socket.close();
                 if (serverConnectorList.size() == 0) {
                     Server.this.closeServer();

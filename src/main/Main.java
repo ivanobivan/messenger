@@ -4,22 +4,21 @@ import client.Client;
 import server.Server;
 
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Scanner;
-
+//TODO Realize graphical shell
+//TODO Realize web shell
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Select the operating mode: Server(1) or Client(2)");
         while (true) {
-            if (scanner.nextInt() == 1) {
+            int prom = scanner.nextInt();
+            if (prom == 1) {
                 new Server();
-            } else if (scanner.nextInt() == 2) {
+            } else if (prom == 2) {
                 new Client();
             } else {
                 System.out.println("Unknown command");

@@ -25,7 +25,7 @@ public class Client {
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
             System.out.println("Enter your name");
-            
+
         }catch (IOException e){
             e.printStackTrace();
         }

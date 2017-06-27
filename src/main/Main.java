@@ -18,8 +18,10 @@ public class Main {
             int prom = scanner.nextInt();
             if (prom == 1) {
                 new Server();
+                break;
             } else if (prom == 2) {
                 new Client();
+                break;
             } else {
                 System.out.println("Unknown command");
             }

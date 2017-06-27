@@ -1,19 +1,18 @@
 package client;
 
-import log.Logger;
 import main.Parameters;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Client {
-    private InputStream inputStream;
-    private OutputStream outputStream;
-    private DataInputStream dataInputStream;
-    private DataOutputStream dataOutputStream;
+    private BufferedReader bufferedReader;
+    private PrintWriter printWriter;
     private Socket socket;
 
     public Client() {
@@ -21,21 +20,20 @@ public class Client {
         try {
             System.out.println("Connecting...");
             socket = new Socket(Parameters.LOCAL_IP, Parameters.PORT);
-            inputStream = socket.getInputStream();
-            outputStream = socket.getOutputStream();
-            dataInputStream = new DataInputStream(inputStream);
-            dataOutputStream = new DataOutputStream(outputStream);
+            System.out.println("Connecting successful");
+            bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            printWriter = new PrintWriter(socket.getOutputStream(),true);
 
             System.out.println("Enter your name");
-            dataOutputStream.writeUTF(scanner.next());
+            printWriter.println(scanner.nextLine());
 
             ClientMessenger clientMessenger = new ClientMessenger();
-            clientMessenger.run();
+            clientMessenger.start();
 
             String line = "";
             while (!line.matches(".*exit.*")) {
                 line = scanner.nextLine();
-                dataOutputStream.writeUTF(line);
+                printWriter.println(line);
             }
             clientMessenger.setStop();
 
@@ -48,8 +46,8 @@ public class Client {
 
     private void close() {
         try{
-            dataInputStream.close();
-            dataOutputStream.close();
+            bufferedReader.close();
+            printWriter.close();
             socket.close();
         }catch (IOException e){
             System.out.println("!Threads not be aborted");
@@ -57,12 +55,12 @@ public class Client {
         }
     }
 
-    private class ClientMessenger implements Runnable {
+    private class ClientMessenger extends Thread {
 
         private boolean stop;
 
 
-        public void setStop() {
+        void setStop() {
             this.stop = true;
         }
 
@@ -70,7 +68,7 @@ public class Client {
         public void run() {
             try {
                 while (!stop) {
-                    String line = dataInputStream.readUTF();
+                    String line = bufferedReader.readLine();
                     System.out.println(line);
                 }
             } catch (IOException e) {

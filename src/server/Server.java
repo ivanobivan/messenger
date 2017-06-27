@@ -8,6 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 //TODO Реализвать доступ к закрытию сервера в настройках
@@ -24,10 +25,11 @@ public class Server {
 
             while (true) {
                 System.out.println("Server start successful");
+                //System.out.println("Wait response from client...");
                 Socket socket = serverSocket.accept();
                 ServerConnector serverConnector = new ServerConnector(socket);
                 serverConnectorList.add(serverConnector);
-                serverConnector.run();
+                serverConnector.start();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,47 +51,48 @@ public class Server {
     }
 
 
-    private class ServerConnector implements Runnable {
+    private class ServerConnector extends Thread  {
 
         private Socket socket;
         private BufferedReader bufferedReader;
         private PrintWriter printWriter;
-        private String userName;
+        private String userName = "";
 
         ServerConnector(Socket socket) throws IOException {
             this.socket = socket;
-            this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.printWriter = new PrintWriter(socket.getOutputStream(), true);
+            bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            printWriter = new PrintWriter(socket.getOutputStream(), true);
         }
 
         @Override
         public void run() {
             try {
-                this.userName = bufferedReader.readLine();
+                userName = bufferedReader.readLine();
                 System.out.println(this.userName + " come now");
 
-                synchronized (serverConnectorList) {
-                    serverConnectorList.forEach(serverConnector -> {
-                        printWriter.write(userName + " : connect");
-                    });
+                synchronized(serverConnectorList) {
+                    for (ServerConnector aServerConnectorList : serverConnectorList) {
+                        (aServerConnectorList).printWriter.println(userName + " : has connect");
+                    }
                 }
+
                 String line = "";
                 while (true) {
                     line = bufferedReader.readLine();
                     if (line.matches(".*exit.*")) {
                         break;
                     }
-                    synchronized (serverConnectorList) {
-                        String finalLine = line;
-                        serverConnectorList.forEach(serverConnector -> {
-                            printWriter.write(userName + " : " + finalLine);
-                        });
+                    synchronized(serverConnectorList) {
+                        for (ServerConnector aServerConnectorList : serverConnectorList) {
+                            (aServerConnectorList).printWriter.println(userName + " : " + line);
+                        }
                     }
                 }
-                synchronized (serverConnectorList) {
-                    serverConnectorList.forEach(serverConnector -> {
-                        printWriter.write(userName + " : has left us");
-                    });
+
+                synchronized(serverConnectorList) {
+                    for (ServerConnector aServerConnectorList : serverConnectorList) {
+                        (aServerConnectorList).printWriter.println(userName + " : has left us");
+                    }
                 }
 
             } catch (IOException e) {

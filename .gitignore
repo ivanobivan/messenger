@@ -1,3 +1,7 @@
 /.idea
 /out
+/src/log
+*.txt
+*.lck
 *.iml
+

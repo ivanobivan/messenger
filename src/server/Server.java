@@ -2,39 +2,49 @@ package server;
 
 
 import main.Parameters;
+import main.TextLogger;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //TODO Реализвать доступ к закрытию сервера в настройках
+//TODO Доделать номальное логгирование клиента и класс логгера
+//TODO Сделать реализацию очистки логов при перезапуске и ноом запуске сервера
+//TODO Сделать, чтоб логи не дублировались в консоль
 
 public class Server {
 
+    private static final Logger logger = Logger.getLogger(Server.class.getName());
     private final List<ServerConnector> serverConnectorList =
             Collections.synchronizedList(new ArrayList<ServerConnector>());
     private ServerSocket serverSocket;
 
     public Server() {
         try {
+            TextLogger.getServerLogCustoms(logger);
             serverSocket = new ServerSocket(Parameters.PORT);
 
             while (true) {
-                System.out.println("Server start successful");
-                //System.out.println("Wait response from client...");
+                logger.log(Level.INFO, "Server start successful");
                 Socket socket = serverSocket.accept();
                 ServerConnector serverConnector = new ServerConnector(socket);
                 serverConnectorList.add(serverConnector);
                 serverConnector.start();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error on server", e);
         } finally {
             closeServer();
+            logger.log(Level.INFO, "Server closed successful");
         }
     }
 
@@ -45,13 +55,12 @@ public class Server {
                 serverConnectorList.forEach(ServerConnector::closeClientCanal);
             }
         } catch (IOException e) {
-            System.out.println("!Thread not be aborted!");
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "!Thread not be aborted!", e);
         }
     }
 
 
-    private class ServerConnector extends Thread  {
+    private class ServerConnector extends Thread {
 
         private Socket socket;
         private BufferedReader bufferedReader;
@@ -68,9 +77,8 @@ public class Server {
         public void run() {
             try {
                 userName = bufferedReader.readLine();
-                System.out.println(this.userName + " come now");
-
-                synchronized(serverConnectorList) {
+                logger.log(Level.INFO, userName + " come now");
+                synchronized (serverConnectorList) {
                     for (ServerConnector aServerConnectorList : serverConnectorList) {
                         (aServerConnectorList).printWriter.println(userName + " : has connect");
                     }
@@ -82,23 +90,24 @@ public class Server {
                     if (line.matches(".*exit.*")) {
                         break;
                     }
-                    synchronized(serverConnectorList) {
+                    synchronized (serverConnectorList) {
                         for (ServerConnector aServerConnectorList : serverConnectorList) {
                             (aServerConnectorList).printWriter.println(userName + " : " + line);
                         }
                     }
                 }
 
-                synchronized(serverConnectorList) {
+                synchronized (serverConnectorList) {
                     for (ServerConnector aServerConnectorList : serverConnectorList) {
                         (aServerConnectorList).printWriter.println(userName + " : has left us");
                     }
                 }
 
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.log(Level.SEVERE, "Error on server", e);
             } finally {
                 closeClientCanal();
+                logger.log(Level.SEVERE, "Client disconnect successful");
             }
 
         }
@@ -113,8 +122,7 @@ public class Server {
                     System.exit(0);
                 }
             } catch (IOException e) {
-                System.out.println("Thread not be aborted");
-                e.printStackTrace();
+                logger.log(Level.SEVERE, "Error on server", e);
             }
         }
     }

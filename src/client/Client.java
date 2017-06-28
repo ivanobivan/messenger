@@ -1,6 +1,7 @@
 package client;
 
 import main.Parameters;
+import main.TextLogger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,18 +9,27 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Client {
     private BufferedReader bufferedReader;
     private PrintWriter printWriter;
     private Socket socket;
+    private static Logger logger = Logger.getLogger(Client.class.getName());
 
     public Client() {
         Scanner scanner = new Scanner(System.in);
         try {
+            TextLogger.getClientLogCustoms(logger);
+
+            logger.log(Level.INFO,"Connecting...");
             System.out.println("Connecting...");
+
             socket = new Socket(Parameters.LOCAL_IP, Parameters.PORT);
+            logger.log(Level.INFO,"Connecting successful");
+
             System.out.println("Connecting successful");
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             printWriter = new PrintWriter(socket.getOutputStream(),true);
@@ -38,7 +48,7 @@ public class Client {
             clientMessenger.setStop();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE,"Error on Client", e);
         } finally {
             close();
         }
@@ -50,8 +60,7 @@ public class Client {
             printWriter.close();
             socket.close();
         }catch (IOException e){
-            System.out.println("!Threads not be aborted");
-            e.printStackTrace();
+            logger.log(Level.SEVERE,"!Threads not be aborted", e);
         }
     }
 
@@ -72,8 +81,7 @@ public class Client {
                     System.out.println(line);
                 }
             } catch (IOException e) {
-                System.out.println("Error with messenger service");
-                e.printStackTrace();
+                logger.log(Level.SEVERE,"!Threads not be aborted", e);
             }
         }
     }

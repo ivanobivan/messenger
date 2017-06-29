@@ -5,8 +5,6 @@ import server.Server;
 
 import java.io.IOException;
 import java.util.Scanner;
-//TODO Realize graphical shell
-//TODO Realize web shell
 
 public class Main {
 

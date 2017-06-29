@@ -2,7 +2,7 @@ package server;
 
 
 import main.Parameters;
-import main.TextLogger;
+import main.log.CustomLogger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,11 +16,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//TODO Реализвать доступ к закрытию сервера в настройках
-//TODO Доделать номальное логгирование клиента и класс логгера
-//TODO Сделать реализацию очистки логов при перезапуске и ноом запуске сервера
-//TODO Сделать, чтоб логи не дублировались в консоль
-
 public class Server {
 
     private static final Logger logger = Logger.getLogger(Server.class.getName());
@@ -30,12 +25,15 @@ public class Server {
 
     public Server() {
         try {
-            TextLogger.getServerLogCustoms(logger);
+            CustomLogger.getServerLogCustoms(logger);
+            CustomLogger.clearServerLogs();
+            CustomLogger.clearClientLogs();
             serverSocket = new ServerSocket(Parameters.PORT);
 
             while (true) {
                 logger.log(Level.INFO, "Server start successful");
                 Socket socket = serverSocket.accept();
+                logger.log(Level.INFO, "Request -> Response");
                 ServerConnector serverConnector = new ServerConnector(socket);
                 serverConnectorList.add(serverConnector);
                 serverConnector.start();

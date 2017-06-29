@@ -5,3 +5,5 @@
 *.lck
 *.iml
 
+
+!/todo.txt

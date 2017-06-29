@@ -1,7 +1,7 @@
 package client;
 
 import main.Parameters;
-import main.TextLogger;
+import main.log.CustomLogger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class Client {
     public Client() {
         Scanner scanner = new Scanner(System.in);
         try {
-            TextLogger.getClientLogCustoms(logger);
+            CustomLogger.getClientLogCustoms(logger);
 
             logger.log(Level.INFO,"Connecting...");
             System.out.println("Connecting...");

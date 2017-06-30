@@ -1,11 +1,8 @@
 package ru.messenger.server;
 
 
-
-
-
 import ru.messenger.CustomLogger;
-import ru.messenger.Parameters;
+import ru.messenger.JsonTransform;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,7 +28,7 @@ public class Server {
             CustomLogger.getServerLogCustoms(logger);
             CustomLogger.clearServerLogs();
             CustomLogger.clearClientLogs();
-            serverSocket = new ServerSocket(Parameters.PORT);
+            serverSocket = new ServerSocket(JsonTransform.getPORT());
 
             while (true) {
                 logger.log(Level.INFO, "Server start successful");

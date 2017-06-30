@@ -1,10 +1,8 @@
 package ru.messenger.client;
 
 
-
-
 import ru.messenger.CustomLogger;
-import ru.messenger.Parameters;
+import ru.messenger.JsonTransform;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,7 +28,7 @@ public class Client {
             logger.log(Level.INFO,"Connecting...");
             System.out.println("Connecting...");
 
-            socket = new Socket(Parameters.LOCAL_IP, Parameters.PORT);
+            socket = new Socket(JsonTransform.getLocalIp(), JsonTransform.getPORT());
             logger.log(Level.INFO,"Connecting successful");
 
             System.out.println("Connecting successful");

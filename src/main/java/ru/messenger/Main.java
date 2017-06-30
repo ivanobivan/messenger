@@ -1,9 +1,12 @@
-package main;
+package ru.messenger;
 
-import client.Client;
-import server.Server;
 
-import java.io.IOException;
+
+
+
+import ru.messenger.client.Client;
+import ru.messenger.server.Server;
+
 import java.util.Scanner;
 
 public class Main {

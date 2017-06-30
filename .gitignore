@@ -1,9 +1,9 @@
 /.idea
 /out
-/src/log
 *.txt
 *.lck
 *.iml
 
-
 !/todo.txt
+/target/
+/src/test/

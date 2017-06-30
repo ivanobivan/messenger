@@ -1,7 +1,10 @@
-package client;
+package ru.messenger.client;
 
-import main.Parameters;
-import main.log.CustomLogger;
+
+
+
+import ru.messenger.CustomLogger;
+import ru.messenger.Parameters;
 
 import java.io.BufferedReader;
 import java.io.IOException;

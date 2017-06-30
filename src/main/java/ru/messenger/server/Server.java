@@ -1,8 +1,11 @@
-package server;
+package ru.messenger.server;
 
 
-import main.Parameters;
-import main.log.CustomLogger;
+
+
+
+import ru.messenger.CustomLogger;
+import ru.messenger.Parameters;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -50,7 +53,9 @@ public class Server {
         try {
             serverSocket.close();
             synchronized (serverConnectorList) {
-                serverConnectorList.forEach(ServerConnector::closeClientCanal);
+                for (ServerConnector aServerConnectorList : serverConnectorList) {
+                    (aServerConnectorList).closeClientCanal();
+                }
             }
         } catch (IOException e) {
             logger.log(Level.SEVERE, "!Thread not be aborted!", e);
@@ -82,7 +87,7 @@ public class Server {
                     }
                 }
 
-                String line = "";
+                String line;
                 while (true) {
                     line = bufferedReader.readLine();
                     if (line.matches(".*exit.*")) {

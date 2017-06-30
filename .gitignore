@@ -3,7 +3,5 @@
 *.txt
 *.lck
 *.iml
-
 !/todo.txt
 /target/
-

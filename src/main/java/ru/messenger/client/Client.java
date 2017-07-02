@@ -8,17 +8,23 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 public class Client {
-    private BufferedReader bufferedReader;
-    private PrintWriter printWriter;
-    private Socket socket;
-    private static Logger logger = Logger.getLogger(Client.class.getName());
+    private transient BufferedReader bufferedReader;
+    private transient PrintWriter printWriter;
+    private transient Socket socket;
+    private transient static Logger logger = Logger.getLogger(Client.class.getName());
+    private String userName;
+    private String currentDate;
+    private String ip;
 
     public Client() {
         Scanner scanner = new Scanner(System.in);
@@ -26,17 +32,18 @@ public class Client {
             CustomLogger.getClientLogCustoms(logger);
 
             logger.log(Level.INFO,"Connecting...");
-            System.out.println("Connecting...");
 
             socket = new Socket(JsonTransform.getLocalIp(), JsonTransform.getPORT());
             logger.log(Level.INFO,"Connecting successful");
 
-            System.out.println("Connecting successful");
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             printWriter = new PrintWriter(socket.getOutputStream(),true);
 
-            System.out.println("Enter your name");
-            printWriter.println(scanner.nextLine());
+            this.currentDate = new SimpleDateFormat("yyyy.MM.dd : kk.mm.ss").format(new Date());
+            this.ip = InetAddress.getLocalHost().getHostAddress();
+            this.userName = scanner.nextLine();
+
+            printWriter.println(userName);
 
             ClientMessenger clientMessenger = new ClientMessenger();
             clientMessenger.start();

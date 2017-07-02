@@ -7,12 +7,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-/**
- * Created by Ivan on 28.06.2017.
- */
 public class CustomLogger {
 
     public static void getServerLogCustoms(Logger logger) throws IOException {
+        if(!new File("src/main/java/log").exists()) {
+            new File("src/main/java/log").mkdir();
+        }
         FileHandler fileHandler = new FileHandler("src/main/java/log/logServer.txt");
         fileHandler.setFormatter(new SimpleFormatter());
         logger.setLevel(Level.INFO);
@@ -21,6 +21,9 @@ public class CustomLogger {
     }
 
     public static void getClientLogCustoms(Logger logger) throws IOException {
+        if(!new File("src/main/java/log/logClient").exists()) {
+            new File("src/main/java/log/logClient").mkdir();
+        }
         FileHandler fileHandler = new FileHandler("src/main/java/log/logClient/logClient.txt");
         fileHandler.setFormatter(new SimpleFormatter());
         logger.setLevel(Level.INFO);

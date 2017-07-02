@@ -14,7 +14,7 @@ public class JsonTransform {
     private static JsonReader jsonReader;
 
     public static int getPORT() throws IOException {
-        jsonReader = new JsonReader(new FileReader("src/main/resources/parametrs.json"));
+        jsonReader = new JsonReader(new FileReader("src/main/resources/parameters.json"));
         jsonReader.beginObject();
         while (jsonReader.hasNext()) {
             if (JsonToken.NAME.equals(jsonReader.peek())) {
@@ -28,7 +28,7 @@ public class JsonTransform {
     }
 
     public static String getLocalIp() throws IOException {
-        jsonReader = new JsonReader(new FileReader("src/main/resources/parametrs.json"));
+        jsonReader = new JsonReader(new FileReader("src/main/resources/parameters.json"));
         jsonReader.beginObject();
         while (jsonReader.hasNext()) {
             if (JsonToken.NAME.equals(jsonReader.peek())) {

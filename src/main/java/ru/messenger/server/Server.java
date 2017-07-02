@@ -4,10 +4,7 @@ package ru.messenger.server;
 import ru.messenger.CustomLogger;
 import ru.messenger.JsonTransform;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -26,8 +23,6 @@ public class Server {
     public Server() {
         try {
             CustomLogger.getServerLogCustoms(logger);
-            CustomLogger.clearServerLogs();
-            CustomLogger.clearClientLogs();
             serverSocket = new ServerSocket(JsonTransform.getPORT());
 
             while (true) {
@@ -107,7 +102,7 @@ public class Server {
                 logger.log(Level.SEVERE, "Error on server", e);
             } finally {
                 closeClientCanal();
-                logger.log(Level.SEVERE, "Client disconnect successful");
+                logger.log(Level.INFO, "Client disconnect successful");
             }
 
         }

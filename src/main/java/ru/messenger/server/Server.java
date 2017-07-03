@@ -10,6 +10,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +20,7 @@ public class Server {
     private final List<ServerConnector> serverConnectorList =
             Collections.synchronizedList(new ArrayList<ServerConnector>());
     private ServerSocket serverSocket;
+    private Scanner scanner;
 
     public Server() {
         try {

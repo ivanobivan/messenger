@@ -30,21 +30,4 @@ public class CustomLogger {
         logger.addHandler(fileHandler);
         logger.setUseParentHandlers(false);
     }
-
-    public static void clearServerLogs(){
-        File[] files = new File("src/main/java/log/").listFiles();
-        assert files != null;
-        for(File file : files){
-            if(file.isFile()){ file.delete(); }
-        }
-    }
-
-    public static void clearClientLogs(){
-        File[] files = new File("src/main/java/log/logClient").listFiles();
-        assert files != null;
-        for(File file : files){
-            if(file.isFile()){ file.delete(); }
-        }
-    }
-
 }

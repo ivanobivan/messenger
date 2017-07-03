@@ -12,6 +12,7 @@ import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class JsonTransform {
     private static int PORT;
@@ -41,22 +42,21 @@ public class JsonTransform {
                 if ("LOCAL_IP".equals(jsonReader.nextName())) {
                     LOCAL_IP = jsonReader.nextString();
                     break;
-                }jsonReader.nextString();
+                }
+                jsonReader.nextString();
             }
         }
         return LOCAL_IP;
     }
 
-    public static void putClientDataToJson(ArrayList<Client> arrayList) throws IOException {
+    public static void putClientDataToJson(String[] strings) throws IOException {
         JsonWriter jsonWriter = new JsonWriter(new FileWriter("src/main/resources/clientInfo.json"));
         jsonWriter.beginObject();
-        for(Client client : arrayList){
-            jsonWriter.name(client.getUserName());
-            jsonWriter.beginArray();
-            jsonWriter.value(client.getCurrentDate());
-            jsonWriter.value(client.getIp());
-            jsonWriter.endArray();
-        }
+        jsonWriter.name(strings[0]);
+        jsonWriter.beginArray();
+        jsonWriter.value(strings[1]);
+        jsonWriter.value(strings[2]);
+        jsonWriter.endArray();
         jsonWriter.endObject();
         jsonWriter.close();
 

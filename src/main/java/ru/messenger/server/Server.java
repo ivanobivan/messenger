@@ -3,6 +3,7 @@ package ru.messenger.server;
 
 import ru.messenger.CustomLogger;
 import ru.messenger.JsonTransform;
+import ru.messenger.client.Client;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -19,8 +20,9 @@ public class Server {
     private static final Logger logger = Logger.getLogger(Server.class.getName());
     private final List<ServerConnector> serverConnectorList =
             Collections.synchronizedList(new ArrayList<ServerConnector>());
+    private final List<String[]> clientData =
+            Collections.synchronizedList(new ArrayList<String[]>());
     private ServerSocket serverSocket;
-    private Scanner scanner;
 
     public Server() {
         try {
@@ -45,6 +47,11 @@ public class Server {
 
     private void closeServer() {
         try {
+            synchronized (clientData) {
+                for (String[] strings : clientData) {
+                    JsonTransform.putClientDataToJson(strings);
+                }
+            }
             serverSocket.close();
             synchronized (serverConnectorList) {
                 for (ServerConnector aServerConnectorList : serverConnectorList) {
@@ -63,6 +70,8 @@ public class Server {
         private BufferedReader bufferedReader;
         private PrintWriter printWriter;
         private String userName = "";
+        private String currentDate;
+        private String ip;
 
         ServerConnector(Socket socket) throws IOException {
             this.socket = socket;
@@ -74,6 +83,9 @@ public class Server {
         public void run() {
             try {
                 userName = bufferedReader.readLine();
+                ip = bufferedReader.readLine();
+                currentDate = bufferedReader.readLine();
+                clientData.add(new String[]{userName,ip,currentDate});
                 logger.log(Level.INFO, userName + " come now");
                 synchronized (serverConnectorList) {
                     for (ServerConnector aServerConnectorList : serverConnectorList) {
@@ -100,6 +112,10 @@ public class Server {
                     }
                 }
 
+                if (serverConnectorList.size() == 2) {
+                    closeServer();
+                }
+
             } catch (IOException e) {
                 logger.log(Level.SEVERE, "Error on server", e);
             } finally {
@@ -114,10 +130,6 @@ public class Server {
                 bufferedReader.close();
                 printWriter.close();
                 socket.close();
-                if (serverConnectorList.size() == 0) {
-                    Server.this.closeServer();
-                    System.exit(0);
-                }
             } catch (IOException e) {
                 logger.log(Level.SEVERE, "Error on server", e);
             }

@@ -19,25 +19,10 @@ public class Client implements Serializable {
     private transient PrintWriter printWriter;
     private transient Socket socket;
     private transient static Logger logger = Logger.getLogger(Client.class.getName());
-    private String userName;
-    private String currentDate;
-    private String ip;
-    private Scanner scanner = new Scanner(System.in);
-
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getCurrentDate() {
-        return currentDate;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-
+    private static String userName;
+    private static String currentDate;
+    private static String ip;
+    private transient Scanner scanner = new Scanner(System.in);
 
     public Client() {
 
@@ -52,11 +37,13 @@ public class Client implements Serializable {
             bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             printWriter = new PrintWriter(socket.getOutputStream(), true);
 
-            this.currentDate = new SimpleDateFormat("yyyy.MM.dd : kk.mm.ss").format(new Date());
-            this.ip = InetAddress.getLocalHost().getHostAddress();
-            this.userName = scanner.nextLine();
+            currentDate = new SimpleDateFormat("yyyy.MM.dd : kk.mm.ss").format(new Date());
+            ip = InetAddress.getLocalHost().getHostAddress();
+            userName = scanner.nextLine();
 
             printWriter.println(userName);
+            printWriter.println(ip);
+            printWriter.println(currentDate);
 
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error on Client", e);

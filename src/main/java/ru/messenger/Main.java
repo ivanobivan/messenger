@@ -1,9 +1,6 @@
 package ru.messenger;
 
 
-
-
-
 import com.google.gson.Gson;
 import ru.messenger.client.Client;
 import ru.messenger.server.Server;
@@ -17,7 +14,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static ArrayList<Client> list = new ArrayList<Client>();
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
@@ -26,11 +22,9 @@ public class Main {
             int prom = scanner.nextInt();
             if (prom == 1) {
                 new Server();
-                JsonTransform.putClientDataToJson(list);
                 break;
             } else if (prom == 2) {
                 Client client = new Client();
-                list.add(client);
                 client.createConnection();
                 break;
             } else {

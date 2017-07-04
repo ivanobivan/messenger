@@ -4,4 +4,13 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>SocketServlet</servlet-name>
+    <servlet-class>ru.messenger.servlets.SocketServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SocketServlet</servlet-name>
+    <url-pattern>/SocketServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

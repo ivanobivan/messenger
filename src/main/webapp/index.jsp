@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset=UTF-8>
     <title>Tomcat WebSocket Chat</title>
     <script>
-        var ws = new WebSocket("ws://localhost:8080/TomcatWebSocket/SocketServlet");
+        var ws = new WebSocket("ws://localhost:8080/TomcatWebSocket/wschat/ServerServlet");
         ws.onopen = function(){
         };
         ws.onmessage = function(message){
@@ -22,6 +23,6 @@
 <textarea id="chatlog" readonly></textarea><br/>
 <input id="msg" type="text" />
 <button type="submit" id="sendButton" onClick="postToServer()">Send!</button>
-<button type="submit" id="sendButton" onClick="closeConnect()">End</button>
+<button type="submit" id="dsendButton" onClick="closeConnect()">End</button>
 </body>
 </html>

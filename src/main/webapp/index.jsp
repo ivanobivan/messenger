@@ -1,28 +1,28 @@
-<!DOCTYPE html>
 <html>
-<head>
-    <meta charset=UTF-8>
-    <title>Tomcat WebSocket Chat</title>
-    <script>
-        var ws = new WebSocket("ws://localhost:8080/TomcatWebSocket/wschat/ServerServlet");
-        ws.onopen = function(){
-        };
-        ws.onmessage = function(message){
-            document.getElementById("chatlog").textContent += message.data + "\n";
-        };
-        function postToServer(){
-            ws.send(document.getElementById("msg").value);
-            document.getElementById("msg").value = "";
-        }
-        function closeConnect(){
-            ws.close();
-        }
-    </script>
-</head>
-<body>
-<textarea id="chatlog" readonly></textarea><br/>
-<input id="msg" type="text" />
-<button type="submit" id="sendButton" onClick="postToServer()">Send!</button>
-<button type="submit" id="dsendButton" onClick="closeConnect()">End</button>
-</body>
+    <head>
+        <title>Chat</title>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <body>
+        <header>
+            <input id="username" placeholder="Username..." autofocus>
+            <button id="connect">Connect</button>
+            <button id="disconnect" disabled>Disconnect</button>
+        </header>
+        <aside>
+            <h5>Online User(s)</h5>
+            <ul><li id="all" class="hoverable">All</li></ul>
+            <ul id="userList"></ul>
+        </aside>
+        <article>
+            <div id="dialog">
+                <span>Chat to <span id="chatTo">All</span></span>
+                <div id="message-board"></div>
+                <hr>
+                <textarea id="message" placeholder="message.."></textarea>
+                <button id="send">Send</button>
+            </div>
+        </article>
+        <script src="script.js"></script>
+    </body>
 </html>

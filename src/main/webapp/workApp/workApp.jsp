@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="header col-12">
-    <input id="username" placeholder="Username..." autofocus>
+    <input id="username" placeholder="Username" autofocus>
     <button id="connect">Connect</button>
     <button id="disconnect" disabled>Disconnect</button>
 </div>

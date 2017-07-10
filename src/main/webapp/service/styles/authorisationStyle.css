@@ -1,0 +1,52 @@
+.w3-btn{
+    transition: 0.2s;
+}
+html{
+    height: 100%;
+}
+body{
+    background:linear-gradient(141deg, rgba(15, 184, 173, 0.41) 0%, rgba(31, 200, 219, 0.31) 51%, rgba(44, 181, 232, 0.35) 75%) no-repeat;
+    background-size: cover;
+}
+button {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    background-color: #008CBA;
+    width: 250px;
+    height: 60px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 0 5%;
+    opacity: 0.9;
+    border: 2px #008CBA solid;
+}
+button span{
+    font: normal 24px monospace;
+}
+button:hover{
+    transition: 0.4s;
+    padding-right: 25px;
+    background-color: white;
+    color:black;
+}
+.invis{
+    margin-top: 16%;
+}
+.invisForm{
+    display: none;
+}
+#formReg span{
+    font-size: 24px;
+    cursor: pointer;
+}
+i{
+    padding: 20px;
+    cursor: pointer;
+}
+i:hover{
+    color:darkviolet;
+}
+p{
+    font-size: 10px;
+}

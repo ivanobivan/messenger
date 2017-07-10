@@ -14,8 +14,8 @@ import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint("/chat")
 public class ServerSocket {
-    //private static final String USERNAME_KEY = "username";
-    private static Map<String, Session> chatRooms =(Map<String, Session>) Collections.synchronizedMap(new LinkedHashMap());
+    private static final String USERNAME_KEY = "username";
+    private static Map<String, Session> chatRooms = Collections.synchronizedMap(new LinkedHashMap());
 
     public ServerSocket() {
     }
@@ -23,21 +23,18 @@ public class ServerSocket {
     @OnOpen
     public void onOpen(Session session) throws Exception {
         Map<String, List<String>> parameter = session.getRequestParameterMap();
-        List<String> list = parameter.get("username");
-        String newUsername = list.get(0);
+        String newUsername = parameter.get(USERNAME_KEY).get(0);
         chatRooms.put(newUsername, session);
-        session.getUserProperties().put("username", newUsername);
+        session.getUserProperties().put(USERNAME_KEY, newUsername);
         String response = "newUser|" + String.join("|", chatRooms.keySet());
         session.getBasicRemote().sendText(response);
         Iterator iterator = chatRooms.values().iterator();
-
         while(iterator.hasNext()) {
             Session client = (Session)iterator.next();
             if (client != session) {
                 client.getBasicRemote().sendText("newUser|" + newUsername);
             }
         }
-
     }
 
     @OnMessage
@@ -45,10 +42,9 @@ public class ServerSocket {
         String[] data = message.split("\\|");
         String destination = data[0];
         String messageContent = data[1];
-        String sender = (String)session.getUserProperties().get("username");
+        String sender = (String)session.getUserProperties().get(USERNAME_KEY);
         if (destination.equals("all")) {
             Iterator iterator = chatRooms.values().iterator();
-
             while(iterator.hasNext()) {
                 Session client = (Session)iterator.next();
                 if (!client.equals(session)) {
@@ -65,12 +61,12 @@ public class ServerSocket {
 
     @OnClose
     public void onClose(Session session) throws Exception {
-        String username = (String)session.getUserProperties().get("username");
+        String username = (String)session.getUserProperties().get(USERNAME_KEY);
         chatRooms.remove(username);
-        Iterator var3 = chatRooms.values().iterator();
+        Iterator iterator = chatRooms.values().iterator();
 
-        while(var3.hasNext()) {
-            Session client = (Session)var3.next();
+        while(iterator.hasNext()) {
+            Session client = (Session)iterator.next();
             client.getBasicRemote().sendText("removeUser|" + username);
         }
 

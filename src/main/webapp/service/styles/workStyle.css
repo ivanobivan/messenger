@@ -1,34 +1,27 @@
+
+html{
+    font-family: Calibri,sans-serif;
+}
 body {
-    position: relative;
-    margin: 0;
     font-family: Calibri, sans-serif;
-    display: flex;
 }
 
-header {
-    border-bottom: 1px solid #acacac;
-    position: fixed;
-    text-align: center;
-    padding: 5px;
-    width: 100%;
+.header {
     background: #6dd9dc;
     z-index: 2;
 }
 
+article {
+
+}
+
 aside {
-    width: 250px;
     height: 100%;
-    padding-top: 42px;
-    display: inline-block;
     border-right: 1px solid grey;
 }
 
-article {
-    display: inline-block;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-}
+
+
 
 header>* {
     padding: 5px;

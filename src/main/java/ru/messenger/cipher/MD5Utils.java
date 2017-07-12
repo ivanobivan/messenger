@@ -1,4 +1,4 @@
-package ru.messenger;
+package ru.messenger.cipher;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

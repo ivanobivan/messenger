@@ -23,7 +23,7 @@
                 <button  class="w3-teal w3-btn" id="buttonReg"><span>Log in</span></button>
             </div>
         </form>
-        <form action="workApp/workApp.jsp" class="invisForm" id="formReg">
+        <form action="workApp.jsp" class="invisForm" id="formReg">
             <p>Enter information for authorisation</p>
             <input type="text" placeholder="Username" class="w3-input w3-animate-input" style="width: 96%;" ><br>
             <input type="password" placeholder="Password" class="w3-input w3-animate-input" style="width: 96%;" ><br>

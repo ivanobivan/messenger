@@ -29,8 +29,4 @@ public class ServerSocket {
         peers.remove(peer);
     }
 
-    @OnError
-    public void onError(Error error) {
-
-    }
 }

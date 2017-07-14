@@ -1,3 +1,5 @@
+package ru.messenger.temp;
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;

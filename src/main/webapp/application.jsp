@@ -25,10 +25,10 @@
                 <a href="#" class="w3-bar-item w3-button">It is your day</a>
             </div>
         </div>
-        <div class="w3-bar-item w3-right">
-            <form action="#" method="get" class="search">
-                <input type="search" name="" placeholder="Search" class="w3-input input ">
-                <input type="submit" name="" value="" class="  submit">
+        <div class="w3-bar-item w3-right customFind">
+            <form action="#" method="get" class="customSearch">
+                <input type="search" name=""  class="w3-input " id="customInput" placeholder="Search...">
+                <input type="submit" name="" value="" id="customSubmit">
             </form>
         </div>
     </div>

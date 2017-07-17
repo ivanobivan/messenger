@@ -9,6 +9,11 @@
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>5.2.10.Final</version>
+        </dependency>
+        <dependency>
             <groupId>javaee</groupId>
             <artifactId>javaee-api</artifactId>
             <version>5</version>
@@ -49,11 +54,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.2.10.Final</version>
         </dependency>
     </dependencies>
     <build>

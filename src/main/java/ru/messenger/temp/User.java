@@ -2,12 +2,15 @@ package ru.messenger.temp;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "chat_user")
 public class User {
 
     @Id
     private int id;
+
     private String name;
 
     public int getId() {

@@ -11,15 +11,17 @@ public class AppTest {
     public void testUser() {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
 
+        session.beginTransaction();
         User user = new User();
         user.setId(1);
         user.setName("User_Test");
         session.save(user);
-
         session.getTransaction().commit();
+
+        User user1 = session.get(User.class, 1);
         session.close();
+        System.out.println(user1.getName());
     }
 
 }

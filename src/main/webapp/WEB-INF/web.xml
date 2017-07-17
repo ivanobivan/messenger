@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <servlet>
-        <servlet-name>AuthorisationServlet</servlet-name>
-        <servlet-class>ru.messenger.servlets.AuthorisationServlet</servlet-class>
+        <servlet-name>MainServlet</servlet-name>
+        <servlet-class>ru.messenger.servlets.MainServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>AuthorisationServlet</servlet-name>
-        <url-pattern>/AuthorisationServlet</url-pattern>
+        <servlet-name>MainServlet</servlet-name>
+        <url-pattern>/MainServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

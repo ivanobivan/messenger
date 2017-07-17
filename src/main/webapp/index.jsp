@@ -41,7 +41,7 @@
     </div>
     <div class="w3-quarter w3-center w3-animate-opacity">
         <button id="button2"><span>Just For Fun</span></button>
-        <form action="#">
+        <form action="MainServlet" method="get">
             <br><br>
             <div class="invisForm" id="form2">
                 <input type="text" name="nick" placeholder="Nickname..." class="w3-input w3-animate-input"

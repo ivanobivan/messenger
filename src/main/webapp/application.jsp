@@ -1,3 +1,8 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"
+%>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Chat</title>
@@ -44,7 +49,8 @@
                     <hr>
                     <form action="#" method="post">
                         <div class="w3-margin-top">
-                            <input type="text" class="customMargin" id="input1" value="Nickname" style="width: 80%" disabled>
+                            <input type="text" class="customMargin" id="input1" value="Nickname" style="width: 80%"
+                                   disabled>
                             <i class="fa fa-pencil-square-o  w3-right w3-margin-right cursorHand" id="btn1"
                                title="Edit"></i>
                         </div>
@@ -89,9 +95,12 @@
             </div>
         </div>
 
+
         <div class="w3-col m4 w3-padding-48">
             <div class="w3-center w3-border-left">
                 <p>Your Contacts</p>
+                <%String value= (String) session.getAttribute("nick");%>
+                <%System.out.println(value);%>
                 <div class="w3-container customBorder">
                     <img class="w3-left w3-round-xlarge" src="service/pic/John.png" alt="Avatar">
                     <p><span class="username">John Dover</span><br><span class="mesUser">Hi, I am John Dover</span></p>
@@ -109,19 +118,10 @@
                     <p><span class="username">SaraSara</span><br><span class="mesUser">Are you meet me?</span></p>
                 </div>
                 <div class="w3-container customBorder">
-                    <img class="w3-left w3-round-xlarge" src="service/pic/change_avatar.png" alt="Avatar">
-                    <p><span class="username">Dendi</span><br><span class="mesUser">Hi</span></p>
-                </div>
-                <div class="w3-container customBorder">
-                    <img class="w3-left w3-round-xlarge" src="service/pic/change_avatar.png" alt="Avatar">
-                    <p><span class="username">Miracle</span><br><span class="mesUserTyping"><i class="fa fa-pencil">...typing</i></span>
+                    <img class="w3-left w3-round-xlarge" src="service/pic/avatar.png" alt="Avatar">
+                    <p><span class="username"></span><br><span class="mesUser">...</span>
                     </p>
                 </div>
-                <div class="w3-container customBorder">
-                    <img class="w3-left w3-round-xlarge" src="service/pic/change_avatar.png" alt="Avatar">
-                    <p><span class="username">Sumail</span><br><span class="mesUser">...</span></p>
-                </div>
-
             </div>
         </div>
     </div>

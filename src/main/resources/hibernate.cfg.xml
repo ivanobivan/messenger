@@ -16,6 +16,6 @@
         <!-- Drop and re-create all database on startup -->
         <property name="hibernate.hbm2ddl.auto">create</property>
         <!-- Annotated entity classes -->
-        <mapping class="ru.messenger.temp.User"/>
+        <mapping class="ru.messenger.entity.User"/>
     </session-factory>
 </hibernate-configuration>

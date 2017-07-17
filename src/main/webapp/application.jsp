@@ -27,13 +27,13 @@
         </div>
         <div class="w3-bar-item w3-right customFind">
             <form action="#" method="get" class="customSearch">
-                <input type="search" name=""  class="w3-input " id="customInput" placeholder="Search...">
+                <input type="search" name="" class="w3-input " id="customInput" placeholder="Search...">
                 <input type="submit" name="" value="" id="customSubmit">
             </form>
         </div>
     </div>
 </div>
-<div class="w3-content" style="max-width: 1400px;">
+<div class="w3-content" style="max-width: 2000px;">
     <div class="w3-row">
 
         <div class="w3-col m2 w3-padding-48" id="dataUserPanel">
@@ -41,21 +41,36 @@
                 <div class="w3-container">
                     <h4 class="w3-center">Ivan</h4>
                     <div class="w3-round-xlarge" id="avatar" style="height:106px;width:106px"></div>
-                    <form action="#">
-                        <hr>
-                        <p>Nickname<i class="fa fa-pencil-square-o w3-margin-right w3-right cursorHand"
-                                      title="Edit"></i></p>
-                        <p>Name<i class="fa fa-pencil-square-o w3-margin-right w3-right cursorHand" title="Edit"></i>
-                        </p>
-                        <p>Surname<i class="fa fa-pencil-square-o w3-margin-right w3-right cursorHand" title="Edit"></i>
-                        </p>
-                        <p>Mobile number<i class="fa fa-pencil-square-o w3-margin-right w3-right cursorHand"
-                                           title="Edit"></i></p>
-                        <p>E-mail<i class="fa fa-pencil-square-o w3-margin-right w3-right cursorHand" title="Edit"></i>
-                        </p>
+                    <hr>
+                    <form action="#" method="post">
+                        <div class="w3-margin-top">
+                            <input type="text" class="customMargin" id="input1" value="Nickname" style="width: 80%" disabled>
+                            <i class="fa fa-pencil-square-o  w3-right w3-margin-right cursorHand" id="btn1"
+                               title="Edit"></i>
+                        </div>
+                        <div class="w3-margin-top">
+                            <input type="text" class="customMargin " value="Name" style="width: 80%" disabled>
+                            <i class="fa fa-pencil-square-o  w3-right w3-margin-right cursorHand"
+                               title="Edit"></i>
+                        </div>
+                        <div class="w3-margin-top">
+                            <input type="text" class="customMargin" value="Surname" style="width: 80%" disabled>
+                            <i class="fa fa-pencil-square-o  w3-right w3-margin-right cursorHand"
+                               title="Edit"></i>
+                        </div>
+                        <div class="w3-margin-top">
+                            <input type="text" class="customMargin" value="Mobile number" style="width: 80%" disabled>
+                            <i class="fa fa-pencil-square-o  w3-right w3-margin-right cursorHand"
+                               title="Edit"></i>
+                        </div>
+                        <div class="w3-margin-top">
+                            <input type="text" class="customMargin" value="E-mail" style="width: 80%" disabled>
+                            <i class="fa fa-pencil-square-o  w3-right w3-margin-right cursorHand"
+                               title="Edit"></i>
+                        </div>
                         <input type="file" name="file" id="changeAvatar" hidden>
                         <input type="submit" value="Save"
-                               class="w3-button w3-teal w3-round w3-margin-right w3-right w3-margin-bottom">
+                               class="w3-button w3-teal w3-round w3-margin w3-right">
                     </form>
                 </div>
             </div>

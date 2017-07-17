@@ -13,10 +13,18 @@ $(document).ready(function () {
         $("#button1").hide(200);
         $("#form1").hide(200);
         $("#formReg").show(200);
-    })
+    });
     $("#return").click(function () {
         $("#formReg").hide(200);
         $("#button1").show(200);
         $("#form1").show(200);
     })
 });
+
+function autorisation(name,pasword) {
+    if(name==="system" && pasword === "12345"){
+        document.location.href("application.jsp");
+    }else{
+        alert("Unkown password");
+    }
+}

@@ -1,7 +1,8 @@
 'use strict';
 var URL = "ws://" + document.location.host + document.location.pathname + "/test";
 var websocket = undefined;
-var message  = document.getElementById("message").value;
+var message;
+var username;
 
 function connectClient() {
     websocket = new WebSocket(URL);
@@ -12,33 +13,60 @@ function connectClient() {
 }
 
 function onOpen(evt) {
-    alert("onOpen(1)");
+    alert("Connection successful");
 }
 
 function onMessage(event) {
-    alert("onMes(2)");
+    alert("Data has got : " + event.data);
     var eventName = event.data.substr(0, event.data.indexOf("|"));
-    var data = event.data.substr(event.data.indexOf("|") + 1);
-    var customFunction;
-    if (eventName === 'newUser') {
-        customFunction = newUser;
-    } else if (eventName === 'removeUser') {
-        customFunction = removeUser;
-    } else if (eventName === 'message') {
-        customFunction = getMessage;
-    }
-    customFunction.apply(null, data.split('|'));
+    username = event.data.substr(event.data.indexOf("|") + 1);
+    // var customFunction;
+    // if (eventName === 'newUser') {
+    //     customFunction = newUser;
+    // } else if (eventName === 'removeUser') {
+    //     customFunction = removeUser;
+    // } else if (eventName === 'message') {
+    //     customFunction = getMessage;
+    // }
+    // customFunction.apply(null, data.split('|'));
 }
 
 function onClose(evt) {
-    alert("Close");
+    if (event.wasClean) {
+        alert('Connection was close clean');
+    } else {
+        alert('Connection failed');
+    }
+    alert('Key: ' + event.code + ' Reason: ' + event.reason);
 }
 
 function onError(evt) {
     alert("Error" + evt.message);
 }
 
-function newUser() {
+function sendMessage() {
+    message  = document.getElementById("message").value;
+    alert("Your message" + " : " + message);
+    message !== null ? websocket.send(message) : false;
+    /*if (message === '') {
+        return;
+    }
+    websocket.send(message);*/
+
+
+    //var sender = usernameInputEl.value;
+    //getMessage(sender, message, destination);
+    //messageBoardEl.scrollTop = messageBoardEl.scrollHeight;
+}
+
+$(document).ready(function () {
+    // After download document create connection
+    connectClient();
+    $("#send").click(function () {
+        sendMessage();
+    })
+});
+/*function newUser() {
     if (arguments.length === 1 && arguments[0] === "") {
         return;
     }
@@ -57,9 +85,9 @@ function newUser() {
         //documentFragment.appendChild(liEl);
     }
     //usernameListEl.appendChild(documentFragment);
-}
+}*/
 
-function getMessage(sender, message) {
+/*function getMessage(sender, message) {
 
     if (destination === destination) {
         var newChatEl = createNewChat(sender, message);
@@ -71,14 +99,14 @@ function getMessage(sender, message) {
 
     // if (chatRoom[destination]) chatRoom[destination].push(newChatEl);
     // else chatRoom[destination] = [newChatEl];
-}
-
+}*/
+/*
 function removeUser(removedUsername) {
     //usernameListEl.querySelector('#' + removedUsername).remove();
     alert(removedUsername);
-}
+}*/
 
-function createNewChat(sender, message) {
+/*function createNewChat(sender, message) {
     //var newChatDivEl = document.createElement('div');
     //var senderEl = document.createElement('span');
     //var messageEl = document.createElement('span');
@@ -92,7 +120,7 @@ function createNewChat(sender, message) {
     //newChatDivEl.appendChild(messageEl);
     alert(sender + " : " + message);
     //return newChatDivEl;
-}
+}*/
 
 /*function addCountMessage(toEl) {
     var countEl = toEl.querySelector('.count');
@@ -109,17 +137,7 @@ function createNewChat(sender, message) {
 }*/
 
 
-function sendMessage() {
-    alert("Your message" + " : " + message);
-    if (message === '') return;
-    websocket.send(message);
-    message = '';
 
-
-    //var sender = usernameInputEl.value;
-    //getMessage(sender, message, destination);
-    //messageBoardEl.scrollTop = messageBoardEl.scrollHeight;
-}
 
 /*function chatToFn(username) {
     return function (e) {
@@ -140,13 +158,6 @@ function sendMessage() {
     }
 }*/
 
-$(document).ready(function () {
-    // After download document create connection
-    connectClient();
-    $("#send").click(function () {
-        sendMessage();
-    })
-});
 
 
 

@@ -21,10 +21,15 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         username = request.getParameter("nick");
-        ManageUser.addUser(username);
-        HttpSession session = request.getSession();
-        session.setAttribute("nick", username);
-        response.sendRedirect(request.getContextPath() + "application.jsp");
+        //if(ManageUser.addUser(username)){
+            HttpSession session = request.getSession();
+            session.setAttribute("nick", username);
+            response.sendRedirect(request.getContextPath() + "application.jsp");
+        /*}else{
+            System.out.println("error");
+        }*/
+
+
     }
 
     @Override

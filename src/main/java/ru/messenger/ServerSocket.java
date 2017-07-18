@@ -31,26 +31,20 @@ public class ServerSocket {
 
     @OnMessage
     public void onMessage(Session session, String message) throws IOException {
-        String[] data = message.split("\\|");
-        for (String s:data) {
-            System.out.println(s);
-        }
-        String destination = data[0];
-        String messageContent = data[1];
         String sender = nickName;
-
         Iterator iterator = chatRooms.values().iterator();
-
         while (iterator.hasNext()) {
             Session client = (Session) iterator.next();
             if (!client.equals(session)) {
-                client.getBasicRemote().sendText("message|" + sender + "|" + messageContent + "|all");
+                client.getBasicRemote().sendText(sender + " : " +  message );
+            }else{
+                client.getBasicRemote().sendText(sender + " : " +  message );
             }
         }
 
-        Session client = chatRooms.get(destination);
-        String response = "message|" + sender + "|" + messageContent;
-        client.getBasicRemote().sendText(response);
+        //Session client = chatRooms.get(destination);
+        //String response = "message|" + sender + "|" ;
+        //client.getBasicRemote().sendText(response);
     }
 
     @OnClose

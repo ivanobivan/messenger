@@ -5,12 +5,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 import ru.messenger.Convert;
-import ru.messenger.entity.User;
+import ru.messenger.database.manageSQL.ManageUser;
+import ru.messenger.database.entity.User;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class AppTest {
 
@@ -18,18 +20,26 @@ public class AppTest {
     public void testUser() throws IOException {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
-
         session.beginTransaction();
         User user = new User();
-        user.setNickname("Nickname_Test");
-        user.setAvatar(Convert.imageToBytes(ImageIO.read(new File("src/main/webapp/service/pic/avatar.png")), "png"));
+        user.setUsername("User");
         session.save(user);
         session.getTransaction().commit();
-
-        User user1 = session.get(User.class, new Long(1));
         session.close();
-        System.out.println(user1.getNickname());
-        BufferedImage image = Convert.bytesToImage(user1.getAvatar());
+    }
+
+    @Test
+    public void testWithoutRegistration() throws IOException {
+        ManageUser.addUser("User1");
+        ManageUser.addUser("User2");
+        ManageUser.addUser("User3");
+        ManageUser.deleteUser("User2");
+        ManageUser.addUser("User2");
+        ManageUser.addUser("User2");
+        List<User> userList = ManageUser.getUsers();
+        for (User user: userList) {
+            System.out.println(user.getId() + " " + user.getUsername());
+        }
     }
 
     @Test

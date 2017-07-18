@@ -1,4 +1,4 @@
-package ru.messenger.entity;
+package ru.messenger.database.entity;
 
 import javax.persistence.*;
 
@@ -8,32 +8,49 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
-    private String nickname;
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
 
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "surname")
     private String surname;
 
+    @Column(name = "mobileNumber")
     private String mobileNumber;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "avatar")
     private byte[] avatar;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getUsername() {
+        return username;
     }
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {

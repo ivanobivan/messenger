@@ -8,7 +8,7 @@
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/chat</property>
         <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">postgres</property>
+        <property name="hibernate.connection.password">masterkey</property>
         <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
         <!-- Print executed SQL to stdout -->
@@ -16,6 +16,6 @@
         <!-- Drop and re-create all database on startup -->
         <property name="hibernate.hbm2ddl.auto">create</property>
         <!-- Annotated entity classes -->
-        <mapping class="ru.messenger.entity.User"/>
+        <mapping class="ru.messenger.database.entity.User"/>
     </session-factory>
 </hibernate-configuration>

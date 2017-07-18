@@ -1,7 +1,4 @@
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,7 +79,7 @@
             </div>
         </div>
 
-        <div class="w3-col m6 w3-padding-48" id="messagePanel">
+        <div class="w3-col m8 w3-padding-48" id="messagePanel">
             <div class="w3-row-padding">
                 <div class="w3-col m12">
                     <div class="w3-card-2 w3-round w3-white">
@@ -96,12 +93,10 @@
         </div>
 
 
-        <div class="w3-col m4 w3-padding-48">
+        <div class="w3-col m4 w3-border-left  customUserPanel">
+            <%--<p>Your Contacts</p>
             <div class="w3-center w3-border-left">
-                <p>Your Contacts</p>
-                <%String value= (String) session.getAttribute("nick");%>
-                <%System.out.println(value);%>
-                <div class="w3-container customBorder">
+               <div class="w3-container customBorder">
                     <img class="w3-left w3-round-xlarge" src="service/pic/John.png" alt="Avatar">
                     <p><span class="username">John Dover</span><br><span class="mesUser">Hi, I am John Dover</span></p>
                 </div>
@@ -116,10 +111,10 @@
                 <div class="w3-container customBorder">
                     <img class="w3-left w3-round-xlarge" src="service/pic/Sara.jpg" alt="Avatar">
                     <p><span class="username">SaraSara</span><br><span class="mesUser">Are you meet me?</span></p>
-                </div>
+                </div>--%>
                 <div class="w3-container customBorder">
                     <img class="w3-left w3-round-xlarge" src="service/pic/avatar.png" alt="Avatar">
-                    <p><span class="username"></span><br><span class="mesUser">...</span>
+                    <p><span class="username"><%=(String)session.getAttribute("nick")%></span><br><span class="mesUser">...</span>
                     </p>
                 </div>
             </div>

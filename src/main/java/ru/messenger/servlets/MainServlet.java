@@ -14,7 +14,6 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nick = request.getParameter("nick");
-        //request.setAttribute("nick",nick);
         HttpSession session = request.getSession();
         session.setAttribute("nick", nick);
         request.getRequestDispatcher("application.jsp").forward(request,response);

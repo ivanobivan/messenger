@@ -8,6 +8,9 @@
     margin-left: auto;
     margin-right: auto;
 }
+#dataUserPanel{
+    display: none;
+}
 #avatar:hover{
     background: url("../pic/change_avatar.png");
     background-size: cover;
@@ -29,8 +32,11 @@
     font-size: 12px;
     opacity: 0.5;
 }
+.customUserPanel{
+    padding-top: 46px!important;
+}
 .customBorder{
-
+    background-color: rgba(100,198,255,0.3);
 }
 .customBorder:hover{
     cursor: pointer;

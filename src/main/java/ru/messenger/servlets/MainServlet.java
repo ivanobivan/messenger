@@ -1,6 +1,7 @@
 package ru.messenger.servlets;
 
-import javax.servlet.RequestDispatcher;
+import ru.messenger.database.manageSQL.ManageUser;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,17 +12,18 @@ import java.io.IOException;
 
 @WebServlet
 public class MainServlet extends HttpServlet {
-    static String nickName;
+    private static String username;
 
-    public static String getNickName() {
-        return nickName;
+    public static String getUsername() {
+        return username;
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        nickName = request.getParameter("nick");
+        username = request.getParameter("nick");
+        ManageUser.addUser(username);
         HttpSession session = request.getSession();
-        session.setAttribute("nick", nickName);
+        session.setAttribute("nick", username);
         response.sendRedirect(request.getContextPath() + "application.jsp");
     }
 

@@ -11,7 +11,7 @@ import java.util.*;
 public class ServerSocket {
 
     private static Map<String, Session> chatRooms = (Map<String, Session>) Collections.synchronizedMap(new LinkedHashMap());
-    private String nickName = MainServlet.getNickName();
+    private String nickName = MainServlet.getUsername();
 
     @OnOpen
     public void onOpen(Session session) throws IOException {

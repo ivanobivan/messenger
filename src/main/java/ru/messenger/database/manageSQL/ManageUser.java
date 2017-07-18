@@ -10,18 +10,21 @@ public class ManageUser {
 
     public static boolean addUser(String username) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            session.beginTransaction();
-            User user = new User();
-            user.setUsername(username);
-            session.save(user);
-            session.getTransaction().commit();
-            return true;
-        } catch (Throwable ex) {
-            return false;
-        } finally {
-            session.close();
+        session.beginTransaction();
+        List<User> users = session.createQuery("from User ").list();
+        for (User user:users) {
+            if (user.getUsername().equals(username)) {
+                session.getTransaction().commit();
+                session.close();
+                return false;
+            }
         }
+        User user = new User();
+        user.setUsername(username);
+        session.save(user);
+        session.getTransaction().commit();
+        session.close();
+        return true;
     }
 
     public static boolean deleteUser(String username) {

@@ -1,5 +1,3 @@
-
-<!DOCTYPE html>
 <html>
 <head>
     <title>Chat</title>
@@ -84,8 +82,10 @@
                 <div class="w3-col m12">
                     <div class="w3-card-2 w3-round w3-white">
                         <div class="w3-container w3-padding">
-                            <p contenteditable="true" class="w3-border w3-padding">Enter message</p>
-                            <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i> Send</button>
+                            <textarea class="w3-border w3-padding customTextArea"></textarea>
+                            <input value="I AM" type="text" placeholder="Message" name="message" id="message" class="w3-input w3-border-left">
+                            <button type="button" class="w3-button w3-indigo w3-right" id="send"><i class="fa fa-pencil"></i> Send
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
         </div>
 
 
-        <div class="w3-col m4 w3-border-left  customUserPanel">
+        <div class="w3-col m4 w3-border-left" id="customUserPanel">
             <%--<p>Your Contacts</p>
             <div class="w3-center w3-border-left">
                <div class="w3-container customBorder">
@@ -112,11 +112,11 @@
                     <img class="w3-left w3-round-xlarge" src="service/pic/Sara.jpg" alt="Avatar">
                     <p><span class="username">SaraSara</span><br><span class="mesUser">Are you meet me?</span></p>
                 </div>--%>
-                <div class="w3-container customBorder">
-                    <img class="w3-left w3-round-xlarge" src="service/pic/avatar.png" alt="Avatar">
-                    <p><span class="username"><%=(String)session.getAttribute("nick")%></span><br><span class="mesUser">...</span>
-                    </p>
-                </div>
+            <div class="w3-container customBorder">
+                <img class="w3-left w3-round-xlarge" src="service/pic/avatar.png" alt="Avatar">
+                <p><span class="username"><%=(String) session.getAttribute("nick")%></span><br><span
+                        class="mesUser">...</span>
+                </p>
             </div>
         </div>
     </div>

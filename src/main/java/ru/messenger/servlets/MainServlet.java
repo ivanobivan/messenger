@@ -11,17 +11,22 @@ import java.io.IOException;
 
 @WebServlet
 public class MainServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String nick = request.getParameter("nick");
-        HttpSession session = request.getSession();
-        session.setAttribute("nick", nick);
-        request.getRequestDispatcher("application.jsp").forward(request,response);
+    static String nickName;
 
+    public static String getNickName() {
+        return nickName;
     }
 
     @Override
-    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
-        super.doPost(httpServletRequest, httpServletResponse);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        nickName = request.getParameter("nick");
+        HttpSession session = request.getSession();
+        session.setAttribute("nick", nickName);
+        response.sendRedirect(request.getContextPath() + "application.jsp");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        super.doPost(request, response);
     }
 }

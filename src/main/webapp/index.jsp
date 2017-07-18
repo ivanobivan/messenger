@@ -17,7 +17,7 @@
         <form action="#">
             <br><br>
             <div class="invisForm" id="form1">
-                <form action="AuthorisationServlet" method="post">
+                <form action="#" method="post">
                     <input type="text" name="username" placeholder="Username" class="w3-input w3-animate-input" style="width: 96%;"><br>
                     <input type="password" name="password" placeholder="Password" class="w3-input w3-animate-input" style="width: 96%;"><br>
                     <input type="submit" value="Sign in" class="w3-btn w3-indigo"><br>

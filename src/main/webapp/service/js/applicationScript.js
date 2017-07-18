@@ -1,15 +1,15 @@
 'use strict';
 var URL = "ws://" + document.location.host + document.location.pathname + "/test";
-var websocket = undefined;
+var webSocket = undefined;
 var message;
-var username;
+var userName;
 
 function connectClient() {
-    websocket = new WebSocket(URL);
-    websocket.onopen = onOpen;
-    websocket.onmessage = onMessage;
-    websocket.onclose = onClose;
-    websocket.onerror = onError;
+    webSocket = new WebSocket(URL);
+    webSocket.onopen = onOpen;
+    webSocket.onmessage = onMessage;
+    webSocket.onclose = onClose;
+    webSocket.onerror = onError;
 }
 
 function onOpen(evt) {
@@ -17,18 +17,23 @@ function onOpen(evt) {
 }
 
 function onMessage(event) {
-    alert("Data has got : " + event.data);
-    var eventName = event.data.substr(0, event.data.indexOf("|"));
-    username = event.data.substr(event.data.indexOf("|") + 1);
-    // var customFunction;
-    // if (eventName === 'newUser') {
-    //     customFunction = newUser;
-    // } else if (eventName === 'removeUser') {
-    //     customFunction = removeUser;
-    // } else if (eventName === 'message') {
-    //     customFunction = getMessage;
-    // }
-    // customFunction.apply(null, data.split('|'));
+    //alert("Data has got : " + event.data);
+    var dataArray = event.data.split(".");
+    var eventName = dataArray[0];
+    userName = dataArray[1];
+
+     //var customFunction;
+     if (eventName === 'newClient') {
+         newClient(userName);
+     } else if (eventName === "message"){
+         newMessage(userName,dataArray[2])
+     }
+     /*else if (eventName === 'removeUser') {
+         customFunction = removeUser;
+     } else if (eventName === 'message') {
+         customFunction = getMessage;
+     }*/
+     //customFunction.apply(null, data.split('.'));
 }
 
 function onClose(evt) {
@@ -46,17 +51,21 @@ function onError(evt) {
 
 function sendMessage() {
     message  = document.getElementById("message").value;
-    alert("Your message" + " : " + message);
-    message !== null ? websocket.send(message) : false;
-    /*if (message === '') {
-        return;
-    }
-    websocket.send(message);*/
-
+    message !== null ? webSocket.send(message) : false;
 
     //var sender = usernameInputEl.value;
     //getMessage(sender, message, destination);
     //messageBoardEl.scrollTop = messageBoardEl.scrollHeight;
+}
+
+function newClient(userName) {
+    alert("work " + userName);
+    var userPanel = document.getElementById("customUserPanel");
+    userPanel.add
+}
+
+function newMessage(userName,message) {
+    alert(userName + ":" + message);
 }
 
 $(document).ready(function () {

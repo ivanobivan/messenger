@@ -35,6 +35,9 @@
 #customUserPanel{
     padding-top: 46px!important;
 }
+#customMarginText{
+    margin-left: 110px;
+}
 .customBorder{
     background-color: rgba(100,198,255,0.3);
 }
@@ -53,9 +56,22 @@
     margin-right: 5px;
     width: 12%!important;
 }
-.customTextArea{
-    width: 1220px;
-    height: 200px;
+
+.customSprite1{
+    background:url("../pic/sprite_faces.png") 0 0;
+    width: 64px;
+    height: 64px;
+}
+.customSprite2{
+    position: relative;
+    background:url("../pic/sprite_faces.png") 0 0;
+    width: 64px;
+    height: 64px;
+}
+.customSprite3{
+    background:url("../pic/sprite_faces.png") 0 0;
+    width: 64px;
+    height: 64px;
 }
 .customMargin{
     border: none!important;

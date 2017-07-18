@@ -82,10 +82,32 @@
                 <div class="w3-col m12">
                     <div class="w3-card-2 w3-round w3-white">
                         <div class="w3-container w3-padding">
-                            <textarea class="w3-border w3-padding customTextArea"></textarea>
-                            <input value="I AM" type="text" placeholder="Message" name="message" id="message" class="w3-input w3-border-left">
-                            <button type="button" class="w3-button w3-indigo w3-right" id="send"><i class="fa fa-pencil"></i> Send
-                            </button>
+                            <div class="w3-border" id="customMessageField">
+
+                                <div class="w3-container w3-row">
+                                    <div class="customSprite1 w3-circle w3-left w3-margin"></div>
+                                    <p class="w3-padding-24 customMarginText">Hi everybody</p>
+                                </div>
+
+                                <div class="w3-container w3-row w3-border-top w3-light-gray">
+                                    <div class="customSprite2 w3-circle w3-left w3-margin "></div>
+                                    <p class="w3-padding-24 customMarginText">gryy</p>
+                                </div>
+
+                                <div class="w3-container w3-row w3-border-top">
+                                    <div class="customSprite1 w3-circle w3-left w3-margin "></div>
+                                    <p class="w3-padding-24 customMarginText">Hi </p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="w3-row">
+                                <button type="button" class="w3-button w3-indigo w3-right w3-round w3-col m2" id="send">
+                                    <i
+                                            class="fa fa-pencil w3-third"></i> Send
+                                </button>
+                                <input type="text" placeholder="Message" name="message" id="message"
+                                       class="w3-input w3-border w3-left w3-col m9">
+                            </div>
                         </div>
                     </div>
                 </div>

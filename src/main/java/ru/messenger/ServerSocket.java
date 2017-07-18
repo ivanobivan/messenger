@@ -11,51 +11,47 @@ import java.util.*;
 public class ServerSocket {
 
     private static Map<String, Session> chatRooms = (Map<String, Session>) Collections.synchronizedMap(new LinkedHashMap());
-    private String nickName = MainServlet.getUsername();
+    private String userName = MainServlet.getUsername();
 
     @OnOpen
     public void onOpen(Session session) throws IOException {
-        session.getUserProperties().put("username", nickName);
-        chatRooms.put(nickName, session);
-        String response = "newUser|" + String.join("|", chatRooms.keySet());
+        session.getUserProperties().put("userName", userName);
+        chatRooms.put(userName, session);
+        String response = "newClient." + userName;
         session.getBasicRemote().sendText(response);
-        Iterator iterator = chatRooms.values().iterator();
 
+        Iterator iterator = chatRooms.values().iterator();
         while (iterator.hasNext()) {
             Session client = (Session) iterator.next();
             if (client != session) {
-                client.getBasicRemote().sendText("newUser|" + nickName);
+                client.getBasicRemote().sendText("newClient." + userName);
             }
         }
     }
 
     @OnMessage
     public void onMessage(Session session, String message) throws IOException {
-        String sender = nickName;
+        String sender = userName;
         Iterator iterator = chatRooms.values().iterator();
         while (iterator.hasNext()) {
             Session client = (Session) iterator.next();
             if (!client.equals(session)) {
-                client.getBasicRemote().sendText(sender + " : " +  message );
+                client.getBasicRemote().sendText("message." + sender + "." +  message );
             }else{
-                client.getBasicRemote().sendText(sender + " : " +  message );
+                client.getBasicRemote().sendText("message." + sender + "." +  message );
             }
         }
-
-        //Session client = chatRooms.get(destination);
-        //String response = "message|" + sender + "|" ;
-        //client.getBasicRemote().sendText(response);
     }
 
     @OnClose
     public void onClose(Session session) throws IOException {
-        String username = nickName;
+        String username = userName;
         chatRooms.remove(username);
-        Iterator var3 = chatRooms.values().iterator();
+        Iterator iterator = chatRooms.values().iterator();
 
-        while (var3.hasNext()) {
-            Session client = (Session) var3.next();
-            client.getBasicRemote().sendText("removeUser|" + username);
+        while (iterator.hasNext()) {
+            Session client = (Session) iterator.next();
+            client.getBasicRemote().sendText("removeUser." + username);
         }
     }
 

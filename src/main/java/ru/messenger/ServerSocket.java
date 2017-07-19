@@ -15,30 +15,27 @@ public class ServerSocket {
 
     @OnOpen
     public void onOpen(Session session) throws IOException {
-        session.getUserProperties().put("userName", userName);
+        //session.getUserProperties().put("userName", userName);
         chatRooms.put(userName, session);
         String response = "newClient." + userName;
         session.getBasicRemote().sendText(response);
 
-        Iterator iterator = chatRooms.values().iterator();
-        while (iterator.hasNext()) {
-            Session client = (Session) iterator.next();
-            if (client != session) {
-                client.getBasicRemote().sendText("newClient." + userName);
+        for (String name : chatRooms.keySet()) {
+            if (!userName.equals(name)) {
+                session.getBasicRemote().sendText("newClient." + name);
             }
         }
+
     }
 
     @OnMessage
     public void onMessage(Session session, String message) throws IOException {
-        String sender = userName;
-        Iterator iterator = chatRooms.values().iterator();
-        while (iterator.hasNext()) {
-            Session client = (Session) iterator.next();
+
+        for (Session client : chatRooms.values()) {
             if (!client.equals(session)) {
-                client.getBasicRemote().sendText("message." + sender + "." +  message );
-            }else{
-                client.getBasicRemote().sendText("message." + sender + "." +  message );
+                client.getBasicRemote().sendText("message." + userName + "." + message);
+            } else {
+                client.getBasicRemote().sendText("message." + userName + "." + message);
             }
         }
     }
@@ -47,10 +44,8 @@ public class ServerSocket {
     public void onClose(Session session) throws IOException {
         String username = userName;
         chatRooms.remove(username);
-        Iterator iterator = chatRooms.values().iterator();
 
-        while (iterator.hasNext()) {
-            Session client = (Session) iterator.next();
+        for (Session client : chatRooms.values()) {
             client.getBasicRemote().sendText("removeUser." + username);
         }
     }

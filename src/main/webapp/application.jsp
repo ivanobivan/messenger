@@ -8,8 +8,8 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<div class="w3-top w3-light-blue" id="sideBar">
-    <div class="w3-bar w3-left-align ">
+<div class="w3-top">
+    <div class="w3-bar w3-left-align w3-light-blue customBar">
         <a id="buttonDataUser" class="w3-bar-item w3-button w3-padding-large"><i
                 class="fa fa-bars"></i></a>
         <a href="#" class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-vk"></i></a>
@@ -32,7 +32,6 @@
             </form>
         </div>
     </div>
-    <div class="customBar"></div>
 </div>
 <div class="w3-content" style="max-width: 2000px;">
     <div class="w3-row">
@@ -83,22 +82,12 @@
                 <div class="w3-col m12">
                     <div class="w3-card-2 w3-round w3-white">
                         <div class="w3-container w3-padding">
-                            <div class="w3-border" id="customMessageField">
-
-                                <div class="w3-container w3-row">
+                            <div class="w3-border" id = "customMessageField">
+                                <%--<div class="w3-container w3-row">
                                     <div class="customSprite1 w3-circle w3-left w3-margin"></div>
-                                    <p class="w3-padding-24 customMarginText">Hi everybody</p>
-                                </div>
-
-                                <div class="w3-container w3-row w3-border-top w3-light-gray">
-                                    <div class="customSprite2 w3-circle w3-left w3-margin "></div>
-                                    <p class="w3-padding-24 customMarginText">gryy</p>
-                                </div>
-
-                                <div class="w3-container w3-row w3-border-top">
-                                    <div class="customSprite1 w3-circle w3-left w3-margin "></div>
-                                    <p class="w3-padding-24 customMarginText">Hi </p>
-                                </div>
+                                    <p class="w3-padding-small"><span id="customSpan1">Username</span><span class="w3-right" id="customSpan2">21.01.2016</span><br><span
+                                            id="customSpan3">Hi everybod fgln glng gbfk kkmfv ldf</span></p>
+                                </div>--%>
                             </div>
                             <br>
                             <div class="w3-row">
@@ -115,10 +104,10 @@
             </div>
         </div>
         <div class="w3-col m4" id="customUserPanel">
-           <div class="w3-container customBorder w3-row w3-light-blue w3-hover-sand" id="test">
-                    <div class="customSprite1 w3-circle w3-left w3-margin"></div>
-                    <p class="customMarginUserMes"><span class="username"><%=(String) session.getAttribute("nick")%></span></p>
-            </div>
+            <%--<div class="w3-container customBorder w3-row w3-light-blue w3-hover-sand" id="test">
+                     <div class="customSprite1 w3-circle w3-left w3-margin"></div>
+                     <p class="customMarginUserMes"><span class="username"><%=(String) session.getAttribute("nick")%></span></p>
+             </div>--%>
         </div>
     </div>
 </div>

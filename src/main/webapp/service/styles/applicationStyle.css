@@ -35,13 +35,18 @@
 #customUserPanel{
     padding-top: 38px!important;
     border-left: 3px solid grey!important;
+    overflow-y: scroll;
+    max-height: 800px;
 }
 #customMarginText{
     margin-left: 110px;
 }
+#customMessageField{
+    overflow-y: scroll;
+    max-height: 800px;
+}
 .customBar{
     border-bottom: 3px solid grey!important;
-    width: 66.8%!important;
 }
 .customBorder:hover{
     cursor: pointer;
@@ -65,7 +70,7 @@
 }
 .customSprite2{
     position: relative;
-    background:url("../pic/sprite_faces.png") -64px 0%;
+    background:url("../pic/sprite_faces.png") -64px 0;
     width: 64px;
     height: 64px;
 }
@@ -81,7 +86,7 @@
 }
 .customSprite5{
     position: relative;
-    background:url("../pic/sprite_faces.png") -256px 0%;
+    background:url("../pic/sprite_faces.png") -256px 0;
     width: 64px;
     height: 64px;
 }
@@ -97,7 +102,7 @@
 }
 .customSprite8{
     position: relative;
-    background:url("../pic/sprite_faces.png") -448px 0%;
+    background:url("../pic/sprite_faces.png") -448px 0;
     width: 64px;
     height: 64px;
 }
@@ -152,6 +157,18 @@
     opacity: 0.5;
     outline: none;
     border: 0;
-
+}
+#customSpan1{
+    color: red;
+    font-family:Lucida Console,sans-serif ;
+    font-weight: bold;
+    text-shadow: 0 0 1em rgba(247, 59, 68, 0.39);
+}
+#customSpan2{
+    font-size:12px;
+    opacity:0.7;
+}
+#customSpan3{
+    font-size:14px;
 }
 

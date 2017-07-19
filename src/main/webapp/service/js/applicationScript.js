@@ -3,6 +3,7 @@ var URL = "ws://" + document.location.host + document.location.pathname + "/test
 var webSocket = undefined;
 var message;
 var userName;
+var sprite;
 
 function connectClient() {
     webSocket = new WebSocket(URL);
@@ -13,26 +14,24 @@ function connectClient() {
 }
 
 function onOpen(evt) {
-    alert("Connection successful");
 }
 
 function onMessage(event) {
+    //alert(event.data);
     var dataArray = event.data.split(".");
     var eventName = dataArray[0];
     userName = dataArray[1];
 
-     //var customFunction;
-     if (eventName === 'newClient') {
-         newClient(userName);
-     } else if (eventName === "message"){
-         newMessage(userName,dataArray[2])
-     }
-     /*else if (eventName === 'removeUser') {
-         customFunction = removeUser;
-     } else if (eventName === 'message') {
-         customFunction = getMessage;
-     }*/
-     //customFunction.apply(null, data.split('.'));
+    //var customFunction;
+    if (eventName === 'newClient') {
+        newClient(userName);
+    } else if (eventName === "message") {
+        newMessage(userName, dataArray[2])
+    }
+    /*else if (eventName === 'removeUser') {
+        customFunction = removeUser;
+    }*/
+    //customFunction.apply(null, data.split('.'));
 }
 
 function onClose(evt) {
@@ -49,8 +48,8 @@ function onError(evt) {
 }
 
 function sendMessage() {
-    message  = document.getElementById("message").value;
-    message !== null ? webSocket.send(message) : false;
+    message = document.getElementById("message").value;
+    message !== "" ? webSocket.send(message) : false;
 
     //var sender = usernameInputEl.value;
     //getMessage(sender, message, destination);
@@ -58,15 +57,38 @@ function sendMessage() {
 }
 
 function newClient(userName) {
+    sprite = getCustomSprite();
     var panel = document.createElement("div");
-    panel.className = "w3-container customBorder w3-row";
-    panel.innerHTML = "<div class=\"customSprite1 w3-circle w3-left w3-margin\"></div>\n" +
+    panel.className = "w3-container customBorder w3-row w3-hover-light-gray";
+    panel.innerHTML = "<div class=\"" + sprite + " w3-circle  w3-left w3-margin\"></div>\n" +
         "                    <p class=\"customMarginUserMes\"><span class=\"username\">" + userName + "</span></p>"
     document.getElementById("customUserPanel").appendChild(panel);
 }
 
-function newMessage(userName,message) {
-    alert(userName + ":" + message);
+function newMessage(username, message) {
+    var date = new Date();
+    var options = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        timezone: 'UTC',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+    };
+    var panel = document.createElement("div");
+    panel.className = "w3-container w3-row";
+    panel.innerHTML = "<div class=\"" + sprite + " w3-circle w3-left w3-margin\"></div>\n" +
+        "        <p class=\"w3-padding-small\"><span id=\"customSpan1\">" + username +
+        "</span><span class=\"w3-right\" id=\"customSpan2\">" + date.toLocaleString("ru", options)  + "</span><br><span\n" +
+        "    id=\"customSpan3\">" + message + "</span></p>";
+    document.getElementById("customMessageField").appendChild(panel);
+
+}
+
+function getCustomSprite() {
+    var number = Math.floor(Math.random() * 9) + 1;
+    return "customSprite" + number;
 }
 
 $(document).ready(function () {
@@ -145,8 +167,6 @@ function removeUser(removedUsername) {
         toEl.appendChild(countEl);
     }
 }*/
-
-
 
 
 /*function chatToFn(username) {

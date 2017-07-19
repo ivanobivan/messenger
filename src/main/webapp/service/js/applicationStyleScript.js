@@ -14,3 +14,7 @@ $(document).ready(function () {
 
 });
 
+function getCustomSprite() {
+    var number = Math.floor(Math.random() * 9) + 1;
+    return "customSprite" + number;
+}

@@ -65,12 +65,49 @@
 }
 .customSprite2{
     position: relative;
-    background:url("../pic/sprite_faces.png") 0 0;
+    background:url("../pic/sprite_faces.png") -64px 0%;
     width: 64px;
     height: 64px;
 }
 .customSprite3{
-    background:url("../pic/sprite_faces.png") 0 0;
+    background:url("../pic/sprite_faces.png") -128px 0;
+    width: 64px;
+    height: 64px;
+}
+.customSprite4{
+    background:url("../pic/sprite_faces.png") -192px 0;
+    width: 64px;
+    height: 64px;
+}
+.customSprite5{
+    position: relative;
+    background:url("../pic/sprite_faces.png") -256px 0%;
+    width: 64px;
+    height: 64px;
+}
+.customSprite6{
+    background:url("../pic/sprite_faces.png") -320px 0;
+    width: 64px;
+    height: 64px;
+}
+.customSprite7{
+    background:url("../pic/sprite_faces.png") -384px 0;
+    width: 64px;
+    height: 64px;
+}
+.customSprite8{
+    position: relative;
+    background:url("../pic/sprite_faces.png") -448px 0%;
+    width: 64px;
+    height: 64px;
+}
+.customSprite9{
+    background:url("../pic/sprite_faces.png") -512px 0;
+    width: 64px;
+    height: 64px;
+}
+.customSprite10{
+    background:url("../pic/sprite_faces.png") -576px 0;
     width: 64px;
     height: 64px;
 }

@@ -8,9 +8,9 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<div class="w3-top w3-light-blue">
-    <div class="w3-bar w3-left-align">
-        <a id="buttonDataUser" class="w3-bar-item w3-button w3-padding-large "><i
+<div class="w3-top w3-light-blue" id="sideBar">
+    <div class="w3-bar w3-left-align ">
+        <a id="buttonDataUser" class="w3-bar-item w3-button w3-padding-large"><i
                 class="fa fa-bars"></i></a>
         <a href="#" class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-vk"></i></a>
         <a href="#" class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-twitter"></i></a>
@@ -32,6 +32,7 @@
             </form>
         </div>
     </div>
+    <div class="customBar"></div>
 </div>
 <div class="w3-content" style="max-width: 2000px;">
     <div class="w3-row">
@@ -113,12 +114,10 @@
                 </div>
             </div>
         </div>
-        <div class="w3-col m4 w3-border-left" id="customUserPanel">
-            <div class="w3-container customBorder">
-                <div class="w3-row">
+        <div class="w3-col m4" id="customUserPanel">
+           <div class="w3-container customBorder w3-row w3-light-blue w3-hover-sand" id="test">
                     <div class="customSprite1 w3-circle w3-left w3-margin"></div>
                     <p class="customMarginUserMes"><span class="username"><%=(String) session.getAttribute("nick")%></span></p>
-                </div>
             </div>
         </div>
     </div>

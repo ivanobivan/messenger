@@ -33,17 +33,18 @@
     opacity: 0.5;
 }
 #customUserPanel{
-    padding-top: 46px!important;
+    padding-top: 38px!important;
+    border-left: 3px solid grey!important;
 }
 #customMarginText{
     margin-left: 110px;
 }
-.customBorder{
-    background-color: rgba(100,198,255,0.3);
+.customBar{
+    border-bottom: 3px solid grey!important;
+    width: 66.8%!important;
 }
 .customBorder:hover{
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.06);
 }
 .customBorder img{
     width: 50px;

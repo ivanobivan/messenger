@@ -17,7 +17,6 @@ function onOpen(evt) {
 }
 
 function onMessage(event) {
-    alert("Data has got : " + event.data);
     var dataArray = event.data.split(".");
     var eventName = dataArray[0];
     userName = dataArray[1];
@@ -59,12 +58,11 @@ function sendMessage() {
 }
 
 function newClient(userName) {
-    //alert("work " + userName);
     var panel = document.createElement("div");
-    panel.className = "w3-container customBorder";
-
-    var userPanel = document.getElementById("customUserPanel");
-    userPanel.appendChild(panel);
+    panel.className = "w3-container customBorder w3-row";
+    panel.innerHTML = "<div class=\"customSprite1 w3-circle w3-left w3-margin\"></div>\n" +
+        "                    <p class=\"customMarginUserMes\"><span class=\"username\">" + userName + "</span></p>"
+    document.getElementById("customUserPanel").appendChild(panel);
 }
 
 function newMessage(userName,message) {

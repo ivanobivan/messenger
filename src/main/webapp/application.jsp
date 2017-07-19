@@ -113,32 +113,12 @@
                 </div>
             </div>
         </div>
-
-
         <div class="w3-col m4 w3-border-left" id="customUserPanel">
-            <%--<p>Your Contacts</p>
-            <div class="w3-center w3-border-left">
-               <div class="w3-container customBorder">
-                    <img class="w3-left w3-round-xlarge" src="service/pic/John.png" alt="Avatar">
-                    <p><span class="username">John Dover</span><br><span class="mesUser">Hi, I am John Dover</span></p>
-                </div>
-                <div class="w3-container customBorder">
-                    <img class="w3-left w3-round-xlarge" src="service/pic/Liza.png" alt="Avatar">
-                    <p><span class="username">Liza4you</span><br><span class="mesUser">Where are you?</span></p>
-                </div>
-                <div class="w3-container customBorder">
-                    <img class="w3-left w3-round-xlarge" src="service/pic/Oleg.png" alt="Avatar">
-                    <p><span class="username">Oleg Olegod</span><br><span class="mesUser">I am your friend</span></p>
-                </div>
-                <div class="w3-container customBorder">
-                    <img class="w3-left w3-round-xlarge" src="service/pic/Sara.jpg" alt="Avatar">
-                    <p><span class="username">SaraSara</span><br><span class="mesUser">Are you meet me?</span></p>
-                </div>--%>
             <div class="w3-container customBorder">
-                <img class="w3-left w3-round-xlarge" src="service/pic/avatar.png" alt="Avatar">
-                <p><span class="username"><%=(String) session.getAttribute("nick")%></span><br><span
-                        class="mesUser">...</span>
-                </p>
+                <div class="w3-row">
+                    <div class="customSprite1 w3-circle w3-left w3-margin"></div>
+                    <p class="customMarginUserMes"><span class="username"><%=(String) session.getAttribute("nick")%></span></p>
+                </div>
             </div>
         </div>
     </div>

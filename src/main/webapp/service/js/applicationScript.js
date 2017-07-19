@@ -48,8 +48,10 @@ function onError(evt) {
 }
 
 function sendMessage() {
-    message = document.getElementById("message").value;
-    message !== "" ? webSocket.send(message) : false;
+
+    message  = document.getElementById("message").value;
+    document.getElementById("message").value = "";
+    message !== null ? webSocket.send(message) : false;
 
     //var sender = usernameInputEl.value;
     //getMessage(sender, message, destination);
@@ -90,6 +92,8 @@ function getCustomSprite() {
     var number = Math.floor(Math.random() * 9) + 1;
     return "customSprite" + number;
 }
+
+function key(event) {return ('which' in event) ? event.which : event.keyCode;}
 
 $(document).ready(function () {
     // After download document create connection

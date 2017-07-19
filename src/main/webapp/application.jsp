@@ -106,7 +106,7 @@
                                     <i
                                             class="fa fa-pencil w3-third"></i> Send
                                 </button>
-                                <input type="text" placeholder="Message" name="message" id="message"
+                                <input type="text" placeholder="Message" name="message" id="message" onkeyup="if(key(event)==13){sendMessage()}"
                                        class="w3-input w3-border w3-left w3-col m9">
                             </div>
                         </div>
@@ -122,7 +122,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="service/js/help/jquery-3.2.1.min.js"></script>
 <script src="service/js/applicationScript.js"></script>

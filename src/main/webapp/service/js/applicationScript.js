@@ -50,6 +50,7 @@ function onError(evt) {
 
 function sendMessage() {
     message  = document.getElementById("message").value;
+    document.getElementById("message").value = "";
     message !== null ? webSocket.send(message) : false;
 
     //var sender = usernameInputEl.value;
@@ -68,6 +69,8 @@ function newClient(userName) {
 function newMessage(userName,message) {
     alert(userName + ":" + message);
 }
+
+function key(event) {return ('which' in event) ? event.which : event.keyCode;}
 
 $(document).ready(function () {
     // After download document create connection

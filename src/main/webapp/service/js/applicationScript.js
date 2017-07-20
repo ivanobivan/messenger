@@ -4,6 +4,15 @@ var webSocket = undefined;
 var message;
 var userName;
 var sprite;
+var options = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    timezone: 'UTC',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric'
+};
 
 function connectClient() {
     webSocket = new WebSocket(URL);
@@ -13,7 +22,8 @@ function connectClient() {
     webSocket.onerror = onError;
 }
 
-function onOpen(evt) {
+function onOpen(event) {
+
 }
 
 function onMessage(event) {
@@ -26,11 +36,9 @@ function onMessage(event) {
         newClient(userName);
     } else if (eventName === "message") {
         newMessage(userName, dataArray[2])
+    } else if (eventName === 'removeUser') {
+        removeUser(userName);
     }
-    /*else if (eventName === 'removeUser') {
-        customFunction = removeUser;
-    }*/
-    //customFunction.apply(null, data.split('.'));
 }
 
 function onClose(evt) {
@@ -49,29 +57,21 @@ function onError(evt) {
 function sendMessage() {
     message  = document.getElementById("message").value;
     document.getElementById("message").value = "";
-    message !== null ? webSocket.send(message) : false;
+    message !== "" ? webSocket.send(message) : false;
 }
 
 function newClient(userName) {
     sprite = getCustomSprite();
     var panel = document.createElement("div");
     panel.className = "w3-container customBorder w3-row w3-hover-light-gray";
+    panel.id = userName;
     panel.innerHTML = "<div class=\"" + sprite + " w3-circle  w3-left w3-margin\"></div>\n" +
-        "                    <p class=\"customMarginUserMes\"><span class=\"username\">" + userName + "</span></p>"
+        "                    <p class=\"customMarginUserMes\"><span class=\"username\">" + userName + "</span></p>";
     document.getElementById("customUserPanel").appendChild(panel);
 }
 
 function newMessage(username, message) {
     var date = new Date();
-    var options = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        timezone: 'UTC',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric'
-    };
     var panel = document.createElement("div");
     panel.className = "w3-container w3-row";
     panel.innerHTML = "<div class=\"" + sprite + " w3-circle w3-left w3-margin\"></div>\n" +
@@ -80,6 +80,10 @@ function newMessage(username, message) {
         "    id=\"customSpan3\">" + message + "</span></p>";
     document.getElementById("customMessageField").appendChild(panel);
 
+}
+
+function removeUser(userName) {
+    document.getElementById("customUserPanel").removeChild(document.getElementById(userName));
 }
 
 function getCustomSprite() {
@@ -96,12 +100,6 @@ $(document).ready(function () {
         sendMessage();
     })
 });
-/*
-
-function removeUser(removedUsername) {
-    //usernameListEl.querySelector('#' + removedUsername).remove();
-    alert(removedUsername);
-}*/
 
 
 

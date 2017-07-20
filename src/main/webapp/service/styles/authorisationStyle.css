@@ -1,12 +1,11 @@
 .w3-btn{
     transition: 0.2s;
 }
-html{
-    height: 100%;
-}
-body{
-    background:linear-gradient(141deg, rgba(15, 184, 173, 0.41) 0%, rgba(31, 200, 219, 0.31) 51%, rgba(44, 181, 232, 0.35) 75%) no-repeat;
-    background-size: cover;
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
 }
 button {
     text-align: center;
@@ -35,6 +34,7 @@ button:hover{
 }
 .invisForm{
     display: none;
+    z-index: 2;
 }
 #formReg span{
     font-size: 24px;

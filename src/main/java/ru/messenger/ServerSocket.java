@@ -15,28 +15,32 @@ public class ServerSocket {
 
     @OnOpen
     public void onOpen(Session session) throws IOException {
+        session.getUserProperties().put("userName", userName);
         chatRooms.put(userName, session);
         for (Session client : chatRooms.values()) {
-            if(client != session) {
+            if (client != session) {
                 client.getBasicRemote().sendText("newClient." + userName);
+            } else {
+                for (String name : chatRooms.keySet()) {
+                    session.getBasicRemote().sendText("newClient." + name);
+                }
             }
         }
-        for (String name : chatRooms.keySet()) {
-            session.getBasicRemote().sendText("newClient." + name);
-        }
-
     }
 
     @OnMessage
-    public void onMessage(Session session, String message) throws IOException {
-
-        for (Session client : chatRooms.values()) {
-            if (!client.equals(session)) {
-                client.getBasicRemote().sendText("message." + userName + "." + message);
-            } else {
-                client.getBasicRemote().sendText("message." + userName + "." + message);
+    public void onMessage(Session session, String message)  {
+        chatRooms.values().forEach(client -> {
+            try {
+                if(client == session){
+                    client.getBasicRemote().sendText("message." + userName + "." + message + ".owner");
+                }else{
+                    client.getBasicRemote().sendText("message." + userName + "." + message);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }
+        });
     }
 
     @OnClose

@@ -10,6 +10,7 @@
     <title>Authorisation</title>
 </head>
 <body>
+<canvas id=c></canvas>
 <div class="w3-row invis">
     <div class="w3-col w3-container w3-quarter"></div>
     <div class="w3-quarter w3-center w3-animate-opacity">

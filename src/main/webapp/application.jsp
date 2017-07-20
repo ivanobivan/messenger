@@ -83,8 +83,8 @@
                     <div class="w3-card-2 w3-round w3-white">
                         <div class="w3-container w3-padding">
                             <div class="w3-border" id = "customMessageField">
-                                <%--<div class="w3-container w3-row">
-                                    <div class="customSprite1 w3-circle w3-left w3-margin"></div>
+                                <%--<div class="w3-container w3-row w3-light-gray">
+                                    <div class="customSprite1 w3-circle w3-left"></div>
                                     <p class="w3-padding-small"><span id="customSpan1">Username</span><span class="w3-right" id="customSpan2">21.01.2016</span><br><span
                                             id="customSpan3">Hi everybod fgln glng gbfk kkmfv ldf</span></p>
                                 </div>--%>
@@ -95,7 +95,7 @@
                                     <i
                                             class="fa fa-pencil w3-third"></i> Send
                                 </button>
-                                <input type="text" placeholder="Message" name="message" id="message" onkeyup="if(key(event)==13){sendMessage()}"
+                                <input type="text" placeholder="Message" name="message" id="message" onkeyup="if(key(event)===13){sendMessage()}"
                                        class="w3-input w3-border w3-left w3-col m9">
                             </div>
                         </div>

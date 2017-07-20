@@ -4,6 +4,7 @@ var webSocket = undefined;
 var message;
 var userName;
 var sprite;
+var greyColor = false;
 var options = {
     year: 'numeric',
     month: 'numeric',
@@ -35,7 +36,7 @@ function onMessage(event) {
     if (eventName === 'newClient') {
         newClient(userName);
     } else if (eventName === "message") {
-        newMessage(userName, dataArray[2])
+        dataArray.length === 4 ? newMessage(userName, dataArray[2],dataArray[3]) : newMessage(userName, dataArray[2], null);
     } else if (eventName === 'removeUser') {
         removeUser(userName);
     }
@@ -55,9 +56,10 @@ function onError(evt) {
 }
 
 function sendMessage() {
-    message  = document.getElementById("message").value;
-    document.getElementById("message").value = "";
+    message = document.getElementById("message").value;
     message !== "" ? webSocket.send(message) : false;
+    message = "";
+
 }
 
 function newClient(userName) {
@@ -70,13 +72,20 @@ function newClient(userName) {
     document.getElementById("customUserPanel").appendChild(panel);
 }
 
-function newMessage(username, message) {
+function newMessage(username, message, color) {
+    var ownerColor = color !== null ? "customSpanOwner" : "customSpan1";
     var date = new Date();
     var panel = document.createElement("div");
-    panel.className = "w3-container w3-row";
-    panel.innerHTML = "<div class=\"" + sprite + " w3-circle w3-left w3-margin\"></div>\n" +
-        "        <p class=\"w3-padding-small\"><span id=\"customSpan1\">" + username +
-        "</span><span class=\"w3-right\" id=\"customSpan2\">" + date.toLocaleString("ru", options)  + "</span><br><span\n" +
+    if(greyColor === false){
+        panel.className = "w3-container w3-row";
+        greyColor = true;
+    }else{
+        panel.className = "w3-container w3-row w3-light-gray";
+        greyColor = false;
+    }
+    panel.innerHTML = "<div class=\"" + sprite + " w3-circle w3-left\"></div>\n" +
+        "        <p class=\"w3-padding-small\"><span id=\"" + ownerColor +"\">" + username +
+        "</span><span class=\"w3-right\" id=\"customSpan2\">" + date.toLocaleString("ru", options) + "</span><br><span\n" +
         "    id=\"customSpan3\">" + message + "</span></p>";
     document.getElementById("customMessageField").appendChild(panel);
 
@@ -91,7 +100,9 @@ function getCustomSprite() {
     return "customSprite" + number;
 }
 
-function key(event) {return ('which' in event) ? event.which : event.keyCode;}
+function key(event) {
+    return ('which' in event) ? event.which : event.keyCode;
+}
 
 $(document).ready(function () {
     // After download document create connection

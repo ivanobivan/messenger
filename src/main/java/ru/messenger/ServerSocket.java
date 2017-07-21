@@ -44,6 +44,7 @@ public class ServerSocket {
 
     @OnClose
     public void onClose(Session session) throws IOException {
+        MainServlet.getSession().removeAttribute("nick");
         String username = userName;
         chatRooms.remove(username);
 

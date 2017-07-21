@@ -10,7 +10,13 @@
     <title>Authorisation</title>
 </head>
 <body>
-<canvas id=c></canvas>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
 <div class="w3-row invis">
     <div class="w3-col w3-container w3-quarter"></div>
     <div class="w3-quarter w3-center w3-animate-opacity">
@@ -21,10 +27,10 @@
                 <form action="#" method="post">
                     <input type="text" name="username" placeholder="Username" class="w3-input w3-animate-input" style="width: 96%;"><br>
                     <input type="password" name="password" placeholder="Password" class="w3-input w3-animate-input" style="width: 96%;"><br>
-                    <input type="submit" value="Sign in" class="w3-btn w3-indigo"><br>
+                    <input type="submit" value="OK" class="w3-btn w3-round customButton"><br>
                 </form>
                 <p>If you don't own account, then create it</p>
-                <button class="w3-teal w3-btn" id="buttonReg"><span>Log in</span></button>
+                <div class="w3-btn w3-border w3-round" id="buttonReg"><span>Log in</span></div>
             </div>
         </form>
         <form action="application.jsp" class="invisForm" id="formReg">
@@ -47,7 +53,7 @@
             <div class="invisForm" id="form2">
                 <input type="text" name="nick" placeholder="Nickname..." class="w3-input w3-animate-input"
                        style="width: 90%;"><br><br>
-                <input type="submit" value="Come in" class="w3-btn w3-indigo">
+                <input type="submit" value="Come in" class="w3-btn w3-round customButton">
             </div>
         </form>
     </div>

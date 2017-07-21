@@ -1,7 +1,6 @@
 'use strict';
 var URL = "ws://" + document.location.host + document.location.pathname + "/test";
 var webSocket = undefined;
-var message;
 var userName;
 var sprite;
 var greyColor = false;
@@ -36,7 +35,7 @@ function onMessage(event) {
     if (eventName === 'newClient') {
         newClient(userName);
     } else if (eventName === "message") {
-        dataArray.length === 4 ? newMessage(userName, dataArray[2],dataArray[3]) : newMessage(userName, dataArray[2], null);
+        dataArray.length === 4 ? newMessage(userName, dataArray[2], dataArray[3]) : newMessage(userName, dataArray[2], null);
     } else if (eventName === 'removeUser') {
         removeUser(userName);
     }
@@ -56,19 +55,22 @@ function onError(evt) {
 }
 
 function sendMessage() {
-    message = document.getElementById("message").value;
+    var message = document.getElementById("message").textContent;
     message !== "" ? webSocket.send(message) : false;
-    message = "";
+    document.getElementById("message").textContent = "";
 
 }
 
 function newClient(userName) {
     sprite = getCustomSprite();
     var panel = document.createElement("div");
-    panel.className = "w3-container customBorder w3-row w3-hover-light-gray";
+    panel.className = "w3-container customBorder w3-row w3-hover-light-gray w3-border-bottom";
     panel.id = userName;
     panel.innerHTML = "<div class=\"" + sprite + " w3-circle  w3-left w3-margin\"></div>\n" +
-        "                    <p class=\"customMarginUserMes\"><span class=\"username\">" + userName + "</span></p>";
+        "                    <p class=\"customMarginUserMes\"><span class=\"username\">" + userName + "</span>" +
+        "<i class=\"fa fa-volume-off w3-right fa-lg customMarginIcons\" title=\"Mute\"></i>\n" +
+        "                    <i class=\"fa fa-address-card w3-right fa-lg customMarginIcons\" title=\"Info about user\"></i>\n" +
+        "                    <i class=\"fa fa-comments-o w3-right fa-lg customMarginIcons\" title=\"Create private chat\"></i></p>";
     document.getElementById("customUserPanel").appendChild(panel);
 }
 
@@ -76,17 +78,17 @@ function newMessage(username, message, color) {
     var ownerColor = color !== null ? "customSpanOwner" : "customSpan1";
     var date = new Date();
     var panel = document.createElement("div");
-    if(greyColor === false){
-        panel.className = "w3-container w3-row";
+    if (greyColor === false) {
+        panel.className = "w3-container";
         greyColor = true;
-    }else{
-        panel.className = "w3-container w3-row w3-light-gray";
+    } else {
+        panel.className = "w3-container w3-light-gray";
         greyColor = false;
     }
     panel.innerHTML = "<div class=\"" + sprite + " w3-circle w3-left\"></div>\n" +
-        "        <p class=\"w3-padding-small\"><span id=\"" + ownerColor +"\">" + username +
-        "</span><span class=\"w3-right\" id=\"customSpan2\">" + date.toLocaleString("ru", options) + "</span><br><span\n" +
-        "    id=\"customSpan3\">" + message + "</span></p>";
+        "                                    <div class=\"w3-padding-small customMarginSpan\"><span id=\"" + ownerColor + "\">" + username + "</span><span\n" +
+        "                                            class=\"w3-right\" id=\"customSpan2\">" + date.toLocaleString("ru", options) + "</span></div><div\n" +
+        "                                            id=\"customSpan3\" class=\"w3-margin-left\">" + message + "</div>"
     document.getElementById("customMessageField").appendChild(panel);
 
 }

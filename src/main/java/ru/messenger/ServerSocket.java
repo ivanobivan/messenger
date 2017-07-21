@@ -15,7 +15,6 @@ public class ServerSocket {
 
     @OnOpen
     public void onOpen(Session session) throws IOException {
-        session.getUserProperties().put("userName", userName);
         chatRooms.put(userName, session);
         for (Session client : chatRooms.values()) {
             if (client != session) {

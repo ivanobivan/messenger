@@ -25,7 +25,7 @@
             <br><br>
             <div class="invisForm" id="form1">
                 <form action="#" method="post">
-                    <input type="text" name="username" placeholder="Username" class="w3-input w3-animate-input" style="width: 96%;"><br>
+                    <input type="text" name="username" placeholder="Username" class="w3-input w3-animate-input" id = "input1" style="width: 96%;"><br>
                     <input type="password" name="password" placeholder="Password" class="w3-input w3-animate-input" style="width: 96%;"><br>
                     <input type="submit" value="OK" class="w3-btn w3-round customButton"><br>
                 </form>
@@ -35,7 +35,7 @@
         </form>
         <form action="application.jsp" class="invisForm" id="formReg">
             <p>Enter information for authorisation</p>
-            <input type="text" placeholder="Username" class="w3-input w3-animate-input" style="width: 96%;"><br>
+            <input type="text" placeholder="Username" class="w3-input w3-animate-input" id="input3" style="width: 96%;"><br>
             <input type="password" placeholder="Password" class="w3-input w3-animate-input" style="width: 96%;"><br>
             <input type="password" placeholder="Confirm password" class="w3-input w3-animate-input" style="width: 96%;"><br>
             <i class="fa fa-vk fa-2x"></i>
@@ -51,7 +51,7 @@
         <form action="MainServlet" method="get">
             <br><br>
             <div class="invisForm" id="form2">
-                <input type="text" name="nick" placeholder="Nickname..." class="w3-input w3-animate-input"
+                <input type="text" name="nick" placeholder="Nickname..." class="w3-input w3-animate-input" id = "input2"
                        style="width: 90%;"><br><br>
                 <input type="submit" value="Come in" class="w3-btn w3-round customButton">
             </div>

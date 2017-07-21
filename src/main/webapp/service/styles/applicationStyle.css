@@ -1,9 +1,5 @@
-html{
-    height: 100%;
-}
-body{
-    background:linear-gradient(141deg, rgba(86, 184, 167, 0.19) 0%, rgba(158, 157, 219, 0.15) 51%, rgba(232, 70, 104, 0.04) 75%) no-repeat;
-    background-size: cover;
+.w3-btn{
+    transition: 0.2s;
 }
 .cursorHand{
     cursor: pointer;
@@ -41,20 +37,18 @@ body{
 }
 #customUserPanel{
     padding-top: 38px!important;
-    border-left: 3px solid grey!important;
+    border-left: 2px solid black!important;
     overflow-y: scroll;
-    max-height: 800px;
+    max-height: 700px;
 }
 #customMarginText{
     margin-left: 110px;
 }
 #customMessageField{
     overflow-y: scroll;
-    max-height: 800px;
+    max-height: 700px;
 }
-.customBar{
-    border-bottom: 3px solid grey!important;
-}
+
 .customBorder:hover{
     cursor: pointer;
 }
@@ -63,75 +57,58 @@ body{
     height: 50px;
     margin-top: 12px;
 }
-.customFind{
-    padding: 0!important;
-    margin-top: 2px;
-    margin-right: 5px;
-    width: 12%!important;
-}
-
 .customSprite1{
     background:url("../pic/sprite_faces.png") 0 0;
     width: 64px;
     height: 64px;
-    margin-top: 8px;
 }
 .customSprite2{
     position: relative;
     background:url("../pic/sprite_faces.png") -64px 0;
     width: 64px;
     height: 64px;
-    margin-top: 8px;
 }
 .customSprite3{
     background:url("../pic/sprite_faces.png") -128px 0;
     width: 64px;
     height: 64px;
-    margin-top: 8px;
 }
 .customSprite4{
     background:url("../pic/sprite_faces.png") -192px 0;
     width: 64px;
     height: 64px;
-    margin-top: 8px;
 }
 .customSprite5{
     position: relative;
     background:url("../pic/sprite_faces.png") -256px 0;
     width: 64px;
     height: 64px;
-    margin-top: 8px;
 }
 .customSprite6{
     background:url("../pic/sprite_faces.png") -320px 0;
     width: 64px;
     height: 64px;
-    margin-top: 8px;
 }
 .customSprite7{
     background:url("../pic/sprite_faces.png") -384px 0;
     width: 64px;
     height: 64px;
-    margin-top: 8px;
 }
 .customSprite8{
     position: relative;
     background:url("../pic/sprite_faces.png") -448px 0;
     width: 64px;
     height: 64px;
-    margin-top: 8px;
 }
 .customSprite9{
     background:url("../pic/sprite_faces.png") -512px 0;
     width: 64px;
     height: 64px;
-    margin-top: 8px;
 }
 .customSprite10{
     background:url("../pic/sprite_faces.png") -576px 0;
     width: 64px;
     height: 64px;
-    margin-top: 8px;
 }
 .customMargin{
     border: none!important;
@@ -140,7 +117,17 @@ body{
 .customMarginUserMes{
     margin-top: 35px;
 }
+.customMarginIcons{
+    margin-right:25px;
+}
 
+/*=====Search panel=========================================================================================*/
+.customFind{
+    padding: 0!important;
+    margin-top: 3px;
+    margin-right: 5px;
+    width: 29.8%!important;
+}
 .customSearch {
     padding: 0;
     margin: 0;
@@ -175,18 +162,18 @@ body{
     outline: none;
     border: 0;
 }
+/*================================================================================================================*/
+
 #customSpanOwner{
-    color: rgba(255, 79, 76, 0.78);
+    color: rgba(255, 145, 0, 0.78);
     font-family:Lucida Console,sans-serif ;
     font-weight: bold;
-    text-shadow: 0 0 1em rgba(247, 139, 96, 0.39);
     margin-left: 15px;
 }
 #customSpan1{
-    color: rgba(135, 130, 255, 0.78);
+    color: rgba(173, 0, 255, 0.78);
     font-family:Lucida Console,sans-serif ;
     font-weight: bold;
-    text-shadow: 0 0 1em rgba(172, 206, 247, 0.39);
     margin-left: 15px;
 }
 #customSpan2{
@@ -195,6 +182,12 @@ body{
 }
 #customSpan3{
     font-size:14px;
-    margin-left: 15px;
+    padding-left: 63px!important;
 }
-
+.customMarginText{
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.customMarginSpan{
+    margin-top: 6px;
+}

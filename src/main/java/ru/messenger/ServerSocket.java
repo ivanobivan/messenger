@@ -1,6 +1,7 @@
 package ru.messenger;
 
 import ru.messenger.servlets.MainServlet;
+import ru.messenger.servlets.SecureJSP;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
@@ -44,12 +45,9 @@ public class ServerSocket {
 
     @OnClose
     public void onClose(Session session) throws IOException {
-        MainServlet.getSession().removeAttribute("nick");
-        String username = userName;
-        chatRooms.remove(username);
-
+        chatRooms.remove(userName);
         for (Session client : chatRooms.values()) {
-            client.getBasicRemote().sendText("removeUser." + username);
+            client.getBasicRemote().sendText("removeUser." + userName);
         }
     }
 

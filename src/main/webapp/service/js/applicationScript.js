@@ -86,11 +86,10 @@ function newMessage(username, message, color) {
         greyColor = false;
     }
     panel.innerHTML = "<div class=\"" + sprite + " w3-circle w3-left\"></div>\n" +
-        "                                    <div class=\"w3-padding-small customMarginSpan\"><span id=\"" + ownerColor + "\">" + username + "</span><span\n" +
-        "                                            class=\"w3-right\" id=\"customSpan2\">" + date.toLocaleString("ru", options) + "</span></div><div\n" +
-        "                                            id=\"customSpan3\" class=\"w3-margin-left\">" + message + "</div>"
+        "                                    <div class=\"w3-padding-small customMarginSpan\"><span class=\"" + ownerColor + "\">" + username + "</span><span\n" +
+        "                                            class=\"w3-right customSpan2\">" + date.toLocaleString("ru", options) + "</span></div><div\n" +
+        "                                            class=\"w3-margin-left customSpan3\">" + message + "</div>";
     document.getElementById("customMessageField").appendChild(panel);
-
 }
 
 function removeUser(userName) {

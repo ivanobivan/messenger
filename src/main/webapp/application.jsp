@@ -86,16 +86,18 @@
                     <div class="w3-card-2 w3-round w3-white">
                         <div class="w3-container w3-padding">
                             <div class="w3-border" id="customMessageField">
-                                <div class="w3-bar w3-left-align w3-border-bottom">
-                                    <a class="w3-bar-item w3-button w3-gray w3-padding-large w3-border-right"><i class="fa fa-users"></i> Common Room</a>
-                                    <a class="w3-bar-item w3-button w3-light-gray w3-padding-large w3-border-right"><i class="fa fa-user"></i> Private Room</a>
+                                <div class="w3-bar w3-left-align customFixed">
+                                    <a class="w3-bar-item w3-button w3-gray w3-padding-large w3-border-right w3-border-bottom"><i class="fa fa-users"></i> Common Room</a>
+                                    <a class="w3-bar-item w3-button w3-light-gray w3-padding-large w3-border-right w3-border-bottom"><i class="fa fa-user"></i> Private Room</a>
                                 </div>
-                                <div class="w3-container customMarginText">
+                                <div class="customBlock"></div>
+                                <%--<div class="w3-container">
                                     <div class="customSprite1 w3-circle w3-left"></div>
-                                    <div class="w3-padding-small customMarginSpan"><span id="customSpan1">Username</span><span
-                                            class="w3-right" id="customSpan2">21.01.2016</span></div><div
-                                            id="customSpan3" class="w3-margin-left">text</div>
-                                </div>
+                                    <div class="w3-padding-small customMarginSpan"><span class="customSpan1">Username</span><span
+                                            class="w3-right customSpan2">21.01.2016</span></div><div
+                                        class="w3-margin-left customSpan3">text</div>
+                                </div>--%>
+
                             </div>
                             <br>
                             <div class="w3-row">
@@ -104,7 +106,7 @@
                                     SEND
                                 </button>
                                 <div type="text" id="message" contenteditable="true"
-                                       onkeyup="if(key(event)===13){sendMessage()}"
+                                       <%--onkeyup="if(key(event)===13){sendMessage()}"--%>
                                           class="w3-input w3-border w3-left w3-col m10" title="Message"></div>
                             </div>
                         </div>

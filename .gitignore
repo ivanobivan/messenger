@@ -3,6 +3,5 @@
 *.txt
 *.lck
 *.iml
-!/todo.txt
 /target/
 /src/main/java/log/

@@ -10,13 +10,6 @@
     <title>Authorisation</title>
 </head>
 <body>
-<ul>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>
 <div class="w3-row invis">
     <div class="w3-col w3-container w3-quarter"></div>
     <div class="w3-quarter w3-center w3-animate-opacity">

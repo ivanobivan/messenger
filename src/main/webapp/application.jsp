@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="w3-top">
-    <div class="w3-bar w3-left-align w3-black">
+    <div class="w3-bar w3-left-align w3-blue-gray">
         <a id="buttonDataUser" class="w3-bar-item w3-button w3-padding-large"><i
                 class="fa fa-cog"></i></a>
         <a href="#" class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-vk"></i></a>
@@ -21,7 +21,7 @@
         <div class="w3-dropdown-hover">
             <a class="w3-button w3-padding-large "><i class="fa fa-bell"></i></a>
             <div class="w3-dropdown-content w3-card-4 w3-bar-block">
-                <a href="#" class="w3-bar-item w3-button">Djim want be your friend</a>
+                <a href="#" class="w3-bar-item w3-button">Dima want be your friend</a>
                 <a href="#" class="w3-bar-item w3-button">Your birthday today</a>
                 <a href="#" class="w3-bar-item w3-button">It is your day</a>
             </div>
@@ -87,8 +87,10 @@
                         <div class="w3-container w3-padding">
                             <div class="w3-border" id="customMessageField">
                                 <div class="w3-bar w3-left-align customFixed">
-                                    <a class="w3-bar-item w3-button w3-gray w3-padding-large w3-border-right w3-border-bottom"><i class="fa fa-users"></i> Common Room</a>
-                                    <a class="w3-bar-item w3-button w3-light-gray w3-padding-large w3-border-right w3-border-bottom"><i class="fa fa-user"></i> Private Room</a>
+                                    <a class="w3-bar-item w3-button w3-gray w3-padding-large w3-border-right w3-border-bottom"><i
+                                            class="fa fa-users"></i> Common Room</a>
+                                    <a class="w3-bar-item w3-button w3-light-gray w3-padding-large w3-border-right w3-border-bottom"><i
+                                            class="fa fa-user"></i> Private Room</a>
                                 </div>
                                 <div class="customBlock"></div>
                                 <%--<div class="w3-container">
@@ -97,17 +99,17 @@
                                             class="w3-right customSpan2">21.01.2016</span></div><div
                                         class="w3-margin-left customSpan3">text</div>
                                 </div>--%>
-
                             </div>
                             <br>
                             <div class="w3-row">
-                                <button type="button"
+                                <button
                                         class="w3-btn w3-black w3-right w3-round w3-col m1 w3-margin-right" id="send">
                                     SEND
                                 </button>
                                 <div type="text" id="message" contenteditable="true"
-                                       <%--onkeyup="if(key(event)===13){sendMessage()}"--%>
-                                          class="w3-input w3-border w3-left w3-col m10" title="Message"></div>
+                                     class="w3-input w3-border w3-left w3-col m10" title="Message"
+                                     onkeyup="prevSendMes()">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -115,12 +117,13 @@
             </div>
         </div>
         <div class="w3-col m4" id="customUserPanel">
-            <%--<div class="w3-container customBorder w3-row w3-hover-light-gray w3-border-bottom" id="test">
-                <div class="customSprite1 w3-circle w3-left w3-margin"></div>
+            <p class="w3-center w3-border-bottom">Contact list</p>
+            <%--<div class="w3-container customBorder w3-border-bottom w3-hover-gray">
+                <div class="customSprite1 w3-circle w3-left"></div>
                 <p class="customMarginUserMes"><span class="username">Sara</span>
-                    <i class="fa fa-volume-off w3-right fa-lg customMarginIcons " title="Mute"></i>
-                    <i class="fa fa-address-card w3-right fa-lg customMarginIcons" title="Info about user"></i>
-                    <i class="fa fa-comments-o w3-right fa-lg customMarginIcons" title="Create private chat"></i></p>
+                    <i class="fa fa-volume-off w3-right fa-lg" title="Mute"></i>
+                    <i class="fa fa-address-card w3-right fa-lg" title="Info about user"></i>
+                    <i class="fa fa-comments-o w3-right fa-lg" title="Create private chat"></i></p>
             </div>--%>
         </div>
     </div>

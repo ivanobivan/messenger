@@ -11,4 +11,5 @@ $(document).ready(function () {
         $(this).find("> i").toggleClass("fa-spin");
     })
     $("#message").focus();
+    $("#send").focus();
 });

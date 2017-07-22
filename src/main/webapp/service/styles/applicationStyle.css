@@ -35,26 +35,27 @@
     opacity: 0.5;
 }
 #customUserPanel{
-    padding-top: 38px!important;
+    padding-top: 25px!important;
     border-left: 2px solid black!important;
     overflow-y: scroll;
-    max-height: 400px;
+    height: 89%;
+}
+#customUserPanel > p{
+    margin-bottom: 0!important;
 }
 #customMarginText{
     margin-left: 110px;
 }
 #customMessageField{
     overflow-y: scroll;
-    max-height: 400px;
+    height: 69%;
+    z-index: 1;
 }
-
-.customBorder:hover{
+.customBorder{
     cursor: pointer;
 }
-.customBorder img{
-    width: 50px;
-    height: 50px;
-    margin-top: 12px;
+.customBorder i{
+    margin-right:25px;
 }
 .customSprite1{
     background:url("../pic/sprite_faces.png") 0 0;
@@ -114,18 +115,16 @@
     background-color: white!important;
 }
 .customMarginUserMes{
-    margin-top: 35px;
+    margin-top: 20px;
 }
-.customMarginIcons{
-    margin-right:25px;
-}
+
 
 /*=====Search panel=========================================================================================*/
 .customFind{
     padding: 0!important;
     margin-top: 3px;
     margin-right: 5px;
-    width: 29.8%!important;
+    width: 28.5%!important;
 }
 .customSearch {
     padding: 0;
@@ -182,12 +181,14 @@
 .customSpan3{
     font-size:14px;
     padding-left: 63px!important;
+    overflow-wrap: break-word;
 }
 .customMarginSpan{
     margin-top: 6px;
 }
 .customFixed{
     position: fixed;
+    z-index: 2;
 }
 .customBlock{
     height:46px;

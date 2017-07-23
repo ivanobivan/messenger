@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,24 +8,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authorisation</title>
 </head>
-<body>
+<body onload="checkLogin(<%request.getParameter("response");%>)">
+<p class="w3-display-topmiddle w3-pink w3-xxlarge" id="isLogin">Invalid password</p>
 <div class="w3-row invis">
     <div class="w3-col w3-container w3-quarter"></div>
     <div class="w3-quarter w3-center w3-animate-opacity">
         <button id="button1"><span>Sign In</span></button>
         <form action="#">
             <br><br>
-            <div class="invisForm" id="form1">
-                <form action="#" method="post">
-                    <input type="text" name="username" placeholder="Username" class="w3-input w3-animate-input" id = "input1" style="width: 96%;"><br>
-                    <input type="password" name="password" placeholder="Password" class="w3-input w3-animate-input" style="width: 96%;"><br>
+            <form action="MainServlet" method="get">
+                <div class="invisForm" id="form1">
+                    <input type="hidden" name="isLogin" value="true">
+                    <input type="text" name="username" placeholder="Username" class="w3-input" id="input1"><br>
+                    <input type="password" name="password" placeholder="Password" class="w3-input"><br>
                     <input type="submit" value="OK" class="w3-btn w3-round customButton"><br>
-                </form>
-                <p>If you don't own account, then create it</p>
-                <div class="w3-btn w3-border w3-round" id="buttonReg"><span>Log in</span></div>
-            </div>
+                    <p>If you don't own account, then create it</p>
+                    <div class="w3-btn w3-border w3-round" id="buttonReg"><span>Log in</span></div>
+                </div>
+            </form>
         </form>
-        <form action="application.jsp" class="invisForm" id="formReg">
+        <form action="MainServlet" class="invisForm" id="formReg">
             <p>Enter information for authorisation</p>
             <input type="text" placeholder="Username" class="w3-input w3-animate-input" id="input3" style="width: 96%;"><br>
             <input type="password" placeholder="Password" class="w3-input w3-animate-input" style="width: 96%;"><br>
@@ -44,8 +45,8 @@
         <form action="MainServlet" method="get">
             <br><br>
             <div class="invisForm" id="form2">
-                <input type="text" name="nick" placeholder="Nickname..." class="w3-input w3-animate-input" id = "input2"
-                       style="width: 90%;"><br><br>
+                <input type="hidden" name="isLogin" value="false">
+                <input type="text" name="nick" placeholder="Nickname..." class="w3-input" id="input2"><br><br>
                 <input type="submit" value="Come in" class="w3-btn w3-round customButton">
             </div>
         </form>

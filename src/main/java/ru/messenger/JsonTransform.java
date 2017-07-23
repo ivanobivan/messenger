@@ -4,15 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-import jdk.nashorn.internal.ir.debug.JSONWriter;
-import ru.messenger.client.Client;
 
 import java.io.*;
-import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class JsonTransform {
     private static int PORT;

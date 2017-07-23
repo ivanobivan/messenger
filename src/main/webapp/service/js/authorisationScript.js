@@ -23,3 +23,8 @@ $(document).ready(function () {
         $("#form1").show(200);
     })
 });
+function checkLogin(bool){
+    if(bool === false){
+        document.getElementById("isLogin").style.display = "block";
+    }
+}

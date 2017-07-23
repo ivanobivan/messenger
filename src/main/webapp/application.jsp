@@ -102,12 +102,12 @@
                                         class="fa fa-user"></i> Private Room</a>
                             </div>
                             <div class="w3-border" id="customMessageField">
-                                <div class="w3-container">
+                                <%--<div class="w3-container">
                                     <div class="customSprite1 w3-circle w3-left"></div>
                                     <div class="w3-padding-small customMarginSpan"><span class="customSpan1">Username</span><span
                                             class="w3-right customSpan2">21.01.2016</span></div><div
                                         class="w3-margin-left customSpan3">text</div>
-                                </div>
+                                </div>--%>
                             </div>
                             <br>
                             <div class="w3-row">

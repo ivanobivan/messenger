@@ -193,11 +193,3 @@
     border-top: 1px solid lightgray;
     border-left: 1px solid lightgray;
 }
-.rootAnimPlus{
-     transform: rotate(90deg);
-     transition: 0.2s;
- }
-.rootAnimPlusBack{
-    transform: rotate(-90deg);
-    transition: 0.2s;
-}

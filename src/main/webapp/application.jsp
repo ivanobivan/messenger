@@ -13,20 +13,26 @@
     <div class="w3-bar w3-left-align w3-blue-gray">
         <a id="buttonDataUser" class="w3-bar-item w3-button w3-padding-large"><i
                 class="fa fa-cog"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-vk"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-twitter"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-facebook"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-phone"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-skype"></i></a>
+        <a class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-vk"></i></a>
+        <a class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-twitter"></i></a>
+        <a class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-facebook"></i></a>
+        <a class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-phone"></i></a>
+        <a class="w3-bar-item w3-button w3-padding-large "><i class="fa fa-skype"></i></a>
         <div class="w3-dropdown-hover">
             <a class="w3-button w3-padding-large "><i class="fa fa-bell"></i></a>
             <div class="w3-dropdown-content w3-card-4 w3-bar-block">
-                <a href="#" class="w3-bar-item w3-button">Dima want be your friend</a>
-                <a href="#" class="w3-bar-item w3-button">Your birthday today</a>
-                <a href="#" class="w3-bar-item w3-button">It is your day</a>
+                <a class="w3-bar-item w3-button">Dima want to be your friend</a>
+                <a class="w3-bar-item w3-button">Your birthday today</a>
+                <a class="w3-bar-item w3-button">It is your day</a>
             </div>
         </div>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-right"><i class="fa fa-plus"></i></a>
+        <div class="w3-dropdown-click w3-right">
+            <button class="w3-button w3-padding-large" id = "settingsUser"><i class="fa fa-plus" id = "rootPlus"></i></button>
+            <div class="w3-dropdown-content w3-card-4 w3-bar-block" id = "settingsPanel" style="right:0">
+                <button class="w3-bar-item w3-button w3-border-bottom" id="clearButton">&#9760; Clear this dialog</button>
+                <a class="w3-bar-item w3-button">&#9741; Create new chat room</a>
+            </div>
+        </div>
         <div class="w3-bar-item w3-right customFind">
             <form action="#" method="get" class="customSearch">
                 <input type="search" name="" class="w3-input" id="customInput" placeholder="Search...">
@@ -85,20 +91,23 @@
                 <div class="w3-col m12">
                     <div class="w3-card-2 w3-round w3-white">
                         <div class="w3-container w3-padding">
+                            <div class="w3-row w3-left-align">
+                                <a class="w3-col m3  w3-light-gray w3-padding-small customBorderRooms"><i
+                                        class="fa fa-users"></i> Common Room <span class="w3-right">&#9747;</span></a>
+                                <a class="w3-col m3  w3-light-gray w3-padding-small customBorderRooms"><i
+                                        class="fa fa-user"></i> Private Room</a>
+                                <a class="w3-col m3  w3-light-gray w3-padding-small customBorderRooms"><i
+                                        class="fa fa-user"></i> Private Room</a>
+                                <a class="w3-col m3  w3-light-gray w3-padding-small customBorderRooms w3-border-right"><i
+                                        class="fa fa-user"></i> Private Room</a>
+                            </div>
                             <div class="w3-border" id="customMessageField">
-                                <div class="w3-bar w3-left-align customFixed">
-                                    <a class="w3-bar-item w3-button w3-gray w3-padding-large w3-border-right w3-border-bottom"><i
-                                            class="fa fa-users"></i> Common Room</a>
-                                    <a class="w3-bar-item w3-button w3-light-gray w3-padding-large w3-border-right w3-border-bottom"><i
-                                            class="fa fa-user"></i> Private Room</a>
-                                </div>
-                                <div class="customBlock"></div>
-                                <%--<div class="w3-container">
+                                <div class="w3-container">
                                     <div class="customSprite1 w3-circle w3-left"></div>
                                     <div class="w3-padding-small customMarginSpan"><span class="customSpan1">Username</span><span
                                             class="w3-right customSpan2">21.01.2016</span></div><div
                                         class="w3-margin-left customSpan3">text</div>
-                                </div>--%>
+                                </div>
                             </div>
                             <br>
                             <div class="w3-row">
@@ -121,7 +130,7 @@
             <%--<div class="w3-container customBorder w3-border-bottom w3-hover-gray">
                 <div class="customSprite1 w3-circle w3-left"></div>
                 <p class="customMarginUserMes"><span class="username">Sara</span>
-                    <i class="fa fa-volume-off w3-right fa-lg" title="Mute"></i>
+                    <i class="fa fa-volume-up w3-right fa-lg" title="Mute"></i>
                     <i class="fa fa-address-card w3-right fa-lg" title="Info about user"></i>
                     <i class="fa fa-comments-o w3-right fa-lg" title="Create private chat"></i></p>
             </div>--%>

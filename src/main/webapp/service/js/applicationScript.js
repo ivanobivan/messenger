@@ -74,7 +74,7 @@ function newClient(userName) {
     panel.id = userName;
     panel.innerHTML = "<div class=\"" + sprite + " w3-circle  w3-left\"></div>\n" +
         "                    <p class=\"customMarginUserMes\"><span class=\"username\">" + userName + "</span>" +
-        "                    <i class=\"fa fa-volume-off w3-right fa-lg customMarginIcons\" title=\"Mute\"></i>\n" +
+        "                    <i class=\"fa fa-volume-up w3-right fa-lg customMarginIcons\" title=\"Mute\"></i>\n" +
         "                    <i class=\"fa fa-address-card w3-right fa-lg customMarginIcons\" title=\"Info about user\"></i>\n" +
         "                    <i class=\"fa fa-comments-o w3-right fa-lg customMarginIcons\" title=\"Create private chat\"></i></p>";
     document.getElementById("customUserPanel").appendChild(panel);

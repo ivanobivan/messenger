@@ -38,7 +38,7 @@
     padding-top: 25px!important;
     border-left: 2px solid black!important;
     overflow-y: scroll;
-    height: 89%;
+    height: 88%;
 }
 #customUserPanel > p{
     margin-bottom: 0!important;
@@ -48,7 +48,7 @@
 }
 #customMessageField{
     overflow-y: scroll;
-    height: 69%;
+    height: 64%;
     z-index: 1;
 }
 .customBorder{
@@ -186,10 +186,18 @@
 .customMarginSpan{
     margin-top: 6px;
 }
-.customFixed{
-    position: fixed;
-    z-index: 2;
-}
 .customBlock{
     height:46px;
+}
+.customBorderRooms{
+    border-top: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+}
+.rootAnimPlus{
+     transform: rotate(90deg);
+     transition: 0.2s;
+ }
+.rootAnimPlusBack{
+    transform: rotate(-90deg);
+    transition: 0.2s;
 }

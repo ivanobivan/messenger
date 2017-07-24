@@ -14,9 +14,8 @@
     <div class="w3-col w3-container w3-quarter"></div>
     <div class="w3-quarter w3-center w3-animate-opacity">
         <button id="button1"><span>Sign In</span></button>
-        <form action="#">
             <br><br>
-            <form action="MainServlet" method="get">
+            <form action="MainServlet" method="post">
                 <div class="invisForm" id="form1">
                     <input type="hidden" name="isLogin" value="true">
                     <input type="text" name="username" placeholder="Username" class="w3-input" id="input1"><br>
@@ -26,18 +25,18 @@
                     <div class="w3-btn w3-border w3-round" id="buttonReg"><span>Log in</span></div>
                 </div>
             </form>
-        </form>
-        <form action="MainServlet" class="invisForm" id="formReg">
+        <form action="MainServlet" class="invisForm" id="formReg" method="post">
             <p>Enter information for authorisation</p>
-            <input type="text" placeholder="Username" class="w3-input w3-animate-input" id="input3" style="width: 96%;"><br>
-            <input type="password" placeholder="Password" class="w3-input w3-animate-input" style="width: 96%;"><br>
-            <input type="password" placeholder="Confirm password" class="w3-input w3-animate-input" style="width: 96%;"><br>
+            <input type="hidden" name="isLogin" value="false">
+            <input type="text" placeholder="NIckname" class="w3-input" id="input3"><br>
+            <input type="text" placeholder="Username" class="w3-input"><br>
+            <input type="password" placeholder="Password" class="w3-input"><br>
             <i class="fa fa-vk fa-2x"></i>
             <i class="fa fa-twitter fa-2x"></i>
             <i class="fa fa-facebook fa-2x"></i>
             <i class="fa fa-google fa-2x"></i><br>
-            <input type="submit" value="Log in" class="w3-btn w3-indigo">
-            <span id="return">&#8634;</span>
+            <input type="submit" value="Log in" class="w3-btn w3-black w3-round">
+            <span id="return" class="w3-padding-large">&#8634;</span>
         </form>
     </div>
     <div class="w3-quarter w3-center w3-animate-opacity">
@@ -45,8 +44,7 @@
         <form action="MainServlet" method="get">
             <br><br>
             <div class="invisForm" id="form2">
-                <input type="hidden" name="isLogin" value="false">
-                <input type="text" name="nick" placeholder="Nickname..." class="w3-input" id="input2"><br><br>
+                <input type="text" name="nick" placeholder="Nickname..." class="w3-input" id="input2" disabled><br><br>
                 <input type="submit" value="Come in" class="w3-btn w3-round customButton">
             </div>
         </form>

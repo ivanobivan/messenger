@@ -21,6 +21,14 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        username = request.getParameter("nick");
+        HttpSession session = request.getSession();
+        SecureJSP.setSession(session);
+        response.sendRedirect(request.getContextPath() + "application.jsp");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("isLogin").equals("true")) {
             if(request.getParameter("password").equals("admin")) {
                 username = request.getParameter("username");
@@ -29,17 +37,14 @@ public class MainServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "application.jsp");
             }else{
                 request.setAttribute("response",false);
+                response.sendRedirect(request.getContextPath() + "index.jsp");
             }
-        } else if(request.getParameter("isLogin").equals("false")) {
-            username = request.getParameter("nick");
-            HttpSession session = request.getSession();
-            SecureJSP.setSession(session);
-            response.sendRedirect(request.getContextPath() + "application.jsp");
+        }else if(request.getParameter("isLogin").equals("formReg")){
+            request.setAttribute("response",false);
+            response.sendRedirect(request.getContextPath() + "index.jsp");
+        }else{
+            request.setAttribute("response",false);
+            response.sendRedirect(request.getContextPath() + "index.jsp");
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

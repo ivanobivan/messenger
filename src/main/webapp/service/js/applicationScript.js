@@ -62,7 +62,7 @@ function onError(event) {
 
 function sendMessage() {
     var message = document.getElementById("message").textContent;
-    if(message !== 0 || message !== "\n"){
+    if(message.length > 0 && message !== "\n" && message !== ""){
         webSocket.send(message);
     }
     document.getElementById("message").textContent = "";

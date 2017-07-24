@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authorisation</title>
 </head>
-<body onload="checkLogin(<%request.getParameter("response");%>)">
+<body onload="checkLogin(<%request.getAttribute("response");%>)">
 <p class="w3-display-topmiddle w3-pink w3-xxlarge" id="isLogin">Invalid password</p>
 <div class="w3-row invis">
     <div class="w3-col w3-container w3-quarter"></div>
@@ -44,7 +44,7 @@
         <form action="MainServlet" method="get">
             <br><br>
             <div class="invisForm" id="form2">
-                <input type="text" name="nick" placeholder="Nickname..." class="w3-input" id="input2" disabled><br><br>
+                <input type="text" name="nick" placeholder="Nickname..." class="w3-input" id="input2"><br><br>
                 <input type="submit" value="Come in" class="w3-btn w3-round customButton">
             </div>
         </form>

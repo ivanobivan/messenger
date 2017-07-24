@@ -30,20 +30,20 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("isLogin").equals("true")) {
-            if(request.getParameter("password").equals("admin")) {
+            if (request.getParameter("password").equals("admin")) {
                 username = request.getParameter("username");
                 HttpSession session = request.getSession();
                 SecureJSP.setSession(session);
                 response.sendRedirect(request.getContextPath() + "application.jsp");
-            }else{
-                request.setAttribute("response",false);
+            } else {
+                request.setAttribute("response", false);
                 response.sendRedirect(request.getContextPath() + "index.jsp");
             }
-        }else if(request.getParameter("isLogin").equals("formReg")){
-            request.setAttribute("response",false);
+        } else if (request.getParameter("isLogin").equals("formReg")) {
+            request.setAttribute("response", false);
             response.sendRedirect(request.getContextPath() + "index.jsp");
-        }else{
-            request.setAttribute("response",false);
+        } else {
+            request.setAttribute("response", false);
             response.sendRedirect(request.getContextPath() + "index.jsp");
         }
     }

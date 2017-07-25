@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authorisation</title>
 </head>
-<body onload="checkLogin(<%request.getAttribute("response");%>)">
+<body onload="${param.response}">
 <p class="w3-display-topmiddle w3-pink w3-xxlarge" id="isLogin">Invalid password</p>
 <div class="w3-row invis">
     <div class="w3-col w3-container w3-quarter"></div>

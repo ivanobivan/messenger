@@ -1,12 +1,16 @@
 package ru.messenger;
 
 import ru.messenger.servlets.MainServlet;
-import ru.messenger.servlets.SecureJSP;
 
-import javax.websocket.*;
+import javax.websocket.OnClose;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @ServerEndpoint("/application.jsp/test")
 public class ServerSocket {

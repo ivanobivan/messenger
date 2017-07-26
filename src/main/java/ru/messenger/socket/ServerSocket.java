@@ -10,19 +10,18 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @ServerEndpoint(
-        value = "/application.jsp/test",
-        configurator = SocketConfigurator.class
+        value = "/application.html/test"
+        //configurator = SocketConfigurator.class
 )
 public class ServerSocket {
-
+    private static final String USERNAME_KEY = "username";
     private static Map<String, Session> chatRooms = (Map<String, Session>) Collections.synchronizedMap(new LinkedHashMap());
-    String userName;
+
     @OnOpen
-    public void onOpen(Session session, EndpointConfig config) throws IOException {
-        HandshakeRequest req = (HandshakeRequest) config.getUserProperties().get("LOL");
-        HttpSession httpSession = (HttpSession) req.getHttpSession();
-        httpSession.getAttribute("LOL");
+    public void onOpen(Session session) throws IOException {
+        String userName = session.getRequestParameterMap().get(USERNAME_KEY).toString();
         chatRooms.put(userName, session);
+        session.getUserProperties().put(USERNAME_KEY, userName);
         for (Session client : chatRooms.values()) {
             if (client != session) {
                 client.getBasicRemote().sendText("newClient." + userName);
@@ -36,6 +35,7 @@ public class ServerSocket {
 
     @OnMessage
     public void onMessage(Session session, String message)  {
+        String userName = (String)session.getUserProperties().get(USERNAME_KEY);
         chatRooms.values().forEach(client -> {
             try {
                 if(client == session){
@@ -51,6 +51,7 @@ public class ServerSocket {
 
     @OnClose
     public void onClose(Session session) throws IOException {
+        String userName = (String)session.getUserProperties().get(USERNAME_KEY);
         chatRooms.remove(userName);
         for (Session client : chatRooms.values()) {
             client.getBasicRemote().sendText("removeUser." + userName);

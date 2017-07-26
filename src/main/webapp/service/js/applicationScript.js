@@ -1,5 +1,5 @@
 'use strict';
-var URL = "ws://" + document.location.host + document.location.pathname + "/test";
+var URL = "ws://" + document.location.host + document.location.pathname + "/test?" + parseSiteName();
 var webSocket = undefined;
 var userName;
 var sprite = getCustomSprite();
@@ -120,6 +120,9 @@ function prevSendMes(e) {
     if (e.keyCode === 13 && e.ctrlKey) {
         sendMessage();
     }
+}
+function parseSiteName() {
+   return window.location.href.split("?")[1];
 }
 
 $(document).ready(function () {

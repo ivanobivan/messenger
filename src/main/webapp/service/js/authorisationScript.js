@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     $("#button1").click(function () {
         $("#form1").toggle(200);
@@ -21,6 +22,10 @@ $(document).ready(function () {
         $("#formReg").hide(200);
         $("#button1").show(200);
         $("#form1").show(200);
+    });
+    
+    $("#JFFButton").click(function () {
+        document.location.href = "application.html?username=" + document.getElementById("inputUserJFF").value;
     })
 });
 function checkLogin(bool){

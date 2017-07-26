@@ -22,8 +22,9 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         username = request.getParameter("nick");
-        HttpSession session = request.getSession();
-        SecureJSP.setSession(session);
+        SecureJSP.setSession(request.getSession());
+        HttpSession httpSession = request.getSession();
+        httpSession.setAttribute("LOL",username);
         response.sendRedirect(request.getContextPath() + "application.jsp");
     }
 
@@ -32,8 +33,6 @@ public class MainServlet extends HttpServlet {
         if (request.getParameter("isLogin").equals("true")) {
             if (request.getParameter("password").equals("admin")) {
                 username = request.getParameter("username");
-                HttpSession session = request.getSession();
-                SecureJSP.setSession(session);
                 response.sendRedirect(request.getContextPath() + "application.jsp");
             } else {
                 request.setAttribute("response", false);

@@ -1,25 +1,27 @@
-package ru.messenger;
+package ru.messenger.socket;
 
-import ru.messenger.servlets.MainServlet;
-
-import javax.websocket.OnClose;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
+import javax.servlet.http.HttpSession;
+import javax.websocket.*;
+import javax.websocket.server.HandshakeRequest;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@ServerEndpoint("/application.jsp/test")
+@ServerEndpoint(
+        value = "/application.jsp/test",
+        configurator = SocketConfigurator.class
+)
 public class ServerSocket {
 
     private static Map<String, Session> chatRooms = (Map<String, Session>) Collections.synchronizedMap(new LinkedHashMap());
-    private String userName = MainServlet.getUsername();
-
+    String userName;
     @OnOpen
-    public void onOpen(Session session) throws IOException {
+    public void onOpen(Session session, EndpointConfig config) throws IOException {
+        HandshakeRequest req = (HandshakeRequest) config.getUserProperties().get("LOL");
+        HttpSession httpSession = (HttpSession) req.getHttpSession();
+        httpSession.getAttribute("LOL");
         chatRooms.put(userName, session);
         for (Session client : chatRooms.values()) {
             if (client != session) {
@@ -53,6 +55,7 @@ public class ServerSocket {
         for (Session client : chatRooms.values()) {
             client.getBasicRemote().sendText("removeUser." + userName);
         }
+        session.close();
     }
 
 }

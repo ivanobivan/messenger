@@ -49,8 +49,7 @@ public class SecureJSP extends HttpServlet implements HttpJspPage {
     @Override
     public void service(HttpServletRequest  request, HttpServletResponse response) throws ServletException, IOException {
         if (session == null) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-            dispatcher.forward(request, response);
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);
         }
         _jspService(request, response);
     }

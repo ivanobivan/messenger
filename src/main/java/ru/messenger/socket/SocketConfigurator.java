@@ -7,7 +7,7 @@ import javax.websocket.server.ServerEndpointConfig;
 public class SocketConfigurator extends ServerEndpointConfig.Configurator {
 
     @Override
-    public void modifyHandshake(ServerEndpointConfig sec, HandshakeRequest request, HandshakeResponse response) {
-        sec.getUserProperties().put("LOL", request);
+    public void modifyHandshake(ServerEndpointConfig serverEndpointConfig, HandshakeRequest request, HandshakeResponse response) {
+        serverEndpointConfig.getUserProperties().put("LOL", request);
     }
 }

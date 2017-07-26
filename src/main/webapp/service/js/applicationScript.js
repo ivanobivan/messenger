@@ -1,5 +1,4 @@
 'use strict';
-var URL = "ws://" + document.location.host + document.location.pathname + "/test?" + parseSiteName();
 var webSocket = undefined;
 var userName;
 var sprite = getCustomSprite();
@@ -14,7 +13,7 @@ var options = {
     second: 'numeric'
 };
 
-function connectClient() {
+function connectClient(URL) {
     webSocket = new WebSocket(URL);
     webSocket.onopen = onOpen;
     webSocket.onmessage = onMessage;
@@ -45,9 +44,9 @@ function onClose(event) {
     panel.className = "w3-display-middle w3-pink w3-border";
 
     if (event.wasClean) {
-        response  = 'Connection was close clean';
+        response = 'Connection was close clean';
     } else {
-        response  = 'Connection failed';
+        response = 'Connection failed';
     }
     panel.innerHTML = response + "\n" + "Key: " + event.code + " Reason: " + event.reason;
     document.body.appendChild(panel);
@@ -55,14 +54,14 @@ function onClose(event) {
 
 function onError(event) {
     var panel = document.createElement("div");
-    panel.className = "w3-display-bottomright w3-pink w3-border";
+    panel.className = "w3-display-bottomleft w3-pink w3-border";
     panel.innerHTML = "Error: " + event.message;
     document.body.appendChild(panel);
 }
 
 function sendMessage() {
     var message = document.getElementById("message").textContent;
-    if(message.length > 0 && message !== "\n" && message !== ""){
+    if (message.length > 0 && message !== "\n" && message !== "") {
         webSocket.send(message);
     }
     document.getElementById("message").textContent = "";
@@ -121,16 +120,52 @@ function prevSendMes(e) {
         sendMessage();
     }
 }
-function parseSiteName() {
-   return window.location.href.split("?")[1];
-}
+
 
 $(document).ready(function () {
-    // After download document create connection
-    connectClient();
+    var bool = true;
+
+    $("#annoyButtonConnect").click(function () {
+        connectClient("ws://" + document.location.host + document.location.pathname + "/test?username=" + document.getElementById("annoyInput").value);
+        $("#annoyButtonDisconnect").show();
+        $("#annoyButtonConnect").hide();
+        $("#annoyInput").hide();
+    });
     $("#send").click(function () {
         sendMessage();
+    })
+        .after(this.focus());
+
+    $("#buttonDataUser").click(function () {
+        $('#dataUserPanel').toggle();
+        $("#messagePanel").toggleClass("m8")
+            .toggleClass("m6");
+    })
+        .hover(function () {
+            $(this).find("> i").toggleClass("fa-spin");
+        });
+
+    $("#btn1").click(function () {
+        $("#input1").prop("disabled", false);
     });
+
+    $("#message").focus();
+    $("#settingsUser").click(function () {
+        if (bool) {
+            $("#rootPlus").css("transform", "rotate(90deg)")
+                .css("transition", "0.2s");
+            bool = false;
+        } else {
+            $("#rootPlus").css("transform", "rotate(-90deg)")
+                .css("transition", "0.2s");
+            bool = true;
+        }
+
+        $("#settingsPanel").animate({height: 'toggle'}, 200);
+    });
+    $("#clearButton").click(function () {
+        $("#customMessageField").empty();
+    })
 });
 
 

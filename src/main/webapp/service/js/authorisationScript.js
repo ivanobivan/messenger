@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
     
     $("#JFFButton").click(function () {
-        document.location.href = "application.html?username=" + document.getElementById("inputUserJFF").value;
+        document.location.href = "application.html";
     })
 });
 function checkLogin(bool){

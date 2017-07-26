@@ -5,6 +5,7 @@ import javax.websocket.*;
 import javax.websocket.server.HandshakeRequest;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -15,12 +16,13 @@ import java.util.Map;
 )
 public class ServerSocket {
     private static final String USERNAME_KEY = "username";
-    private static Map<String, Session> chatRooms = (Map<String, Session>) Collections.synchronizedMap(new LinkedHashMap());
+    private static Map<String, ArrayList<Session>> chatRooms = (Map<String, ArrayList<Session>>) Collections.synchronizedMap(new LinkedHashMap());
 
     @OnOpen
     public void onOpen(Session session) throws IOException {
         String userName = session.getRequestParameterMap().get(USERNAME_KEY).toString();
-        chatRooms.put(userName, session);
+
+        chatRooms.put(userName);
         session.getUserProperties().put(USERNAME_KEY, userName);
         for (Session client : chatRooms.values()) {
             if (client != session) {

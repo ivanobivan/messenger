@@ -193,3 +193,6 @@
     border-top: 1px solid lightgray;
     border-left: 1px solid lightgray;
 }
+#annoyButtonDisconnect{
+    display: none;
+}

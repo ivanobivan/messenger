@@ -1,5 +1,22 @@
+function sendDataUserRequest() {
+    var xmlRequest = new XMLHttpRequest();
+    var servletName = "/MainServlet?";
+    var body = "username=" +  document.getElementById("username").value + "&password=" +
+        document.getElementById("password").value;
+    xmlRequest.open("POST",document.location.host + servletName,true);
+    xmlRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlRequest.send(body);
+}
 
+function checkLogin(bool){
+    if(bool === false){
+        document.getElementById("isLogin").style.display = "block";
+    }
+}
 $(document).ready(function () {
+    $("#submitButton").click(function () {
+        sendDataUserRequest();
+    });
     $("#button1").click(function () {
         $("#form1").toggle(200);
         $("#form2").hide(200);
@@ -28,8 +45,3 @@ $(document).ready(function () {
         document.location.href = "application.html";
     })
 });
-function checkLogin(bool){
-    if(bool === false){
-        document.getElementById("isLogin").style.display = "block";
-    }
-}

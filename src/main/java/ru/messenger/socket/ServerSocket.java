@@ -18,9 +18,12 @@ public class ServerSocket {
     @OnOpen
     public void onOpen(Session session, EndpointConfig config) throws IOException {
         HttpSession  httpSession = ((UserPrincipal) session.getUserPrincipal()).getSession();
-        String userName = session.getRequestParameterMap().get(USERNAME_KEY).toString();
+        String userName;
         if (httpSession.getAttribute(USERNAME_KEY) == null) {
+            userName = session.getRequestParameterMap().get(USERNAME_KEY).toString();
             httpSession.setAttribute(USERNAME_KEY, userName);
+        } else {
+            userName = httpSession.getAttribute(USERNAME_KEY).toString();
         }
         session.getUserProperties().put(USERNAME_KEY, userName);
 
@@ -32,27 +35,31 @@ public class ServerSocket {
             chatRooms.put(httpSession, sessions);
         }
 
-        for (ArrayList<Session> list: chatRooms.values()) {
-            for (Session client: list) {
-                if (client != session) {
-                    client.getBasicRemote().sendText("newClient." + userName);
+        if (chatRooms.get(httpSession).size() == 1) {
+            for (ArrayList<Session> list: chatRooms.values()) {
+                for (Session client: list) {
+                    if (!client.equals(session)) {
+                        client.getBasicRemote().sendText("newClient." + userName);
+                    }
                 }
             }
         }
 
-        for (HttpSession name: chatRooms.keySet()) {
-            String currentName = name.getAttribute("username").toString();
-            session.getBasicRemote().sendText("newClient." + currentName);
+        for (HttpSession curHttpSession: chatRooms.keySet()) {
+            if (!chatRooms.get(curHttpSession).isEmpty()) {
+                String curName = curHttpSession.getAttribute("username").toString();
+                session.getBasicRemote().sendText("newClient." + curName);
+            }
         }
     }
 
     @OnMessage
     public void onMessage(Session session, String message)  {
         String userName = (String)session.getUserProperties().get(USERNAME_KEY);
-        chatRooms.values().forEach(list -> {
-            for (Session client: list) {
+        for (Map.Entry<HttpSession, ArrayList<Session>> entry: chatRooms.entrySet()) {
+            for (Session client: entry.getValue()) {
                 try {
-                    if(client == session){
+                    if(entry.getKey().getAttribute(USERNAME_KEY).equals(userName)) {
                         client.getBasicRemote().sendText("message." + userName + "." + message + ".owner");
                     }else{
                         client.getBasicRemote().sendText("message." + userName + "." + message);
@@ -61,16 +68,24 @@ public class ServerSocket {
                     e.printStackTrace();
                 }
             }
-        });
+        }
     }
 
     @OnClose
     public void onClose(Session session) throws IOException {
         String userName = (String)session.getUserProperties().get(USERNAME_KEY);
+        boolean empty = false;
         for (ArrayList<Session> list : chatRooms.values()) {
-            list.remove(session);
-            for (Session client: list) {
-                client.getBasicRemote().sendText("removeUser." + userName);
+            if (list.contains(session)) {
+                list.remove(session);
+                empty = list.isEmpty();
+            }
+        }
+        if (empty) {
+            for (ArrayList<Session> list : chatRooms.values()) {
+                for (Session client : list) {
+                    client.getBasicRemote().sendText("removeUser." + userName);
+                }
             }
         }
         session.close();

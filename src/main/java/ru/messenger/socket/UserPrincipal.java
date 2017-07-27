@@ -6,11 +6,11 @@ import java.security.Principal;
 public class UserPrincipal implements Principal {
     private final HttpSession session;
 
-    public UserPrincipal(HttpSession session) {
+    UserPrincipal(HttpSession session) {
         this.session = session;
     }
 
-    public HttpSession getSession() {
+    HttpSession getSession() {
         return session;
     }
 

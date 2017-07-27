@@ -109,11 +109,6 @@ function getCustomSprite() {
     return "customSprite" + number;
 }
 
-function key(event) {
-    return ('which' in event) ? event.which : event.keyCode;
-}
-
-
 function prevSendMes(e) {
     e = e || window.event;
     if (e.keyCode === 13 && e.ctrlKey) {

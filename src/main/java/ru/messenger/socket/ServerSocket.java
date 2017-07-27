@@ -20,7 +20,7 @@ public class ServerSocket {
         HttpSession  httpSession = ((UserPrincipal) session.getUserPrincipal()).getSession();
         String userName;
         if (httpSession.getAttribute(USERNAME_KEY) == null) {
-            userName = session.getRequestParameterMap().get(USERNAME_KEY).toString();
+            userName = session.getRequestParameterMap().get(USERNAME_KEY).toString().replaceAll("\\[ | \\]","");
             httpSession.setAttribute(USERNAME_KEY, userName);
         } else {
             userName = httpSession.getAttribute(USERNAME_KEY).toString();

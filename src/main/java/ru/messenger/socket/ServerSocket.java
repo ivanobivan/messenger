@@ -20,7 +20,7 @@ public class ServerSocket {
         HttpSession  httpSession = ((UserPrincipal) session.getUserPrincipal()).getSession();
         String userName;
         if (httpSession.getAttribute(USERNAME_KEY) == null) {
-            userName = session.getRequestParameterMap().get(USERNAME_KEY).toString();
+            userName = session.getRequestParameterMap().get(USERNAME_KEY).toString().replace('[', ' ').replace(']', ' ');
             httpSession.setAttribute(USERNAME_KEY, userName);
         } else {
             userName = httpSession.getAttribute(USERNAME_KEY).toString();
@@ -36,7 +36,7 @@ public class ServerSocket {
         }
 
         if (chatRooms.get(httpSession).size() == 1) {
-            for (ArrayList<Session> list: chatRooms.values()) {
+            for (ArrayList<Session> list : chatRooms.values()) {
                 for (Session client: list) {
                     if (!client.equals(session)) {
                         client.getBasicRemote().sendText("newClient." + userName);
@@ -54,18 +54,32 @@ public class ServerSocket {
     }
 
     @OnMessage
-    public void onMessage(Session session, String message)  {
-        String userName = (String)session.getUserProperties().get(USERNAME_KEY);
-        for (Map.Entry<HttpSession, ArrayList<Session>> entry: chatRooms.entrySet()) {
-            for (Session client: entry.getValue()) {
-                try {
-                    if(entry.getKey().getAttribute(USERNAME_KEY).equals(userName)) {
-                        client.getBasicRemote().sendText("message." + userName + "." + message + ".owner");
-                    }else{
-                        client.getBasicRemote().sendText("message." + userName + "." + message);
+    public void onMessage(Session session, String message) throws IOException {
+        String userName = (String) session.getUserProperties().get(USERNAME_KEY);
+        if (message.equals("@disconnect")) {
+            for (Map.Entry<HttpSession, ArrayList<Session>> entry : chatRooms.entrySet()) {
+                HttpSession httpSession = entry.getKey();
+                if (httpSession.getAttribute(USERNAME_KEY).toString().equals(userName)) {
+                    for (Session client : entry.getValue()) {
+                        if (!client.equals(session)) client.close();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    httpSession.removeAttribute(USERNAME_KEY);
+                    chatRooms.remove(httpSession);
+                    session.close();
+                }
+            }
+        } else {
+            for (Map.Entry<HttpSession, ArrayList<Session>> entry : chatRooms.entrySet()) {
+                for (Session client : entry.getValue()) {
+                    try {
+                        if (entry.getKey().getAttribute(USERNAME_KEY).toString().equals(userName)) {
+                            client.getBasicRemote().sendText("message." + userName + "." + message + ".owner");
+                        } else {
+                            client.getBasicRemote().sendText("message." + userName + "." + message);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

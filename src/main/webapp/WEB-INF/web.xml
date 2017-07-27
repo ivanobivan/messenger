@@ -5,7 +5,7 @@
          version="3.1">
     <servlet>
         <servlet-name>MainServlet</servlet-name>
-        <servlet-class>ru.messenger.servlet.MainServlet</servlet-class>
+        <servlet-class>ru.messenger.server.servlet.MainServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

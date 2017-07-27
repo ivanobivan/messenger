@@ -1,4 +1,4 @@
-package ru.messenger.socket;
+package ru.messenger.server.socket;
 
 import javax.websocket.HandshakeResponse;
 import javax.websocket.server.HandshakeRequest;

@@ -1,8 +1,7 @@
-package ru.messenger.socket;
+package ru.messenger.server.socket;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
-import javax.websocket.server.HandshakeRequest;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.*;

@@ -1,4 +1,4 @@
-package ru.messenger.socket;
+package ru.messenger.server.socket;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;

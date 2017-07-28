@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppTest {
@@ -40,6 +41,9 @@ public class AppTest {
         for (User user: userList) {
             System.out.println(user.getId() + " " + user.getUsername());
         }
+        User user = ManageUser.getUserByName("User3");
+        ArrayList<String> list = user.getFriends();
+        list.add(ManageUser.getUserByName("User2").getUsername());
     }
 
     @Test

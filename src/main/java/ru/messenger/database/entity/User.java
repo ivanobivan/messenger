@@ -1,8 +1,10 @@
 package ru.messenger.database.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
+@Entity(name = "User")
 @Table(name = "chat_user")
 public class User {
 
@@ -32,11 +34,11 @@ public class User {
     @Column(name = "avatar")
     private byte[] avatar;
 
+    @Column(name = "friends")
+    private ArrayList<String> friends;
+
     public Long getId() {
         return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -86,6 +88,13 @@ public class User {
     }
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
+    }
+
+    public ArrayList<String> getFriends() {
+        return friends;
+    }
+    public void setFriends(ArrayList<String> friends) {
+        this.friends = friends;
     }
 
 }

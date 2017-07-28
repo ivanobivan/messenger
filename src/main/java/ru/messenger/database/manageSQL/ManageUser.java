@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import ru.messenger.database.entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManageUser {
@@ -21,6 +22,7 @@ public class ManageUser {
         }
         User user = new User();
         user.setUsername(username);
+        user.setFriends(new ArrayList<>());
         session.save(user);
         session.getTransaction().commit();
         session.close();
@@ -36,6 +38,17 @@ public class ManageUser {
         session.getTransaction().commit();
         session.close();
         return result > 0;
+    }
+
+    public static User getUserByName(String username) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("from User where username = :param");
+        query.setParameter("param", username);
+        User user = (User) query.list().get(0);
+        session.getTransaction().commit();
+        session.close();
+        return user;
     }
 
     public static List<User> getUsers() {

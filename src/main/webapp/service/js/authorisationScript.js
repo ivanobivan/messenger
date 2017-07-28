@@ -1,27 +1,29 @@
 function sendDataUserRequest() {
     var servletName = "/MainServlet";
-    var person = { "userName":document.getElementById("username").value
-        , "password":document.getElementById("password").value };
+    var person = $("#loginForm").serialize();
     var personJSON = JSON.stringify(person);
     $.ajax({
-        url: document.location.host + servletName,
+        url: servletName,
         method: "POST",
+        async: false,
         data: personJSON,
         contentType: "application/json",
-        error:function (message) {
-            console.log(message);
-        },
-        success:function (data) {
-            console.log(data);
+        success: function (data) {
+            if (data === "NO") {
+                alert("Uncown username/password")
+            } else if (data === "YES") {
+                document.location.href = "application.html";
+            }
         }
     });
 }
 
-function checkLogin(bool){
-    if(bool === false){
+function checkLogin(bool) {
+    if (bool === false) {
         document.getElementById("isLogin").style.display = "block";
     }
 }
+
 $(document).ready(function () {
     $("#loginForm").submit(function () {
         sendDataUserRequest()
@@ -49,6 +51,4 @@ $(document).ready(function () {
         $("#button1").show(200);
         $("#loginForm").show(200);
     });
-
-
 });

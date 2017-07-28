@@ -35,7 +35,7 @@ public class ServerSocket {
         }
 
         if (chatRooms.get(httpSession).size() == 1) {
-            for (ArrayList<Session> list : chatRooms.values()) {
+            for (ArrayList<Session> list: chatRooms.values()) {
                 for (Session client: list) {
                     if (!client.equals(session)) {
                         client.getBasicRemote().sendText("newClient." + userName);
@@ -56,8 +56,9 @@ public class ServerSocket {
     public void onMessage(Session session, String message) throws IOException {
         String userName = (String) session.getUserProperties().get(USERNAME_KEY);
         if (message.equals("@disconnect")) {
-            for (Map.Entry<HttpSession, ArrayList<Session>> entry : chatRooms.entrySet()) {
-                HttpSession httpSession = entry.getKey();
+            HttpSession httpSession = null;
+            for (Map.Entry<HttpSession, ArrayList<Session>> entry: chatRooms.entrySet()) {
+                httpSession = entry.getKey();
                 if (httpSession.getAttribute(USERNAME_KEY).toString().equals(userName)) {
                     ArrayList<Session> list = entry.getValue();
                     while (list.size() != 0) {
@@ -66,12 +67,16 @@ public class ServerSocket {
                         client.close();
                     }
                     httpSession.removeAttribute(USERNAME_KEY);
-                    chatRooms.remove(httpSession);
+                } else {
+                    for (Session client: entry.getValue()) {
+                        client.getBasicRemote().sendText("removeUser." + userName);
+                    }
                 }
             }
+            chatRooms.remove(httpSession);
         } else {
             for (Map.Entry<HttpSession, ArrayList<Session>> entry : chatRooms.entrySet()) {
-                for (Session client : entry.getValue()) {
+                for (Session client: entry.getValue()) {
                     try {
                         if (entry.getKey().getAttribute(USERNAME_KEY).toString().equals(userName)) {
                             client.getBasicRemote().sendText("message." + userName + "." + message + ".owner");
@@ -90,15 +95,15 @@ public class ServerSocket {
     public void onClose(Session session) throws IOException {
         String userName = (String)session.getUserProperties().get(USERNAME_KEY);
         boolean empty = false;
-        for (ArrayList<Session> list : chatRooms.values()) {
+        for (ArrayList<Session> list: chatRooms.values()) {
             if (list.contains(session)) {
                 list.remove(session);
                 empty = list.isEmpty();
             }
         }
         if (empty) {
-            for (ArrayList<Session> list : chatRooms.values()) {
-                for (Session client : list) {
+            for (ArrayList<Session> list: chatRooms.values()) {
+                for (Session client: list) {
                     client.getBasicRemote().sendText("removeUser." + userName);
                 }
             }

@@ -59,12 +59,14 @@ public class ServerSocket {
             for (Map.Entry<HttpSession, ArrayList<Session>> entry : chatRooms.entrySet()) {
                 HttpSession httpSession = entry.getKey();
                 if (httpSession.getAttribute(USERNAME_KEY).toString().equals(userName)) {
-                    for (Session client : entry.getValue()) {
-                        if (!client.equals(session)) client.close();
+                    ArrayList<Session> list = entry.getValue();
+                    while (list.size() != 0) {
+                        Session client = list.get(0);
+                        list.remove(client);
+                        client.close();
                     }
                     httpSession.removeAttribute(USERNAME_KEY);
                     chatRooms.remove(httpSession);
-                    session.close();
                 }
             }
         } else {

@@ -1,8 +1,7 @@
 package ru.messenger.database.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.TreeSet;
 
 @Entity(name = "User")
 @Table(name = "chat_user")
@@ -35,7 +34,20 @@ public class User {
     private byte[] avatar;
 
     @Column(name = "friends")
-    private ArrayList<String> friends;
+    private TreeSet<String> friends;
+
+    public User() {}
+
+    public User(String username) {
+        this.username = username;
+        this.friends = new TreeSet<>();
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.friends = new TreeSet<>();
+    }
 
     public Long getId() {
         return id;
@@ -90,10 +102,10 @@ public class User {
         this.avatar = avatar;
     }
 
-    public ArrayList<String> getFriends() {
+    public TreeSet<String> getFriends() {
         return friends;
     }
-    public void setFriends(ArrayList<String> friends) {
+    public void setFriends(TreeSet<String> friends) {
         this.friends = friends;
     }
 

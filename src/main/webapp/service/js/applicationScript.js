@@ -126,6 +126,9 @@ $(document).ready(function () {
         $("#annoyButtonConnect").hide();
         $("#annoyInput").hide();
     });
+    $("#annoyButtonDisconnect").click(function () {
+
+    });
     $("#send").click(function () {
         sendMessage();
     })

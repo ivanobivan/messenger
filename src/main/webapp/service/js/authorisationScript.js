@@ -1,6 +1,7 @@
 function sendDataUserRequest() {
-    var servletName = "/MainServlet";
-    var person = $("#loginForm").serialize();
+    var servletName = "/testMVC";
+    var person = { "userName":document.getElementById("username").value
+             , "password":document.getElementById("password").value };
     var personJSON = JSON.stringify(person);
     $.ajax({
         url: servletName,
@@ -12,7 +13,7 @@ function sendDataUserRequest() {
             if (data === "NO") {
                 alert("Uncown username/password")
             } else if (data === "YES") {
-                document.location.href = "application.html";
+                document.location.href = "../../WEB-INF/lib/application.html";
             }
         }
     });

@@ -13,7 +13,7 @@ function sendDataUserRequest() {
             if (data === "NO") {
                 alert("Uncown username/password")
             } else if (data === "YES") {
-                document.location.href = "../../WEB-INF/lib/application.html";
+                document.location.href = "../../application.html";
             }
         }
     });

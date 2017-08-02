@@ -8,27 +8,10 @@ import java.util.List;
 
 public class ManageUser {
 
-    public static boolean addUser(String username) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        List<User> users = session.createQuery("from User ").list();
-        for (User user:users) {
-            if (user.getUsername().equals(username)) {
-                session.getTransaction().commit();
-                session.close();
-                return false;
-            }
-        }
-        session.save(new User(username));
-        session.getTransaction().commit();
-        session.close();
-        return true;
-    }
-
     public static boolean addUser(String username, String password) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        List<User> users = session.createQuery("from User ").list();
+        List<User> users = session.createQuery("from User").list();
         for (User user:users) {
             if (user.getUsername().equals(username)) {
                 session.getTransaction().commit();
@@ -65,7 +48,7 @@ public class ManageUser {
     public static List<User> getUsers() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        List<User> users = session.createQuery("from User ").list();
+        List<User> users = session.createQuery("from User").list();
         session.getTransaction().commit();
         session.close();
         return users;

@@ -23,15 +23,13 @@ public class Room {
 
     public Room() {}
 
-    public Room(String admin) {
-        this.name = admin + "_room";
-        this.admin = admin;
-    }
-
     public Room(String name, String admin) {
-        this.name = name;
+        if (name != null) this.name = name;
+        else this.name = admin + "_room";
         this.admin = admin;
-        this.users = new TreeSet<>();
+        TreeSet<String> users = new TreeSet<>();
+        users.add(admin);
+        this.users = users;
     }
 
     public Long getId() {

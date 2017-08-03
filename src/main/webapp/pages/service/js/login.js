@@ -1,6 +1,7 @@
 function sendDataUserRequest() {
-    var servletName = "/MainServlet";
-    var person = $("#loginForm").serialize();
+    var servletName = "MainServlet";
+    var person = { "userName":document.getElementById("username").value
+             , "password":document.getElementById("password").value };
     var personJSON = JSON.stringify(person);
     $.ajax({
         url: servletName,
@@ -12,7 +13,7 @@ function sendDataUserRequest() {
             if (data === "NO") {
                 alert("Uncown username/password")
             } else if (data === "YES") {
-                document.location.href = "application.html";
+
             }
         }
     });
@@ -25,9 +26,9 @@ function checkLogin(bool) {
 }
 
 $(document).ready(function () {
-    $("#loginForm").submit(function () {
+   /* $("#loginForm").submit(function () {
         sendDataUserRequest()
-    });
+    });*/
     $("#button1").click(function () {
         $("#loginForm").toggle(200);
         $("#form2").hide(200);

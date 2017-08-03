@@ -126,6 +126,9 @@ $(document).ready(function () {
         $("#annoyButtonConnect").hide();
         $("#annoyInput").hide();
     });
+    $("#annoyButtonDisconnect").click(function () {
+
+    });
     $("#send").click(function () {
         sendMessage();
     })
@@ -144,7 +147,6 @@ $(document).ready(function () {
         $("#input1").prop("disabled", false);
     });
 
-    $("#message").focus();
     $("#settingsUser").click(function () {
         if (bool) {
             $("#rootPlus").css("transform", "rotate(90deg)")

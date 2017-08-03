@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://xmlns.jcp.org/jsf/html">
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="service/styles/authorisationStyle.css"/>
-    <link rel="stylesheet" href="service/styles/help/w3.css"/>
+    <link rel="stylesheet" href="pages/service/styles/login.css"/>
+    <link rel="stylesheet" href="pages/service/styles/help/w3.css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authorisation</title>
@@ -14,7 +14,7 @@
     <div class="w3-quarter w3-center w3-animate-opacity">
         <button id="button1"><span>Sign In</span></button>
         <br><br>
-        <form id="loginForm" class="invisForm">
+        <form id="loginForm" class="invisForm" action="/login">
             <input type="text" placeholder="Username" class="w3-input" id="username"><br>
             <input type="password" placeholder="Password" class="w3-input" id="password"><br>
             <input type="submit" class="w3-btn w3-round customButton" value="OK">
@@ -23,10 +23,10 @@
             <div class="w3-btn w3-border w3-round" id="buttonReg"><span>Log in</span></div>
         </form>
         <div class="invisForm" id="formReg">
-            <form action="MainServlet">
+            <form>
                 <p>Enter information for authorisation</p>
                 <input type="hidden" value="logIn">
-                <input type="text" placeholder="NIckname" class="w3-input" id="input3"><br>
+                <input type="text" placeholder="Nickname" class="w3-input" id="input3"><br>
                 <input type="text" placeholder="Username" class="w3-input"><br>
                 <input type="password" placeholder="Password" class="w3-input"><br>
                 <i class="fa fa-vk fa-2x"></i>
@@ -50,6 +50,6 @@
 <div class="w3-col w3-container w3-quarter"></div>
 <div class="w3-container w3-display-bottomright"><p>Welcome to our chat &#169;</p></div>
 </body>
-<script src="service/js/help/jquery-3.2.1.js"></script>
-<script src="service/js/authorisationScript.js"></script>
+<script src="pages/service/js/help/jquery-3.2.1.js"></script>
+<script src="pages/service/js/login.js"></script>
 </html>

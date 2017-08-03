@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.security.Principal;
 
 @WebFilter(
-        value = "/application.html/test"
+        value = "/test"
 )
 public class SocketFilter implements Filter {
     @Override

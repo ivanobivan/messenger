@@ -1,15 +1,16 @@
 package ru.messenger.database.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.TreeSet;
 
-@Entity(name = "User")
+@Entity
 @Table(name = "chat_user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private Long id;
 
     @Column(name = "username", unique = true, nullable = false)
@@ -35,6 +36,10 @@ public class User {
 
     @Column(name = "friends")
     private TreeSet<String> friends;
+
+    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinTable(name = "chat_room", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
+    private List<Room> rooms;
 
     public User() {}
 

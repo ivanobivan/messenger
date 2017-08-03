@@ -2,11 +2,9 @@ package ru.messenger.temp;
 
 import org.junit.Test;
 import ru.messenger.Convert;
-import ru.messenger.database.entity.Message;
 import ru.messenger.database.entity.Room;
 import ru.messenger.database.entity.User;
 import ru.messenger.database.manageSQL.HibernateUtil;
-import ru.messenger.database.manageSQL.ManageMessage;
 import ru.messenger.database.manageSQL.ManageRoom;
 import ru.messenger.database.manageSQL.ManageUser;
 
@@ -14,7 +12,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -51,8 +49,14 @@ public class AppTest {
 
     @Test
     public void testCommunication() {
-        //HibernateUtil.getSessionFactory();
+        HibernateUtil.getSessionFactory();
+
         Room room = new Room();
+        room.setAdmin(null);
+        room.setName("Living room");
+        ManageRoom.saveRoom(room);
+
+        /*Room room = new Room();
         room.setName("Living room");
         ManageRoom.saveRoom(room);
 
@@ -75,7 +79,7 @@ public class AppTest {
         List<Message> messages = ManageMessage.getMessages(room.getId());
         for (Message message: messages) {
             System.out.println(message.getSender() + ", " + message.getDate().toString() + ":\n" + message.getText());
-        }
+        }*/
     }
 
 }

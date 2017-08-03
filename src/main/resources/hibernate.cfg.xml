@@ -18,7 +18,6 @@
         <property name="hibernate.hbm2ddl.auto">create</property>
         <!-- Annotated entity classes -->
         <mapping class="ru.messenger.database.entity.User"/>
-        <mapping class="ru.messenger.database.entity.Message"/>
         <mapping class="ru.messenger.database.entity.Room"/>
     </session-factory>
 </hibernate-configuration>

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-import ru.messenger.client.Client;
+
 
 import java.io.*;
 
@@ -14,10 +14,10 @@ public class JSONParse {
     private static JsonReader jsonReader;
     private static Gson gson;
 
-    public static Client parseString(String StringJSON) throws IOException {
+  /*  public static Client parseString(String StringJSON) throws IOException {
         Gson gson = new Gson();
         return gson.fromJson(StringJSON,Client.class);
-    }
+    }*/
 
     public static String getLocalIp() throws IOException {
         jsonReader = new JsonReader(new FileReader("src/main/resources/parameters.json"));

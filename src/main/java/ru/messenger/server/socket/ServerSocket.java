@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 
 @ServerEndpoint(
-        value = "/application.html/test",
+        value = "/test",
         configurator = SocketConfigurator.class
 )
 public class ServerSocket {

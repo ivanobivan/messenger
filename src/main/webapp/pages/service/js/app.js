@@ -147,7 +147,6 @@ $(document).ready(function () {
         $("#input1").prop("disabled", false);
     });
 
-    $("#message").focus();
     $("#settingsUser").click(function () {
         if (bool) {
             $("#rootPlus").css("transform", "rotate(90deg)")

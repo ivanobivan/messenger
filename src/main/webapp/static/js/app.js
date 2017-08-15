@@ -1,4 +1,4 @@
-'use strict';
+
 var webSocket = undefined;
 var userName;
 var sprite = getCustomSprite();

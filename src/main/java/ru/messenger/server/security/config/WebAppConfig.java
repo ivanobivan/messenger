@@ -1,39 +1,40 @@
 package ru.messenger.server.security.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
-import ru.messenger.server.security.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan("ru.messenger.server.security")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 
-    @Override
+
+    /*public static final String FONT = "classpath:static";
+
+    @Autowired
+    private ResourceLoader resourceLoader;
+    Resource resource = resourceLoader.getResource(FONT);*/
+
+
+    /*@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/pages/**").addResourceLocations("/pages/");
-    }
 
-    @Bean
-    public UserDetailsService getUserDetailsService(){
-        return new UserDetailsServiceImpl();
-    }
+        registry.addResourceHandler("/js/**").addResourceLocations("static/js/");
+        registry.addResourceHandler("/js/**").addResourceLocations("resources/js/");
+        registry.addResourceHandler("/css/**").addResourceLocations("static/css/");
+        registry.addResourceHandler("/pic/**").addResourceLocations("static/pic/");
+    }*/
 
-    @Bean
+    /*@Bean
     public InternalResourceViewResolver setupViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/pages/");
-        resolver.setSuffix(".html");
+        resolver.setPrefix("/resources/");
+        resolver.setSuffix(".js");
         resolver.setViewClass(JstlView.class);
 
         return resolver;
-    }
+    }*/
 
 }

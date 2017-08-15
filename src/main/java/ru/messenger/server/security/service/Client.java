@@ -1,4 +1,4 @@
-package ru.messenger.server.security;
+package ru.messenger.server.security.service;
 
 public class Client {
 

@@ -1,5 +1,6 @@
 package ru.messenger.server.security.config;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -9,6 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+@SpringBootApplication
 public class Initializer implements WebApplicationInitializer {
 
     private static final String DISPATCHER_SERVLET_NAME = "dispatcher";

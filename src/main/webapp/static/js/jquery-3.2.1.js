@@ -6112,7 +6112,7 @@ var getStyles = function( elem ) {
 		boxSizingReliableVal = divStyle.width === "4px";
 
 		// Support: Android 4.0 - 4.3 only
-		// Some styles come back with percentage values, even though they shouldn't
+		// Some css come back with percentage values, even though they shouldn't
 		div.style.marginRight = "50%";
 		pixelMarginRightVal = divStyle.marginRight === "4px";
 
@@ -6367,7 +6367,7 @@ function getWidthOrHeight( elem, name, extra ) {
 	// Normalize "", auto, and prepare for extra
 	val = parseFloat( val ) || 0;
 
-	// Use the active box-sizing model to add/subtract irrelevant styles
+	// Use the active box-sizing model to add/subtract irrelevant css
 	return ( val +
 		augmentWidthOrHeight(
 			elem,
@@ -6422,7 +6422,7 @@ jQuery.extend( {
 	// Get and set the style property on a DOM Node
 	style: function( elem, name, value, extra ) {
 
-		// Don't set styles on text and comment nodes
+		// Don't set css on text and comment nodes
 		if ( !elem || elem.nodeType === 3 || elem.nodeType === 8 || !elem.style ) {
 			return;
 		}
@@ -6890,7 +6890,7 @@ function defaultPrefilter( elem, props, opts ) {
 		return;
 	}
 
-	// Restrict "overflow" and "display" styles during box animations
+	// Restrict "overflow" and "display" css during box animations
 	if ( isBox && elem.nodeType === 1 ) {
 
 		// Support: IE <=9 - 11, Edge 12 - 13

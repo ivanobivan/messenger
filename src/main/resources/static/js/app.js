@@ -132,7 +132,6 @@ $(document).ready(function () {
     $("#send").click(function () {
         sendMessage();
     })
-        .after(this.focus());
 
     $("#buttonDataUser").click(function () {
         $('#dataUserPanel').toggle();

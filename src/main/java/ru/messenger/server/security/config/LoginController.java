@@ -1,4 +1,4 @@
-package ru.messenger.server.security.controller;
+package ru.messenger.server.security.config;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,19 +8,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
-
     @GetMapping(value = "/login")
-    public ModelAndView viewLoginPage() {
+    public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/","IIChat"},method = RequestMethod.GET)
-    public ModelAndView viewMainPage() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
-        return modelAndView;
+    @RequestMapping(value = {"/Chat","/"},method = RequestMethod.GET)
+    public ModelAndView index() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("index");
+        return model;
     }
-
 }

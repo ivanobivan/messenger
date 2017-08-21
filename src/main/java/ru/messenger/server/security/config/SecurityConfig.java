@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                     .antMatchers("/Chat","/").access("hasRole('ROLE_USER')")
-                    .antMatchers("/Chat","/").access("hasRole('ROLE_ANONYMOUS')")
+                    .antMatchers("/Chat/**","/").access("hasRole('ROLE_ANONYMOUS')")
                 .and()
                     .formLogin().loginPage("/login").failureUrl("/login?error")
                     .usernameParameter("username").passwordParameter("password")

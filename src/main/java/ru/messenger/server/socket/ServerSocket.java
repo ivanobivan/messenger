@@ -4,11 +4,13 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @ServerEndpoint(
-        value = "/test",
-        configurator = SocketConfigurator.class
+        value = "/echo"
 )
 public class ServerSocket {
     private static final String USERNAME_KEY = "username";

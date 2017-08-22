@@ -1,5 +1,6 @@
 
 var webSocket = undefined;
+var stompClient = null;
 var userName;
 var sprite = getCustomSprite();
 var greyColor = false;
@@ -13,8 +14,19 @@ var options = {
     second: 'numeric'
 };
 
+function connect() {
+    websocket = new SockJS('/gs-guide-websocket');
+    stompClient = Stomp.over(websocket);
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/greetings', function (greeting) {
+            alert(JSON.parse(greeting.body).content);
+        });
+    });
+}
+
 function connectClient(URL) {
-    webSocket = new WebSocket(URL);
+    /*webSocket = new WebSocket(URL);*/
     webSocket.onopen = onOpen;
     webSocket.onmessage = onMessage;
     webSocket.onclose = onClose;
@@ -62,7 +74,8 @@ function onError(event) {
 function sendMessage() {
     var message = document.getElementById("message").textContent;
     if (message.length > 0 && message !== "\n" && message !== "") {
-        webSocket.send(message);
+        /*webSocket.send(message);*/
+        stompClient.send("/app/hello",{},JSON.stringify({name : message}));
     }
     document.getElementById("message").textContent = "";
 }
@@ -121,7 +134,8 @@ $(document).ready(function () {
     var bool = true;
 
     $("#annoyButtonConnect").click(function () {
-        connectClient("ws://" + document.location.host + document.location.pathname + "/test?username=" + document.getElementById("annoyInput").value);
+        connect();
+        /*connectClient("ws://" + document.location.host + document.location.pathname + "/echo?username=" + document.getElementById("annoyInput").value);*/
         $("#annoyButtonDisconnect").show();
         $("#annoyButtonConnect").hide();
         $("#annoyInput").hide();

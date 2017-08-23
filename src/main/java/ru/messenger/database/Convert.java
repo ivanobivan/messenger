@@ -1,4 +1,4 @@
-package ru.messenger;
+package ru.messenger.database;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

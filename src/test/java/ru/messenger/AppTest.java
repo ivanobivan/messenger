@@ -1,7 +1,7 @@
-package ru.messenger.temp;
+package ru.messenger;
 
 import org.junit.Test;
-import ru.messenger.Convert;
+import ru.messenger.database.Convert;
 import ru.messenger.database.entity.Room;
 import ru.messenger.database.entity.User;
 import ru.messenger.database.manageSQL.HibernateUtil;
@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 

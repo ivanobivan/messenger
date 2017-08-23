@@ -1,6 +1,7 @@
-package ru.messenger.cipher;
+package ru.messenger;
 
 import org.junit.Test;
+import ru.messenger.cipher.AdvancedEncryptionStandard;
 
 import java.nio.charset.StandardCharsets;
 

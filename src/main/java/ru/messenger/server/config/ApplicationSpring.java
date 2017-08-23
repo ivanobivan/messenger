@@ -8,7 +8,6 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 @SpringBootApplication
 public class ApplicationSpring extends SpringBootServletInitializer {
 
-
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(ApplicationSpring.class);
@@ -17,24 +16,4 @@ public class ApplicationSpring extends SpringBootServletInitializer {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(ApplicationSpring.class, args);
     }
-
-
-
-
-    //private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
-
-  /*  @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        //ctx.register(WebAppConfig.class);
-        ctx.register(SecurityConfig.class);
-        servletContext.addListener(new ContextLoaderListener(ctx));
-
-        ctx.setServletContext(servletContext);
-
-        ServletRegistration.Dynamic servlet = servletContext.addServlet(DISPATCHER_SERVLET_NAME, new DispatcherServlet(ctx));
-        servlet.addMapping("/");
-        servlet.setLoadOnStartup(1);
-    }*/
-
 }

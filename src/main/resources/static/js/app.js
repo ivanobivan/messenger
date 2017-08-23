@@ -15,11 +15,11 @@ var options = {
 };
 
 function connect() {
-    websocket = new SockJS('/gs-guide-websocket');
+    websocket = new SockJS('/ws');
     stompClient = Stomp.over(websocket);
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
+        stompClient.subscribe('/topic/communion', function (greeting) {
             alert(JSON.parse(greeting.body).content);
         });
     });
@@ -75,7 +75,7 @@ function sendMessage() {
     var message = document.getElementById("message").textContent;
     if (message.length > 0 && message !== "\n" && message !== "") {
         /*webSocket.send(message);*/
-        stompClient.send("/app/hello",{},JSON.stringify({name : message}));
+        stompClient.send("/app/message",{},JSON.stringify({'name' : message}));
     }
     document.getElementById("message").textContent = "";
 }

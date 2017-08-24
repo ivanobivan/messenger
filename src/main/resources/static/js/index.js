@@ -1,32 +1,24 @@
 function sendDataUserRequest() {
-    var servletName = "MainServlet";
-    var person = { "userName":document.getElementById("username").value
-             , "password":document.getElementById("password").value };
-    var personJSON = JSON.stringify(person);
+    var action = "http://" +  document.location.host + document.location.pathname +  "/login";
+    var name = document.getElementById("username").value;
     $.ajax({
-        url: servletName,
+        url: action,
         method: "POST",
-        async: false,
-        data: personJSON,
-        contentType: "application/json",
+        async: true,
+        data: {username:name},
+        dataType: 'json',
         success: function (data) {
-            if (data === "NO") {
+            if (data === null) {
                 alert("Uncown username/password")
-            } else if (data === "YES") {
-
+            } else {
+               alert("well done")
             }
         }
     });
 }
 
-function checkLogin(bool) {
-    if (bool === false) {
-        document.getElementById("isLogin").style.display = "block";
-    }
-}
-
 $(document).ready(function () {
-   /* $("#loginForm").submit(function () {
+    /*$("#form2").submit(function () {
         sendDataUserRequest()
     });*/
     $("#button1").click(function () {

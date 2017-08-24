@@ -14,8 +14,8 @@
     <div class="w3-quarter w3-center w3-animate-opacity">
         <button id="button1"><span>Sign In</span></button>
         <br/><br/>
-        <form id="loginForm" class="invisForm" action="/login">
-            <input placeholder="Username" class="w3-input" id="username"><br/>
+        <form id="loginForm" class="invisForm" action="/login" method="post">
+            <input placeholder="Username" class="w3-input" ><br/>
             <input type="password" placeholder="Password" class="w3-input" id="password"><br>
             <input type="submit" class="w3-btn w3-round customButton" value="OK">
             <br/>
@@ -41,9 +41,9 @@
     <div class="w3-quarter w3-center w3-animate-opacity">
         <button id="button2"><span>Just For Fun</span></button>
         <br><br/>
-        <form class="invisForm" id="form2" method="post" action="/login">
-            <input placeholder="Username" class="w3-input"><br/>
-            <button class="w3-btn w3-round customButton" id="JFFButton">OK</button>
+        <form class="invisForm" id="form2" action="/login" method="post">
+            <input  placeholder="Username" class="w3-input" name="username"><br/>
+            <input type="submit"  class="w3-btn w3-round customButton" value="OK"/>
         </form>
     </div>
 </div>

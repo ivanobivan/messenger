@@ -2,30 +2,28 @@ package ru.messenger.server.service;
 
 public class Client {
 
-    private String login;
+    private String userName;
     private String password;
-    private String name;
 
-
-    public String getName() {
-        return name;
-    }
-
-    public Client(String login, String password) {
-        this.login = login;
-        this.password = password;
-    }
 
     public Client() {
 
     }
+    public Client(String login) {
+        this.userName = login;
+    }
+    public Client(String login, String password) {
+        this.userName = login;
+        this.password = password;
+    }
+
 
     public String getLogin() {
-        return login;
+        return userName;
     }
 
     public void setLogin(String login) {
-        this.login = login;
+        this.userName = userName;
     }
 
     public String getPassword() {

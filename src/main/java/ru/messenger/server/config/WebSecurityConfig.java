@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.List;
 
@@ -38,15 +39,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 			.authorizeRequests()
-				.antMatchers("/js/**", "/pic/**", "/css/**", "/index.html", "/","chat.html").permitAll()
+				.antMatchers("/js/**", "/pic/**", "/css/**", "/","chat.html").permitAll()
 				.anyRequest().authenticated();
+        http.addFilterBefore(new CustomUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.authenticationProvider(new AuthenticationProvider() {
-
             @Override
             public boolean supports(Class<?> authentication) {
                 return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
@@ -62,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 return new UsernamePasswordAuthenticationToken(token.getName(), token.getCredentials(), authorities);
             }
         });
+
     }
 
     @Override

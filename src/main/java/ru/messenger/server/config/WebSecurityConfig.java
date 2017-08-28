@@ -41,7 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/js/**", "/pic/**", "/css/**", "/","chat.html").permitAll()
 				.anyRequest().authenticated();
-        //http.addFilterBefore(new CustomUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 
     @Autowired

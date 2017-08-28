@@ -19,23 +19,18 @@ function connect() {
     stompClient = Stomp.over(websocket);
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/communion', function (greeting) {
-            alert(JSON.parse(greeting.body).content);
+        stompClient.subscribe('/topic/communion', function (data) {
+            newMessage(JSON.parse(data.body).sender,JSON.parse(data.body).message);
         });
     });
 }
 
 function connectClient(URL) {
-    /*webSocket = new WebSocket(URL);*/
-    webSocket.onopen = onOpen;
     webSocket.onmessage = onMessage;
     webSocket.onclose = onClose;
     webSocket.onerror = onError;
 }
 
-function onOpen(event) {
-
-}
 
 function onMessage(event) {
     var dataArray = event.data.split(".");
@@ -75,7 +70,7 @@ function sendMessage() {
     var message = document.getElementById("message").textContent;
     if (message.length > 0 && message !== "\n" && message !== "") {
         /*webSocket.send(message);*/
-        stompClient.send("/app/message",{},JSON.stringify({'name' : message}));
+        stompClient.send("/app/message",{},JSON.stringify({'message' : message,"recipient" : "All"}));
     }
     document.getElementById("message").textContent = "";
 }
@@ -132,21 +127,11 @@ function prevSendMes(e) {
 
 $(document).ready(function () {
     var bool = true;
-
-    $("#annoyButtonConnect").click(function () {
-        connect();
-        /*connectClient("ws://" + document.location.host + document.location.pathname + "/echo?username=" + document.getElementById("annoyInput").value);*/
-        $("#annoyButtonDisconnect").show();
-        $("#annoyButtonConnect").hide();
-        $("#annoyInput").hide();
-    });
-    $("#annoyButtonDisconnect").click(function () {
-
-    });
+    connect();
+    newClient(stompClient.username);
     $("#send").click(function () {
         sendMessage();
-    })
-
+    });
     $("#buttonDataUser").click(function () {
         $('#dataUserPanel').toggle();
         $("#messagePanel").toggleClass("m8")

@@ -1,4 +1,4 @@
-package ru.messenger.server.service;
+package ru.messenger.server.redirect;
 
 public class ChatMessage {
 

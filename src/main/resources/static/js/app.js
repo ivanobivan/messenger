@@ -1,8 +1,7 @@
 
 var webSocket = undefined;
 var stompClient = null;
-var userName;
-var sprite = getCustomSprite();
+var sprite;
 var greyColor = false;
 var options = {
     year: 'numeric',
@@ -15,37 +14,20 @@ var options = {
 };
 
 function connect() {
-    websocket = new SockJS('/ws');
-    stompClient = Stomp.over(websocket);
+    webSocket = new SockJS('/ws');
+    stompClient = Stomp.over(webSocket);
     stompClient.connect({}, function (frame) {
-        console.log('Connected: ' + frame);
+        newClient(frame.headers['user-name']);
         stompClient.subscribe('/topic/communion', function (data) {
             newMessage(JSON.parse(data.body).sender,JSON.parse(data.body).message);
         });
+        stompClient.subscribe('app/chat.persons',function (message) {
+            console.log(message.body);
+        })
     });
 }
 
-function connectClient(URL) {
-    webSocket.onmessage = onMessage;
-    webSocket.onclose = onClose;
-    webSocket.onerror = onError;
-}
-
-
-function onMessage(event) {
-    var dataArray = event.data.split(".");
-    var eventName = dataArray[0];
-    userName = dataArray[1];
-    if (eventName === 'newClient') {
-        newClient(userName);
-    } else if (eventName === "message") {
-        dataArray.length === 4 ? newMessage(userName, dataArray[2], dataArray[3]) : newMessage(userName, dataArray[2], null);
-    } else if (eventName === 'removeUser') {
-        removeUser(userName);
-    }
-}
-
-function onClose(event) {
+var on_close = function (event) {
     var response;
     var panel = document.createElement("div");
     panel.className = "w3-display-middle w3-pink w3-border";
@@ -57,28 +39,28 @@ function onClose(event) {
     }
     panel.innerHTML = response + "\n" + "Key: " + event.code + " Reason: " + event.reason;
     document.body.appendChild(panel);
-}
+};
 
-function onError(event) {
+var on_error =  function (event) {
     var panel = document.createElement("div");
     panel.className = "w3-display-bottomleft w3-pink w3-border";
     panel.innerHTML = "Error: " + event.message;
     document.body.appendChild(panel);
-}
+};
 
 function sendMessage() {
     var message = document.getElementById("message").textContent;
     if (message.length > 0 && message !== "\n" && message !== "") {
-        /*webSocket.send(message);*/
-        stompClient.send("/app/message",{},JSON.stringify({'message' : message,"recipient" : "All"}));
+        stompClient.send("/app/chat.message",{},JSON.stringify({'message' : message,"recipient" : "All"}));
     }
     document.getElementById("message").textContent = "";
 }
 
 function newClient(userName) {
     var panel = document.createElement("div");
-    panel.className = "w3-container customBorder w3-row w3-hover-light-gray w3-border-bottom";
+    panel.className = "w3-container customBorder w3-hover-light-gray w3-border-bottom";
     panel.id = userName;
+    sprite = getCustomSprite();
     panel.innerHTML = "<div class=\"" + sprite + " w3-circle  w3-left\"></div>\n" +
         "                    <p class=\"customMarginUserMes\"><span class=\"username\">" + userName + "</span>" +
         "                    <i class=\"fa fa-volume-up w3-right fa-lg customMarginIcons\" title=\"Mute\"></i>\n" +
@@ -105,7 +87,6 @@ function newMessage(username, message, color) {
         "                                            class=\"w3-margin-left customSpan3\">" + message + "</div>";
     messageField.appendChild(panel);
     messageField.scrollTop = messageField.scrollHeight;
-
 }
 
 function removeUser(userName) {
@@ -128,7 +109,9 @@ function prevSendMes(e) {
 $(document).ready(function () {
     var bool = true;
     connect();
-    newClient(stompClient.username);
+    //webSocket.onmessage = onMessage;
+    //webSocket.onclose = onClose;
+    //webSocket.onerror = onError;
     $("#send").click(function () {
         sendMessage();
     });

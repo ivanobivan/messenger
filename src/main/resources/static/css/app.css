@@ -1,3 +1,6 @@
+html {
+    min-height: 100%;
+}
 .w3-btn{
     transition: 0.2s;
 }
@@ -12,6 +15,7 @@
 }
 #dataUserPanel{
     display: none;
+
 }
 #avatar:hover{
     background: url("../pic/change_avatar.png");
@@ -35,12 +39,12 @@
     opacity: 0.5;
 }
 #customUserPanel{
-    padding-top: 25px!important;
-    border-left: 2px solid black!important;
+    height: 850px !important;
     overflow-y: scroll;
-    height: 88%;
 }
-#customUserPanel > p{
+#customUserPanel> p {
+    -webkit-margin-after: 0!important;
+    -webkit-margin-before: 0!important;
     margin-bottom: 0!important;
 }
 #customMarginText{
@@ -48,8 +52,8 @@
 }
 #customMessageField{
     overflow-y: scroll;
-    height: 64%;
     z-index: 1;
+    height: 740px !important;
 }
 .customBorder{
     cursor: pointer;
@@ -190,8 +194,9 @@
     height:46px;
 }
 .customBorderRooms{
-    border-top: 1px solid lightgray;
-    border-left: 1px solid lightgray;
+    border-top: 2px solid lightgray;
+    border-left: 2px solid lightgray;
+    border-right: 2px solid lightgray;
 }
 #annoyButtonDisconnect{
     display: none;

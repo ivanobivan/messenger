@@ -1,39 +1,29 @@
 package ru.messenger;
 
-import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.junit.Test;
 import ru.messenger.database.model.User;
-import ru.messenger.database.mongoDB.ManageUsers;
-import ru.messenger.database.mongoDB.MongoDB;
-
-import java.util.ArrayList;
-import java.util.List;
+import ru.messenger.database.manageDB.ManageUsers;
+import ru.messenger.database.manageDB.MongoDB;
 
 public class TestMongoDB {
 
     @Test
     public void work() {
-        /*MongoClient client = new MongoClient("localhost", 27017);
-        MongoDatabase db = client.getDatabase("chat");*/
+        final String userToStr = "user";
+
         MongoDatabase db = MongoDB.getDB();
+        db.drop();
 
         MongoCollection<Document> users = db.getCollection("users");
-        users.drop();
+        ManageUsers.addUser(userToStr);
+        User user = ManageUsers.getUser(userToStr);
+        System.out.println("id: " + user.getId() + " login: " + user.getLogin());
 
-        /*List<Document> seedData = new ArrayList<Document>();
-        seedData.add(new Document("login", "user1"));
-        seedData.add(new Document("login", "user2"));
-        seedData.add(new Document("login", "user3"));*/
-        User user = new User();
-        user.setLogin("user");
-        ManageUsers.addUser(user);
+        if(!ManageUsers.findUser("master")) System.out.println("don't find");
 
-        //users.insertMany(seedData);
-
-        //client.close();
         MongoDB.disconnection();
     }
 

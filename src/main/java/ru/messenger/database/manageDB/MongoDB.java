@@ -1,4 +1,4 @@
-package ru.messenger.database.mongoDB;
+package ru.messenger.database.manageDB;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;

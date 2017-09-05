@@ -6,6 +6,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
+import ru.messenger.database.manageDB.ManageUsers;
 import ru.messenger.server.events.LoginEvent;
 import ru.messenger.server.events.PersonsRepository;
 import ru.messenger.server.redirect.ChatMessage;
@@ -26,8 +27,9 @@ public class MainController {
     @MessageMapping("/chat.message")
     @SendTo("/topic/communion")
     public ChatMessage communication(@Payload ChatMessage chatMessage, Principal principal) throws Exception {
-
-        return new ChatMessage(principal.getName(),chatMessage.getMessage(),chatMessage.getRecipient());
+        String name = principal.getName();
+        if (!ManageUsers.findUser(name)) ManageUsers.addUser(name);
+        return new ChatMessage(name,chatMessage.getMessage(),chatMessage.getRecipient());
     }
 
 }

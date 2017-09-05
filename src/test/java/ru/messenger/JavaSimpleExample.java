@@ -1,10 +1,11 @@
-package ru.messenger.database.mongoDB;
+package ru.messenger;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.junit.Test;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ import java.util.List;
 
 public class JavaSimpleExample {
 
-    public static void main(String[] args) throws UnknownHostException {
+    @Test
+    public static void test(String[] args) throws UnknownHostException {
 
         // Create seed data
 

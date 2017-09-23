@@ -9,7 +9,7 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 import java.util.Optional;
 
 
-public class PresenceEventListener {
+public class SocketEventListener {
 	
 	private PersonsRepository personsRepository;
 	
@@ -19,7 +19,7 @@ public class PresenceEventListener {
 	
 	private String logoutDestination;
 	
-	public PresenceEventListener(SimpMessagingTemplate messagingTemplate, PersonsRepository participantRepository) {
+	public SocketEventListener(SimpMessagingTemplate messagingTemplate, PersonsRepository participantRepository) {
 		this.messagingTemplate = messagingTemplate;
 		this.personsRepository = participantRepository;
 	}

@@ -1,4 +1,4 @@
-
+//TODO Create  modal structure with simple display users panel and users message
 var webSocket = undefined;
 var stompClient = null;
 var sprite;
@@ -26,27 +26,6 @@ function connect() {
         })
     });
 }
-
-var on_close = function (event) {
-    var response;
-    var panel = document.createElement("div");
-    panel.className = "w3-display-middle w3-pink w3-border";
-
-    if (event.wasClean) {
-        response = 'Connection was close clean';
-    } else {
-        response = 'Connection failed';
-    }
-    panel.innerHTML = response + "\n" + "Key: " + event.code + " Reason: " + event.reason;
-    document.body.appendChild(panel);
-};
-
-var on_error =  function (event) {
-    var panel = document.createElement("div");
-    panel.className = "w3-display-bottomleft w3-pink w3-border";
-    panel.innerHTML = "Error: " + event.message;
-    document.body.appendChild(panel);
-};
 
 function sendMessage() {
     var message = document.getElementById("message").textContent;
@@ -109,9 +88,6 @@ function prevSendMes(e) {
 $(document).ready(function () {
     var bool = true;
     connect();
-    //webSocket.onmessage = onMessage;
-    //webSocket.onclose = onClose;
-    //webSocket.onerror = onError;
     $("#send").click(function () {
         sendMessage();
     });

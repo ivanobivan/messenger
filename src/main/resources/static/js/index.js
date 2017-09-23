@@ -1,3 +1,5 @@
+//TODO Refresh authorisation page with React involve
+//TODO Create modal structure with npm without templates
 function sendDataUserRequest() {
     var action = "http://" +  document.location.host + document.location.pathname +  "/login";
     var name = document.getElementById("username").value;

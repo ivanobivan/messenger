@@ -4,7 +4,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 
 public class MongoDB {
-
+    //TODO Need do creation database in real-time with some rules
     private static final MongoClient client = new MongoClient("localhost", 27017);
     private static final MongoDatabase db = client.getDatabase("chat");
 

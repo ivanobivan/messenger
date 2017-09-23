@@ -20,9 +20,9 @@ import java.util.List;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+    //TODO Need create authorisation without empty name with work with database
     private String USER = "USER";
-    private static final String SECURE_ADMIN_PASSWORD = "123";
+    private static final String SECURE_ADMIN_PASSWORD = "admin";
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

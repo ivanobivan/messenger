@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/help/w3.css"/>
 </head>
 <body>
+<!--TODO troubles with position of left panel, need fix it-->
 <div class="w3-top">
     <div class="w3-bar w3-left-align w3-blue-gray">
         <a id="buttonDataUser" class="w3-bar-item w3-button w3-padding-large"><i
@@ -26,6 +27,8 @@
                 <a class="w3-bar-item w3-button">It is your day</a>
             </div>
         </div>
+        <!--TODO Create simple performance for list user names -->
+        <button id="logoutButton" class="w3-bar-item w3-button w3-padding-large w3-right" onclick="logOutFromApp()">EXIT:{username}</button>
         <div class="w3-dropdown-click w3-right">
             <button class="w3-button w3-padding-large" id="settingsUser"><i class="fa fa-plus" id="rootPlus"></i>
             </button>
@@ -35,12 +38,6 @@
                 <a class="w3-bar-item w3-button">&#9741; Create new chat room</a>
             </div>
         </div>
-        <!-- <div class="w3-bar-item w3-right customFind">
-             <form action="#" method="get" class="customSearch">
-                 <input type="search" name="" class="w3-input" id="customInput" placeholder="Search...">
-                 <input type="submit" name="" value="" id="customSubmit">
-             </form>
-         </div>-->
 
     </div>
 </div>
@@ -99,13 +96,13 @@
                                 <!--<a class="w3-col m3  w3-light-gray w3-padding-small customBorderRooms"><i
                                         class="fa fa-user"></i> Private Room</a>-->
                             </div>
-                            <div class="w3-border" id="customMessageField">
-                                <!--<div class="w3-container">
+                            <div class="w3-card-2 w3-border" id="customMessageField">
+                                <div class="w3-card-2 w3-container">
                                     <div class="customSprite1 w3-circle w3-left"></div>
-                                    <div class="w3-padding-small customMarginSpan"><span class="customSpan1">Username</span><span
+                                    <div class="w3-padding-small customMarginSpan"><span class="customSpan1">TestName</span><span
                                             class="w3-right customSpan2">21.01.2016</span></div><div
-                                        class="w3-margin-left customSpan3">text</div>
-                                </div>-->
+                                        class="w3-margin-left customSpan3">TestMessage</div>
+                                </div>
                             </div>
                             <br>
                             <div class="w3-row">
@@ -126,11 +123,11 @@
 
         <div class="w3-col m4 w3-padding-64">
             <div class="w3-row-padding">
-                <div class=" w3-card-2 w3-round" id="customUserPanel">
+                <div class=" w3-card-2 " id="customUserPanel">
                      <p class="w3-center w3-padding w3-large w3-border-bottom">Contacts list</p>
-                     <div class="w3-container customBorder w3-border-bottom w3-hover-light-gray">
+                     <div class="w3-card-2  w3-container customBorder w3-border-bottom w3-hover-light-gray">
                          <div class="customSprite1 w3-circle w3-left"></div>
-                         <p class="customMarginUserMes"><span class="username">Sara</span>
+                         <p class="customMarginUserMes"><span class="username">TestName</span>
                              <i class="fa fa-volume-up w3-right fa-lg" title="Mute"></i>
                              <i class="fa fa-address-card w3-right fa-lg" title="Info about user"></i>
                              <i class="fa fa-comments-o w3-right fa-lg" title="Create private chat"></i></p>

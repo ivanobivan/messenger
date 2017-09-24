@@ -7,7 +7,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.socket.config.WebSocketMessageBrokerStats;
 import ru.messenger.server.events.PersonsRepository;
-import ru.messenger.server.events.PresenceEventListener;
+import ru.messenger.server.events.SocketEventListener;
 import ru.messenger.server.endpoint.WebSocketEndpoint;
 import ru.messenger.server.endpoint.MessageMappingEndpoint;
 
@@ -20,8 +20,8 @@ public class ChatConfig {
 	
 	@Bean
 	@Description("Tracks user presence (join / leave) and broacasts it to all connected users")
-	public PresenceEventListener presenceEventListener(SimpMessagingTemplate messagingTemplate) {
-		PresenceEventListener presence = new PresenceEventListener(messagingTemplate, personsRepository());
+	public SocketEventListener presenceEventListener(SimpMessagingTemplate messagingTemplate) {
+		SocketEventListener presence = new SocketEventListener(messagingTemplate, personsRepository());
 		//presence.setLoginDestination(chatProperties.getDestinations().getLogin());
 		//presence.setLogoutDestination(chatProperties.getDestinations().getLogout());
 		return presence;

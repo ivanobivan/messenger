@@ -3,7 +3,7 @@
 $(document).ready(function () {
     //TODO This part of code need to be refactor
     if(window.location.href.indexOf("error") >= 0) {
-        $("#errorAuthorisation").fadeIn().fadeOut(4000);
+        $("#errorAuthorisation").fadeIn().fadeOut(6000);
     }
     $("#button1").click(function () {
         $("#loginForm").toggle(200);

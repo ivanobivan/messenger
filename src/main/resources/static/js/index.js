@@ -1,28 +1,10 @@
 //TODO Refresh authorisation page with React involve
 //TODO Create modal structure with npm without templates
-function sendDataUserRequest() {
-    var action = "http://" +  document.location.host + document.location.pathname +  "/login";
-    var name = document.getElementById("username").value;
-    $.ajax({
-        url: action,
-        method: "POST",
-        async: true,
-        data: {username:name},
-        dataType: 'json',
-        success: function (data) {
-            if (data === null) {
-                alert("Uncown username/password")
-            } else {
-               alert("well done")
-            }
-        }
-    });
-}
-
 $(document).ready(function () {
-    /*$("#form2").submit(function () {
-        sendDataUserRequest()
-    });*/
+    //TODO This part of code need to be refactor
+    if(window.location.href.indexOf("error") >= 0) {
+        $("#errorAuthorisation").fadeIn().fadeOut(4000);
+    }
     $("#button1").click(function () {
         $("#loginForm").toggle(200);
         $("#form2").hide(200);

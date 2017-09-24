@@ -1,9 +1,9 @@
 //TODO Create  modal structure with simple display users panel and users message
-var webSocket = undefined;
-var stompClient = null;
-var sprite;
-var greyColor = false;
-var options = {
+let webSocket = undefined;
+let stompClient = null;
+let sprite;
+let greyColor = false;
+const options = {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
@@ -12,17 +12,26 @@ var options = {
     minute: 'numeric',
     second: 'numeric'
 };
-
+function logOutFromApp() {
+    $.ajax({
+        url: "/logout",
+        method: "POST",
+        success: function () {
+            window.location.href = window.host + window.port
+        }
+    });
+}
 function connect() {
+    //TODO need overview Socket.IO for this workflow, because app need auto-reconnection
     webSocket = new SockJS('/ws');
     stompClient = Stomp.over(webSocket);
     stompClient.connect({}, function (frame) {
         newClient(frame.headers['user-name']);
-        stompClient.subscribe('/topic/communion', function (data) {
-            newMessage(JSON.parse(data.body).sender,JSON.parse(data.body).message);
+        stompClient.subscribe('/topic/communion', function (chatMessage) {
+            newMessage(JSON.parse(chatMessage.body).sender,JSON.parse(chatMessage.body).message);
         });
-        stompClient.subscribe('app/chat.persons',function (message) {
-            console.log(message.body);
+        stompClient.subscribe('app/chat.persons',function (persons) {
+            console.log(persons);
         })
     });
 }

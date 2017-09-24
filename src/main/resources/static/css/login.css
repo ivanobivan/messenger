@@ -48,4 +48,6 @@ i{
 i:hover{
     color:darkviolet;
 }
-
+#errorAuthorisation{
+    display: none;
+}

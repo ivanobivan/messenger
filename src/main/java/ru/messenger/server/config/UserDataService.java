@@ -2,12 +2,10 @@ package ru.messenger.server.config;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
-import ru.messenger.database.model.UserField;
-import ru.messenger.database.model.User;
+import ru.messenger.server.domain.UserField;
 
 import java.util.Optional;
 

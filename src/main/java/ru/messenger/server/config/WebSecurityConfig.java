@@ -17,8 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.messenger.database.model.Role;
-import ru.messenger.database.model.User;
+import ru.messenger.server.domain.Role;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDataService userDataService;
 
     @Bean
-    public PasswordEncoder bcryptPasswordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
     @Override
@@ -74,9 +73,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 if(!userDataService.findByUsername(username).isPresent()){
                     User newUser = new User();
                     newUser.setUsername(username);
-                    newUser.setPassword(password);
+                    newUser.setPassword(passwordEncoder().encode(password));
                     newUser.setAuthorities(AuthorityUtils.createAuthorityList(Role.ROLE_USER.getRole()));
-                    newUser.setAuthorised(true);
+                    newUser.setBanned(true);
                     //TODO banned option for create new logic for view banned user or now depending on some options
                     newUser.setBanned(false);
                     userDataService.save(newUser);

@@ -1,13 +1,14 @@
-package ru.messenger.database.model;
+package ru.messenger.server.config;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 @Document(collection = "users")
 public class User {
     @Id
@@ -16,16 +17,7 @@ public class User {
     private String username;
     private List<GrantedAuthority> authorities;
     private String password;
-    private boolean authorised;
     private boolean banned;
-
-    public List<GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(List<GrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
 
     public String getUsername() {
         return username;
@@ -35,20 +27,20 @@ public class User {
         this.username = username;
     }
 
+    public List<GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isAuthorised() {
-        return authorised;
-    }
-
-    public void setAuthorised(boolean authorised) {
-        this.authorised = authorised;
     }
 
     public boolean isBanned() {

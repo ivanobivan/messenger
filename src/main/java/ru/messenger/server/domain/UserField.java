@@ -1,4 +1,4 @@
-package ru.messenger.database.model;
+package ru.messenger.server.domain;
 
 public enum UserField {
     USER_NAME("username"),

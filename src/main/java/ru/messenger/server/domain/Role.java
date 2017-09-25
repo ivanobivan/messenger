@@ -1,4 +1,4 @@
-package ru.messenger.database.model;
+package ru.messenger.server.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 

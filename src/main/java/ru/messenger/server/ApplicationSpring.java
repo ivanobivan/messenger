@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
+import java.io.File;
+
 
 @SpringBootApplication
 public class ApplicationSpring extends SpringBootServletInitializer {
@@ -16,6 +18,8 @@ public class ApplicationSpring extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) throws Exception {
+        File file = new File("springlog.log");
+        file.deleteOnExit();
         SpringApplication.run(ApplicationSpring.class, args);
     }
 

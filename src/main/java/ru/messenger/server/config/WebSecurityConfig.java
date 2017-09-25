@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.messenger.server.domain.Role;
 
 import java.util.List;
+import java.util.Optional;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -52,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        //TODO need to be encrypt password
+        //TODO need encrypt password in time authentication
         auth.authenticationProvider(new AuthenticationProvider() {
             @Override
             public boolean supports(Class<?> authentication) {
@@ -70,7 +71,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     return null;
                 }
                 //TODO Add any tests for check invalid password and test for differ logIn and authorisation
-                if(!userDataService.findByUsername(username).isPresent()){
+                //TODO Need fix it error with NaN page
+                Optional<User> tempUserObjectFromDB = userDataService.findByUsername(username);
+                if(!tempUserObjectFromDB.isPresent()){
                     User newUser = new User();
                     newUser.setUsername(username);
                     newUser.setPassword(passwordEncoder().encode(password));
@@ -80,6 +83,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     newUser.setBanned(false);
                     userDataService.save(newUser);
                     return new UsernamePasswordAuthenticationToken(username,password,newUser.getAuthorities());
+                }else if(tempUserObjectFromDB.get().isBanned()){
+                    return null;
+                }else if(!passwordEncoder().matches(password,tempUserObjectFromDB.get().getPassword())){
+                    return null;
                 }
                 //TODO create logic for admin/user/anonim in depending dome options
                 List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(Role.ROLE_USER.getRole());

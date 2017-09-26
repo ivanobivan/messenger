@@ -1,6 +1,8 @@
 package ru.messenger.server.config;
 
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,28 +21,27 @@ public class User {
     private String password;
     private boolean banned;
 
+    public User() {
+
+    }
+
+    public User(String username, String password, List<GrantedAuthority> authorities, boolean banned) {
+        this.username = username;
+        this.authorities = authorities;
+        this.password = password;
+        this.banned = banned;
+    }
+
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public List<GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(List<GrantedAuthority> authorities) {
-        this.authorities = authorities;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public List<GrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
     public boolean isBanned() {

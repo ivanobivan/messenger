@@ -18,6 +18,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.messenger.server.domain.Role;
+import ru.messenger.server.exeptions.UsernameOrPasswordIsEmptyExeption;
 
 import java.util.List;
 import java.util.Optional;
@@ -74,13 +75,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //TODO Need fix it error with NaN page
                 Optional<User> tempUserObjectFromDB = userDataService.findByUsername(username);
                 if(!tempUserObjectFromDB.isPresent()){
-                    User newUser = new User();
-                    newUser.setUsername(username);
-                    newUser.setPassword(passwordEncoder().encode(password));
-                    newUser.setAuthorities(AuthorityUtils.createAuthorityList(Role.ROLE_USER.getRole()));
-                    newUser.setBanned(true);
                     //TODO banned option for create new logic for view banned user or now depending on some options
-                    newUser.setBanned(false);
+                    User newUser = new User(username,passwordEncoder().encode(password),AuthorityUtils.createAuthorityList(Role.ROLE_USER.getRole()),false);
                     userDataService.save(newUser);
                     return new UsernamePasswordAuthenticationToken(username,password,newUser.getAuthorities());
                 }else if(tempUserObjectFromDB.get().isBanned()){

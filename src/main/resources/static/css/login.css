@@ -30,17 +30,6 @@ button:hover{
     background-color: white;
     color:black;
 }
-.invis{
-    margin-top: 16%;
-}
-.invisForm{
-    display: none;
-    z-index: 2;
-}
-#formReg span{
-    font-size: 24px;
-    cursor: pointer;
-}
 i{
     padding: 20px;
     cursor: pointer;

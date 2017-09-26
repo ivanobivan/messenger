@@ -6,3 +6,4 @@
 *.iml
 /target/
 /src/main/java/log/
+/src/test

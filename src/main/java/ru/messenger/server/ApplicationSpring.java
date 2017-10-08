@@ -18,8 +18,6 @@ public class ApplicationSpring extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) throws Exception {
-        File file = new File("springlog.log");
-        file.deleteOnExit();
         SpringApplication.run(ApplicationSpring.class, args);
     }
 

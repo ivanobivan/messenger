@@ -1,0 +1,14 @@
+server:
+  port: 5050
+spring:
+  data:
+    mongodb:
+      database: chat
+      host: localhost
+      port: 27017
+  session:
+    store-type: none
+  mandatory-file-encoding: UTF-8
+
+logging:
+  level: debug

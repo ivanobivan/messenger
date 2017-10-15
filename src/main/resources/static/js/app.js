@@ -38,7 +38,7 @@ function connect() {
 
 function sendMessage() {
     var message = document.getElementById("message").textContent;
-    if (message.length > 0 && message !== "\n" && message !== "") {
+    if (message.length > 0 && message !== "\n" && message.trim() !== "") {
         stompClient.send("/app/chat.message",{},JSON.stringify({'message' : message,"recipient" : "All"}));
     }
     document.getElementById("message").textContent = "";

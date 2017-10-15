@@ -10,10 +10,6 @@ spring:
     store-type: none
   mandatory-file-encoding: UTF-8
 
-logging:
-  level:
-    org.springframework.security: DEBUG
-
 security:
   oauth2:
     client:
@@ -41,4 +37,8 @@ github:
     userAuthorizationUri: https://github.com/login/oauth/authorize
     clientAuthenticationScheme: form
   resource:
-    userInfoUri: https://api.github.com/userfoUri
+    userInfoUri: https://api.github.com/user
+
+logging:
+  level:
+    org.springframework.security: DEBUG

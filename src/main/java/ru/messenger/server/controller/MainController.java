@@ -6,6 +6,7 @@ import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.messenger.server.events.LoginEvent;
 import ru.messenger.server.events.PersonsRepository;
 import ru.messenger.server.exeptions.MessageException;
@@ -13,6 +14,8 @@ import ru.messenger.server.redirect.ChatMessage;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -33,6 +36,13 @@ public class MainController {
         //TODO Create test for check userName from principal in base and throw new Exeption
         String userName = principal.getName();
         return new ChatMessage(userName, chatMessage.getMessage(), chatMessage.getRecipient());
+    }
+
+    @RequestMapping({"/user", "/me"})
+    public Map<String, String> user(Principal principal) {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("name", principal.getName());
+        return map;
     }
 
    /* @MessageMapping("/chat.private.{username}")

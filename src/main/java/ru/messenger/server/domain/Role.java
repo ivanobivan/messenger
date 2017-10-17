@@ -1,13 +1,21 @@
 package ru.messenger.server.domain;
 
-import org.springframework.security.core.GrantedAuthority;
+public class Role {
 
-public enum Role  {
-    ROLE_ANONYMOUS,
-    ROLE_USER,
-    ROLE_ADMIN;
+    private String name;
 
-    public String getRole(){
-        return name();
+    Role() {
+    }
+
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

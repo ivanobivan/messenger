@@ -1,15 +1,24 @@
 package ru.messenger.server.config;
 
 import org.bson.types.ObjectId;
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
+import ru.messenger.server.domain.Role;
+import ru.messenger.server.domain.UserField;
 
 import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+
 @Component
 @Document(collection = "users")
 public class User {
@@ -18,18 +27,23 @@ public class User {
     @Indexed(unique = true)
     private String username;
     private List<GrantedAuthority> authorities;
+    private List<Role> roles;
     private String password;
-    private boolean banned;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public User() {
 
     }
 
-    public User(String username, String password, List<GrantedAuthority> authorities, boolean banned) {
+    public User(String username, String password,List<Role> roles) {
         this.username = username;
-        this.authorities = authorities;
         this.password = password;
-        this.banned = banned;
+        this.roles = roles;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
     }
 
     public String getUsername() {
@@ -44,11 +58,16 @@ public class User {
         return authorities;
     }
 
-    public boolean isBanned() {
-        return banned;
+
+
+    public Optional<User> findByUsername(String username) {
+        Assert.assertNotNull(username);
+        return Optional.ofNullable(
+                mongoTemplate.findOne(Query.query(where(UserField.USER_NAME.getField()).is(username)), User.class));
     }
 
-    public void setBanned(boolean banned) {
-        this.banned = banned;
+    public void save(User user) {
+        Assert.assertNotNull(user);
+        mongoTemplate.save(user);
     }
 }

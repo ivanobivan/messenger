@@ -20,8 +20,8 @@ security:
 
 facebook:
   client:
-    clientId: 233668646673605
-    clientSecret: 33b17e044ee6a4fa383f46ec6e28ea1d
+    clientId: 1987540281457780
+    clientSecret: 146d9351e31e06c582cb1febd3c0aee5
     accessTokenUri: https://graph.facebook.com/oauth/access_token
     userAuthorizationUri: https://www.facebook.com/dialog/oauth
     tokenName: oauth_token

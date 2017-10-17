@@ -1,3 +1,4 @@
+/*
 package ru.messenger.server.config;
 
 import org.junit.Assert;
@@ -62,7 +63,6 @@ import java.util.Optional;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableOAuth2Client
 @EnableAuthorizationServer
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDataService userDataService;
@@ -219,3 +219,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
+*/

@@ -29,6 +29,16 @@ public class MainController {
     @Autowired
     private PersonsRepository participantRepository;
 
+    @RequestMapping({"/login","/"})
+    public String login() {
+        return "index.html";
+    }
+
+    @RequestMapping({"/chat"})
+    public String chat() {
+        return "chat.html";
+    }
+
     @SubscribeMapping("/chat.persons")
     public Collection<LoginEvent> retrievePersons() {
         return participantRepository.getActiveSessions().values();

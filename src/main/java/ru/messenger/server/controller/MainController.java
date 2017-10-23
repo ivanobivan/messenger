@@ -28,6 +28,16 @@ public class MainController {
     @Autowired
     private PersonsRepository participantRepository;
 
+    @RequestMapping({"/login","/"})
+    public String login() {
+        return "index.html";
+    }
+
+    @RequestMapping({"/chat"})
+    public String chat() {
+        return "chat.html";
+    }
+
     @SubscribeMapping("/chat.persons")
     public Collection<LoginEvent> retrievePersons() {
         return participantRepository.getActiveSessions().values();
@@ -53,10 +63,10 @@ public class MainController {
     @CrossOrigin(origins = "*", maxAge = 3600)
     @RequestMapping({"/chat"})
     @PreAuthorize("hasRole('ROLE_USER')")
-    public void chat() {
+  /*  public void chat() {
         ModelAndView model = new ModelAndView();
         model.setViewName("chat.html");
-    }
+    }*/
 
    /* @MessageMapping("/chat.private.{username}")
     public void filterPrivateMessage(@Payload ChatMessage message, @DestinationVariable("username") String username, Principal principal) {

@@ -1,18 +1,12 @@
-/*
+
 package ru.messenger.server.config;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -28,44 +22,24 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
-import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
-import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
-import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.web.csrf.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.filter.CompositeFilter;
-import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.util.WebUtils;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import ru.messenger.server.domain.Role;
-import ru.messenger.server.exeptions.UsernameOrPasswordIsEmptyExeption;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableOAuth2Client
-@EnableAuthorizationServer
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
-    private UserDataService userDataService;
+    private CustomUserDetails userDetails;
 
 
     @Qualifier("oauth2ClientContext")
@@ -80,6 +54,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
+                .httpBasic()
+                .and()
                 .formLogin()
                 .loginPage("/index.html")
                 .loginProcessingUrl("/login")
@@ -91,16 +69,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/js/**", "/pic/**", "/css/**", "login**", "/","/webjars/**").permitAll()
+                .antMatchers("/js/**", "/pic/**", "/css/**").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/index.html"))
                 .and()
                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
-                .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
+                .exceptionHandling().accessDeniedHandler((httpServletRequest, httpServletResponse, e) -> e.printStackTrace());
 
     }
+
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -123,11 +100,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 }
                 //TODO Add any tests for check invalid password and test for differ logIn and authorisation
                 //TODO Need fix it error with NaN page
-                Optional<User> tempUserObjectFromDB = userDataService.findByUsername(username);
+                Optional<User> tempUserObjectFromDB = userDetails.findByUsername(username);
                 if (!tempUserObjectFromDB.isPresent()) {
                     //TODO banned option for create new logic for view banned user or now depending on some options
-                    User newUser = new User(username, passwordEncoder().encode(password), AuthorityUtils.createAuthorityList(Role.ROLE_USER.getRole()), false);
-                    userDataService.save(newUser);
+                    User newUser = new User(username, passwordEncoder().encode(password), AuthorityUtils.createAuthorityList(Role.ROLE_USER.getRole()));
+                    userDetails.save(newUser);
                     return new UsernamePasswordAuthenticationToken(username, password, newUser.getAuthorities());
                 } else if (tempUserObjectFromDB.get().isBanned()) {
                     return null;
@@ -146,77 +123,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity webSecurity) throws Exception {
         webSecurity.debug(true);
     }
-
-    @Configuration
-    @EnableResourceServer
-    protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
-        @Override
-        public void configure(HttpSecurity http) throws Exception {
-            http.antMatcher("/me").authorizeRequests().anyRequest().authenticated();
-        }
-    }
-
-    @Bean
-    public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter) {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(filter);
-        registration.setOrder(-100);
-        return registration;
-    }
-
-    @Bean
-    @ConfigurationProperties("github")
-    public ClientResources github() {
-        return new ClientResources();
-    }
-
-    @Bean
-    @ConfigurationProperties("facebook")
-    public ClientResources facebook() {
-        return new ClientResources();
-    }
-
-    private Filter ssoFilter() {
-        CompositeFilter filter = new CompositeFilter();
-        List<Filter> filters = new ArrayList<>();
-        filters.add(ssoFilter(facebook(), "/login/facebook"));
-        filters.add(ssoFilter(github(), "/login/github"));
-        filter.setFilters(filters);
-        return filter;
-    }
-
-    private Filter ssoFilter(ClientResources client, String path) {
-        OAuth2ClientAuthenticationProcessingFilter filter = new OAuth2ClientAuthenticationProcessingFilter(
-                path);
-        OAuth2RestTemplate template = new OAuth2RestTemplate(client.getClient(), oauth2ClientContext);
-        filter.setRestTemplate(template);
-        UserInfoTokenServices tokenServices = new UserInfoTokenServices(
-                client.getResource().getUserInfoUri(), client.getClient().getClientId());
-        tokenServices.setRestTemplate(template);
-        filter.setTokenServices(tokenServices);
-        return filter;
-    }
-
-
-    class ClientResources {
-
-        @NestedConfigurationProperty
-        private AuthorizationCodeResourceDetails client = new AuthorizationCodeResourceDetails();
-
-        @NestedConfigurationProperty
-        private ResourceServerProperties resource = new ResourceServerProperties();
-
-        public AuthorizationCodeResourceDetails getClient() {
-            return client;
-        }
-
-        public ResourceServerProperties getResource() {
-            return resource;
-        }
-    }
 }
-
-
-
-
-*/

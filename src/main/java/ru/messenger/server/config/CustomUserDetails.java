@@ -1,29 +1,34 @@
 package ru.messenger.server.config;
 
+import org.junit.Assert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.ApplicationScope;
 import ru.messenger.server.domain.Role;
+import ru.messenger.server.domain.UserField;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+
+@Component
 public class CustomUserDetails implements UserDetails {
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     private String username;
     private String password;
     Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(User byUsername) {
-        this.username = byUsername.getUsername();
-        this.password = byUsername.getPassword();
-        List<GrantedAuthority> auth = new ArrayList<>();
-        for (Role role : byUsername.getRoles()) {
-            auth.add(new SimpleGrantedAuthority(role.getName().toUpperCase()));
-        }
-        this.authorities = auth;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -58,5 +63,16 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Optional<User> findByUsername(String username) {
+        Assert.assertNotNull(username);
+        return Optional.ofNullable(
+                mongoTemplate.findOne(Query.query(where(UserField.USER_NAME.getField()).is(username)), User.class));
+    }
+
+    public void save(User user) {
+        Assert.assertNotNull(user);
+        mongoTemplate.save(user);
     }
 }

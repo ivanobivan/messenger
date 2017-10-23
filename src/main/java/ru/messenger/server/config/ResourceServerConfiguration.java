@@ -1,3 +1,4 @@
+/*
 package ru.messenger.server.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http
                 .authorizeRequests()
                 .antMatchers("/","/**","/js/**", "/pic/**", "/css/**","/index.html").permitAll()
-                .antMatchers("/chat.html**").authenticated();
+                .antMatchers("/chat.html").authenticated();
     }
 }
+*/

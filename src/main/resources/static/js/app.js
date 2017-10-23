@@ -13,13 +13,23 @@ const options = {
     second: 'numeric'
 };
 function logOutFromApp() {
+    let token = getCookie('XSRF-TOKEN');
     $.ajax({
         url: "/logout",
         method: "POST",
+        beforeSend: function(request) {
+            request.setRequestHeader("X-XSRF-TOKEN", token);
+        },
         success: function () {
             window.location.href = window.host + window.port
         }
     });
+}
+function getCookie(name) {
+    var matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 function connect() {
     //TODO need overview Socket.IO for this workflow, because app need auto-reconnection

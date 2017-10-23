@@ -8,6 +8,8 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="css/login.css"/>
     <link rel="stylesheet" href="css/help/w3.css"/>
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
 <!--TODO Design tool tips need to be refactored-->
@@ -17,11 +19,13 @@
 </div>
 <div class="w3-center w3-animate-opacity w3-display-middle">
     <h2>Welcome to chat, come in</h2>
-    <form action="/login" method="post">
+    <form id="formIn" onSubmit="sendRequest()">
         <input placeholder="Username" class="w3-input" name="username" required maxlength=15 minlength=1><br/>
-        <input type="password" placeholder="Password" class="w3-input" name="password" id="password" required maxlength=20 minlength=8><br>
+        <input type="password" placeholder="Password" class="w3-input" name="password" id="password" required
+               maxlength=20 minlength=8><br>
         <input type="checkbox" class="w3-check" name="forfunmode" id="forfunmode"
-               title="Chatting without save, your do not need password, just input nickname and get fun" onclick="checkMode()">
+               title="Chatting without save, your do not need password, just input nickname and get fun"
+               onclick="checkMode()">
         <span class="w3-padding-small w3-text">Just for fun mode</span><br><br>
         <i class="fa fa-vk fa-2x"></i>
         <a href="/login/facebook"><i class="fa fa-facebook fa-2x"></i></a>
@@ -33,6 +37,4 @@
 </div>
 
 </body>
-<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
 </html>

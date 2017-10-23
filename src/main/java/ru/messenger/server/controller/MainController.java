@@ -1,18 +1,17 @@
 package ru.messenger.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.*;
+import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.PagedList;
-import org.springframework.social.facebook.api.Post;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import ru.messenger.server.events.LoginEvent;
 import ru.messenger.server.events.PersonsRepository;
 import ru.messenger.server.exeptions.MessageException;
@@ -49,6 +48,14 @@ public class MainController {
         Map<String, String> map = new LinkedHashMap<>();
         map.put("name", principal.getName());
         return map;
+    }
+
+    @CrossOrigin(origins = "*", maxAge = 3600)
+    @RequestMapping({"/chat"})
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public void chat() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("chat.html");
     }
 
    /* @MessageMapping("/chat.private.{username}")

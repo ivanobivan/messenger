@@ -1,3 +1,4 @@
+/*
 package ru.messenger.server.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,3 +39,4 @@ public class AuthorisationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints.authenticationManager(authenticationManager);
     }
 }
+*/

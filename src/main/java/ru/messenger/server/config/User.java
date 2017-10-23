@@ -29,17 +29,15 @@ public class User {
     private List<GrantedAuthority> authorities;
     private List<Role> roles;
     private String password;
-    @Autowired
-    private MongoTemplate mongoTemplate;
 
     public User() {
 
     }
 
-    public User(String username, String password,List<Role> roles) {
+    public User(String username, String password,List<GrantedAuthority> authorities) {
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        this.authorities = authorities;
     }
 
     public List<Role> getRoles() {
@@ -59,15 +57,7 @@ public class User {
     }
 
 
-
-    public Optional<User> findByUsername(String username) {
-        Assert.assertNotNull(username);
-        return Optional.ofNullable(
-                mongoTemplate.findOne(Query.query(where(UserField.USER_NAME.getField()).is(username)), User.class));
-    }
-
-    public void save(User user) {
-        Assert.assertNotNull(user);
-        mongoTemplate.save(user);
+    public boolean isBanned() {
+        return false;
     }
 }

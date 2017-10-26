@@ -1,4 +1,4 @@
-package ru.messenger.server.config;
+package ru.messenger.server.domain;
 
 import org.bson.types.ObjectId;
 import org.junit.Assert;

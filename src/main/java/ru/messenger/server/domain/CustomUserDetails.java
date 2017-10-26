@@ -1,20 +1,14 @@
-package ru.messenger.server.config;
+package ru.messenger.server.domain;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.ApplicationScope;
-import ru.messenger.server.domain.Role;
-import ru.messenger.server.domain.UserField;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;

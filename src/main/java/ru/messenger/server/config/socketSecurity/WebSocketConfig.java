@@ -1,4 +1,4 @@
-package ru.messenger.server.config;
+package ru.messenger.server.config.socketSecurity;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

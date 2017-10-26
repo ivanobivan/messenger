@@ -1,4 +1,4 @@
-package ru.messenger.server.config;
+package ru.messenger.server.config.socketSecurity;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.messaging.MessageSecurityMetadataSourceRegistry;

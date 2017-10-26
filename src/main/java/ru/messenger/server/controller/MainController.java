@@ -21,22 +21,13 @@ import java.security.Principal;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 public class MainController {
 
     @Autowired
     private PersonsRepository participantRepository;
-
-    @RequestMapping({"/login","/"})
-    public String login() {
-        return "index.html";
-    }
-
-    @RequestMapping({"/chat"})
-    public String chat() {
-        return "chat.html";
-    }
 
     @SubscribeMapping("/chat.persons")
     public Collection<LoginEvent> retrievePersons() {
@@ -60,13 +51,6 @@ public class MainController {
         return map;
     }
 
-    @CrossOrigin(origins = "*", maxAge = 3600)
-    @RequestMapping({"/chat"})
-    @PreAuthorize("hasRole('ROLE_USER')")
-  /*  public void chat() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("chat.html");
-    }*/
 
    /* @MessageMapping("/chat.private.{username}")
     public void filterPrivateMessage(@Payload ChatMessage message, @DestinationVariable("username") String username, Principal principal) {
@@ -88,5 +72,4 @@ public class MainController {
         profanity.increment(profanityLevel);
         message.setMessage(profanityFilter.filter(message.getMessage()));
     }*/
-
 }

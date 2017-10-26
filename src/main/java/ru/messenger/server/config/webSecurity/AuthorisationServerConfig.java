@@ -1,10 +1,9 @@
-/*
-package ru.messenger.server.config;
+
+package ru.messenger.server.config.webSecurity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -20,18 +19,21 @@ public class AuthorisationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.checkTokenAccess("isAuthenticated()");
+        security
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()");
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient("my-trusted-client")
-                .authorizedGrantTypes("client_credentials","password")
-                .authorities("ROLE-CLIENT","ROLE_TRUSTED_CLIENT")
-                .scopes("read","write","trust")
-                .resourceIds("oauth2-resource")
-                .accessTokenValiditySeconds(5000)
-                .secret("secret");
+        clients
+                .inMemory()
+                .withClient("ClientId")
+                .authorizedGrantTypes("implicit")
+                .autoApprove(true)
+                .secret("secret")
+                .authorizedGrantTypes("password","authorization_code", "refresh_token")
+                .scopes("read");
     }
 
     @Override
@@ -39,4 +41,4 @@ public class AuthorisationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints.authenticationManager(authenticationManager);
     }
 }
-*/
+

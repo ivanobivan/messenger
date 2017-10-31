@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.ApplicationScope;
 import ru.messenger.server.domain.User;
 
 import java.util.Collection;
@@ -14,7 +15,7 @@ import java.util.Optional;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
-@Component
+@ApplicationScope
 public class CustomUserDetails implements UserDetails {
 
     @Autowired

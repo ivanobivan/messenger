@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import ru.messenger.server.domain.User;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -70,3 +71,4 @@ public class CustomUserDetails implements UserDetails {
         mongoTemplate.save(user);
     }
 }
+

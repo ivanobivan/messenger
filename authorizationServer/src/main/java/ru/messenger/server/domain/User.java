@@ -1,23 +1,13 @@
 package ru.messenger.server.domain;
 
 import org.bson.types.ObjectId;
-import org.junit.Assert;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
-import ru.messenger.server.domain.Role;
-import ru.messenger.server.domain.UserField;
 
 import java.util.List;
-import java.util.Optional;
-
-import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 @Component
 @Document(collection = "users")

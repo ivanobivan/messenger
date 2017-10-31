@@ -1,9 +1,0 @@
-/.idea
-/out
-*.txt
-*.lck
-*.log
-*.iml
-/target/
-/src/main/java/log/
-/src/test

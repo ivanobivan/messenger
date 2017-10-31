@@ -15,7 +15,7 @@ import java.util.Optional;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
-@ApplicationScope
+@Component
 public class CustomUserDetails implements UserDetails {
 
     @Autowired

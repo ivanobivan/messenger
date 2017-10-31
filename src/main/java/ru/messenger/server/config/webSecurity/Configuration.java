@@ -3,6 +3,7 @@ package ru.messenger.server.config.webSecurity;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -28,6 +29,7 @@ import java.util.Optional;
 
 @EnableResourceServer
 @org.springframework.context.annotation.Configuration
+@EnableOAuth2Sso
 public class Configuration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -47,13 +49,13 @@ public class Configuration extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .formLogin()
-                .loginPage("/index.html")
+                .loginPage("/indexTest.html")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/chat.html")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/index.html")
+                .logoutSuccessUrl("/indexTest.html")
                 .permitAll()
                 .and()
                 .authorizeRequests()
@@ -76,16 +78,16 @@ public class Configuration extends WebSecurityConfigurerAdapter {
 
     }
 
-    /*@Override
+    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.parentAuthenticationManager(authenticationManager)
                 .inMemoryAuthentication()
                 .withUser("qwer")
                 .password("qwerqwer");
-    }*/
+    }
 
-   @Autowired
+   /*@Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         //TODO need encrypt password in time authentication
         auth.authenticationProvider(new AuthenticationProvider() {
@@ -123,7 +125,7 @@ public class Configuration extends WebSecurityConfigurerAdapter {
             }
         });
 
-    }
+    }*/
 
     @Override
     public void configure(WebSecurity webSecurity) throws Exception {

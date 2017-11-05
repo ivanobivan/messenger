@@ -19,7 +19,7 @@
 </div>
 <div class="w3-center w3-animate-opacity w3-display-middle">
     <h2>Welcome to chat, come in</h2>
-    <form id="formIn" onSubmit="sendRequest()">
+    <form id="formIn" onSubmit="sendRequest()" action="/login">
         <input placeholder="Username" class="w3-input" name="username" required maxlength=15 minlength=1><br/>
         <input type="password" placeholder="Password" class="w3-input" name="password" id="password" required
                maxlength=20 minlength=8><br>
@@ -29,9 +29,9 @@
         <span class="w3-padding-small w3-text">Just for fun mode</span><br><br>
         <i class="fa fa-vk fa-2x"></i>
         <a href="/login/facebook"><i class="fa fa-facebook fa-2x"></i></a>
-        <i class="fa fa-twitter fa-2x"></i>
+        <a href="/login/twitter"><i class="fa fa-twitter fa-2x"></i></a>
         <a href="/login/github"><i class="fa fa-github fa-2x"></i></a>
-        <i class="fa fa-google fa-2x"></i><br/>
+        <a href="/login/google"><i class="fa fa-google fa-2x"></i><br/></a>
         <input type="submit" class="w3-btn w3-round customButton" value="GO">
     </form>
 </div>

@@ -1,4 +1,4 @@
-
+/*
 package ru.messenger.server.config.webSecurity;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class AuthorisationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients
                 .inMemory()
-                .withClient("ClientId")
+                .withClient("client")
                 .secret("secret")
                 .authorizedGrantTypes("authorization_code")
                 .scopes("user_info")
@@ -41,3 +41,4 @@ public class AuthorisationServerConfig extends AuthorizationServerConfigurerAdap
     }
 }
 
+*/

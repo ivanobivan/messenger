@@ -1,3 +1,4 @@
+/*
 package ru.messenger.server.config.webSecurity;
 
 import org.springframework.context.annotation.Bean;
@@ -39,3 +40,4 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return new PropertySourcesPlaceholderConfigurer();
     }
 }
+*/

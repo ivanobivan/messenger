@@ -8,23 +8,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 
 @SpringBootApplication
-@EnableResourceServer
 public class ApplicationSpring extends SpringBootServletInitializer {
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-
-        return application.sources(ApplicationSpring.class);
-    }
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(ApplicationSpring.class, args);
     }
 
-    /*@Autowired
-    public void authenticationManager(AuthenticationManagerBuilder builder, UserDataService service) throws Exception {
-        builder.userDetailsService(s -> new CustomUserDetails(service.findByUsername(s)));
-    }*/
 }
 
 
